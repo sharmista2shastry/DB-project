@@ -5,8 +5,24 @@
 </head>
 <body>
 
-<h1>Find transactions by email</h1>
 <div id="login-form">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <button type="button" id="login-button">Login</button>
+</div>
+
+<div id="y-main-page" style="display: none;">
+  <h1>Welcome back to Y!</h1>
+  <button type="button" id="go-search-button">Search Transactions for a Cardholder</button>
+  <button type="button" id="analytics-button">Client Analytics</button>
+</div>
+
+<div id="find-form" style="display: none;">
+  <h1>Find transactions by email</h1>
   <label for="email">Name:</label>
   <input type="email" id="email" name="email" required><br>
 
@@ -43,14 +59,30 @@
   </table>
 </div>
 <script>
-
+  const loginButton = document.getElementById('login-button');
   const searchButton = document.getElementById('search-button');
+  const searchPage = document.getElementById('find-form');
   const loginPage = document.getElementById('login-form');
   const transactionsPage = document.getElementById('transactions-table');
+  const mainPage = document.getElementById('y-main-page');
+  const goToSearchPage = document.getElementById('go-search-button');
+
   let email = ''
-  searchButton.addEventListener('click', async () => {
+  loginButton.addEventListener('click', async () => {
             email = document.getElementById('email').value;
             loginPage.style.display = 'none'; 
+            mainPage.style.display = 'block'; 
+        });
+
+  goToSearchPage.addEventListener('click', async () => {
+            email = document.getElementById('email').value;
+            mainPage.style.display = 'none'; 
+            searchPage.style.display = 'block'; 
+        });
+
+  searchButton.addEventListener('click', async () => {
+            email = document.getElementById('email').value;
+            searchPage.style.display = 'none'; 
             transactionsPage.style.display = 'block'; 
         });
 

@@ -7,21 +7,50 @@
     <h1>Welcome to the world of entertainment!</h1>
     
     <div id="login-form">
-        <label for="email">Name:</label>
+        <label for="email">Email:</label>
         <input type="email" id="email" name="email" required><br>
 
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required><br>
 
         <button type="button" id="login-button">Login</button>
+        <button type="button" id="sign-up-button">Sign Up</button>
+    </div>
+
+    <div id="sign-up-section" style="display: none;">
+        <label for="name">Name:</label>
+        <input type="name" id="name" name="name" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="address">Address:</label>
+        <input type="address" id="address" name="address" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <button type="button" id="submit">Submit and proceed</button>
     </div>
     
     <div id="plan-options" style="display: none;">
-        <label for="country">Select your plan:</label>
+        <label for="country">Select your country:</label>
+        <select id="country" name="country" required>
+            <option value="USA">United States of America</option>
+            <option value="India">India</option>
+            <option value="Indonesia">Indonesia</option>
+            <option value="China">China</option>
+            <option value="Portugal">Portugal</option>
+            <option value="SouthAfrica">South Africa</option>
+            <option value="Brazil">Brazil</option>
+            <!-- Add more options as needed -->
+        </select><br>
+
+        <label for="plan">Select your plan:</label>
         <select id="plan" name="plan" required>
-            <option value="weekly">$5</option>
-            <option value="monthly">$20</option>
-            <option value="annual">$200</option>
+            <option value="weekly">Weekly Subscription - $5</option>
+            <option value="monthly">Monthly Subscription - $20</option>
+            <option value="annual">Annual Subscription - $200</option>
             <!-- Add more options as needed -->
         </select><br>
         
@@ -49,10 +78,17 @@
     <script>
         const loginForm = document.getElementById('login-form');
         const loginButton = document.getElementById('login-button');
+        const signupButton = document.getElementById('sign-up-button');
         const paymentOptions = document.getElementById('plan-options');
         const goToPaymentSection = document.getElementById('go-to-payment-button');
         const paymentSection = document.getElementById('payment-options');
         const makePaymentButton = document.getElementById('process-payment-button');
+        const signupSection = document.getElementById('sign-up-section');
+        const submit = document.getElementById('submit');
+
+        let paymentPlan = "";
+        let countrySelected = "";
+        let paymentMethod = "";
 
         loginButton.addEventListener('click', async () => {
             const email = document.getElementById('email').value;
@@ -71,10 +107,22 @@
             }
         });
 
+        submit.addEventListener('click', async () => {
+            signupSection.style.display = 'none'; // Hide the login form
+            paymentOptions.style.display = 'block'; // Show the country and payment options
+        });
+
+        signupButton.addEventListener('click', async () => {
+            loginForm.style.display = 'none'; // Hide the login form
+            signupSection.style.display = 'block'; // Show the country and payment options
+        });
+
         goToPaymentSection.addEventListener('click', async () => {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             paymentOptions.style.display = 'none'; 
+            paymentPlan = document.getElementById('plan').value;
+            countrySelected = document.getElementById('country').value;
             paymentSection.style.display = 'block'; 
         });
 
@@ -82,13 +130,11 @@
             const radioButtons = document.getElementsByName("option1");
 
             // Initialize a variable to store the selected value
-            let selectedValue = "";
 
             // Loop through the radio buttons to find the selected one
             for (let i = 0; i < radioButtons.length; i++) {
                 if (radioButtons[i].checked) {
-                    selectedValue = radioButtons[i].value;
-                    console.log(selectedValue);
+                    paymentMethod = radioButtons[i].value;
                     break; // Exit the loop once a selection is found
                 }
   }
