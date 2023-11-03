@@ -1,39 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Card Transactions</title>
+  <title>Transaction Helper</title>
 </head>
 <body>
 
-<h1>Card Transactions</h1>
+<h1>Find transactions by email</h1>
+<div id="login-form">
+  <label for="email">Name:</label>
+  <input type="email" id="email" name="email" required><br>
 
-<table border="1">
-  <tr>
-    <th>Date</th>
-    <th>Amount</th>
-    <th>Merchant</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>2023-11-01</td>
-    <td>$50.00</td>
-    <td>Online Store A</td>
-    <td>Online shopping</td>
-  </tr>
-  <tr>
-    <td>2023-10-25</td>
-    <td>$30.00</td>
-    <td>Retail Store B</td>
-    <td>Groceries</td>
-  </tr>
-  <tr>
-    <td>2023-10-15</td>
-    <td>$15.50</td>
-    <td>Restaurant C</td>
-    <td>Dinner with friends</td>
-  </tr>
-  <!-- Add more rows for additional transactions -->
-</table>
+  <button type="button" id="search-button">Search Transactions</button>
+</div>
 
+<div id="transactions-table" style="display: none;">
+  <table border="1">
+    <tr>
+      <th>Timestamp</th>
+      <th>Amount</th>
+      <th>Merchant</th>
+      <th>Decline Reason</th>
+    </tr>
+    <tr>
+      <td>2023-11-01</td>
+      <td>$50.00</td>
+      <td>Online Store A</td>
+      <td>Online shopping</td>
+    </tr>
+    <tr>
+      <td>2023-10-25</td>
+      <td>$30.00</td>
+      <td>Retail Store B</td>
+      <td>Groceries</td>
+    </tr>
+    <tr>
+      <td>2023-10-15</td>
+      <td>$15.50</td>
+      <td>Restaurant C</td>
+      <td>Dinner with friends</td>
+    </tr>
+    <!-- Add more rows for additional transactions -->
+  </table>
+</div>
+<script>
+
+  const searchButton = document.getElementById('search-button');
+  const loginPage = document.getElementById('login-form');
+  const transactionsPage = document.getElementById('transactions-table');
+  let email = ''
+  searchButton.addEventListener('click', async () => {
+            email = document.getElementById('email').value;
+            loginPage.style.display = 'none'; 
+            transactionsPage.style.display = 'block'; 
+        });
+
+</script>
 </body>
 </html>

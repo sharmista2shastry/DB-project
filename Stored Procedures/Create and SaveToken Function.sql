@@ -1,9 +1,10 @@
-CREATE OR REPLACE FUNCTION CreateToken(
-    MerchantId VARCHAR(100),
-    Country VARCHAR(100),
-	CardNumber VARCHAR(100),
-	Dater VARCHAR(100),
-	Cardholder_Id VARCHAR(100)
+CREATE OR REPLACE FUNCTION CREATE_AND_SAVE_TOKEN(
+    MerchantId TEXT,
+    Country TEXT,
+	CardNumber TEXT,
+	Dater TEXT,
+	Cardholder_Id TEXT,
+	CustomerEmail TEXT
 ) RETURNS text AS $$
 DECLARE
     shifted_string1 VARCHAR(100);
@@ -12,6 +13,7 @@ DECLARE
     shifted_string4 VARCHAR(100);
 	shifted_string5 VARCHAR(100);
     concatenated_string VARCHAR(100);
+	card_token_id INT;
 BEGIN
     -- Shift ASCII values by 9 for String1
     shifted_string1 := '';
@@ -45,6 +47,14 @@ BEGIN
     -- Concatenate the shifted strings with hyphens every 4 characters
     concatenated_string := shifted_string1 || '-' || shifted_string2  || '-' || shifted_string3  || '-' || shifted_string4  || '-' || shifted_string5;
    
+    INSERT INTO INTERNETFLIX_STORED_CARD_DATA(CARD_TOKEN, MERCHANT_ID) VALUES (concatenated_string, 1);
+	
+	card_token_id = (SELECT STORED_CARD_ID FROM INTERNETFLIX_STORED_CARD_DATA WHERE CARD_TOKEN = concatenated_string);
+	
+	UPDATE INTERNETFLIX_CUSTOMER_DATA SET STORED_CARD_ID = card_token_id WHERE CUSTOMER_EMAIL = $6;
+
     RETURN concatenated_string;
 END;
 $$ LANGUAGE plpgsql;
+
+-- SELECT CREATE_AND_SAVE_TOKEN(CAST('1' AS TEXT), CAST('1' AS TEXT), CAST('1234-5614-9008-0533' AS TEXT), TO_CHAR(CURRENT_TIMESTAMP, 'YYYY-MM-DD'), CAST (105 AS TEXT), CAST('bbartos2w@jigsy.com' AS TEXT));
