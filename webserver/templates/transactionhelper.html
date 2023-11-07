@@ -82,15 +82,18 @@
 
   searchButton.addEventListener('click', async () => {
             email = document.getElementById('email').value;
+            const data = {
+              'email': email
+            };
             searchPage.style.display = 'none'; 
             transactionsPage.style.display = 'block'; 
 
-            const apiUrl = '/gettransactions';
+            const apiUrl = "/gettransactions";
 
             try {
                 const response = await fetch(apiUrl, {
                     method: 'POST', 
-                    body: JSON.stringify(email)
+                    body: JSON.stringify(data)
                     // Or 'GET' or 'PUT' depending on your API
                     // Add headers, body, and other options as needed
                 });
