@@ -106,28 +106,24 @@
       }
       globalResponse.result.output.forEach(item => {
         const row = document.createElement('tr');
-        const dateCell = document.createElement('td');
-        dateCell.textContent = item.transaction_timestamp;
-        const cardNumberCell = document.createElement('td');
-        cardNumberCell.textContent = item.card_number;
-        const amountCell = document.createElement('td');
-        amountCell.textContent = item.transaction_amount;
-        const merchantCell = document.createElement('td');
-        merchantCell.textContent = item.merchant_id;
-        const authenticationTypeCell = document.createElement('td');
-        authenticationTypeCell.textContent = item.email;
-        const currencyCell = document.createElement('td');
-        currencyCell.textContent = item.transaction_currency;
-        const fraudCell = document.createElement('td');
-        fraudCell.textContent = item.transaction_fraud;
+        const date = document.createElement('td');
+        date.textContent = item.id;
+        const cardNumber = document.createElement('td');
+        cardNumber.textContent = item.name;
+        const amount = document.createElement('td');
+        amount.textContent = item.email;
+        const merchant = document.createElement('td');
+        merchant.textContent = item.email;
+        const authenticationType = document.createElement('td');
+        merchant.textContent = item.email;
+        const merchant = document.createElement('td');
+        merchant.textContent = item.email;
+        const merchant = document.createElement('td');
+        merchant.textContent = item.email;
 
-        row.appendChild(dateCell);
-        row.appendChild(cardNumberCell);
-        row.appendChild(amountCell);
-        row.appendChild(merchantCell);
-        row.appendChild(authenticationTypeCell);
-        row.appendChild(currencyCell);
-        row.appendChild(fraudCell);
+        row.appendChild(idCell);
+        row.appendChild(nameCell);
+        row.appendChild(emailCell);
 
         tbody.appendChild(row);
       });

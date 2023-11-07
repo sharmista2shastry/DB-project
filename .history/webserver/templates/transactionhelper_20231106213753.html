@@ -119,15 +119,14 @@
         const currencyCell = document.createElement('td');
         currencyCell.textContent = item.transaction_currency;
         const fraudCell = document.createElement('td');
-        fraudCell.textContent = item.transaction_fraud;
+        frfraudCellaud.textContent = item.transaction_fraud;
 
         row.appendChild(dateCell);
         row.appendChild(cardNumberCell);
         row.appendChild(amountCell);
         row.appendChild(merchantCell);
-        row.appendChild(authenticationTypeCell);
         row.appendChild(currencyCell);
-        row.appendChild(fraudCell);
+        row.appendChild(emailCell);
 
         tbody.appendChild(row);
       });

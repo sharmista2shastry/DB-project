@@ -117,17 +117,16 @@
         const authenticationTypeCell = document.createElement('td');
         authenticationTypeCell.textContent = item.email;
         const currencyCell = document.createElement('td');
-        currencyCell.textContent = item.transaction_currency;
+        currency.textContent = item.transaction_currency;
         const fraudCell = document.createElement('td');
-        fraudCell.textContent = item.transaction_fraud;
+        fraud.textContent = item.transaction_fraud;
 
         row.appendChild(dateCell);
         row.appendChild(cardNumberCell);
         row.appendChild(amountCell);
         row.appendChild(merchantCell);
         row.appendChild(authenticationTypeCell);
-        row.appendChild(currencyCell);
-        row.appendChild(fraudCell);
+        row.appendChild(emailCell);
 
         tbody.appendChild(row);
       });

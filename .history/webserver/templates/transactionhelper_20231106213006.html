@@ -34,19 +34,34 @@
   <div id="transactions-table" style="display: none;">
     <table border="1">
       <thead>
-        <tr>
-          <th>Date</th>
-          <th>Card Number</th>
-          <th>Amount</th>
-          <th>Merchant</th>
-          <th>Authentication Type</th>
-          <th>Currency</th>
-          <th>Fraud</th>
-        </tr>
-      </thead>
-      <tbody>
-
-      </tbody>
+      <tr>
+        <th>Date</th>
+        <th>Card Number</th>
+        <th>Amount</th>
+        <th>Merchant</th>
+        <th>Authentication Type</th>
+        <th>Currency</th>
+        <th>Fraud</th>
+      </tr>
+      <tr>
+        <td>2023-11-01</td>
+        <td>$50.00</td>
+        <td>Online Store A</td>
+        <td>Online shopping</td>
+      </tr>
+      <tr>
+        <td>2023-10-25</td>
+        <td>$30.00</td>
+        <td>Retail Store B</td>
+        <td>Groceries</td>
+      </tr>
+      <tr>
+        <td>2023-10-15</td>
+        <td>$15.50</td>
+        <td>Restaurant C</td>
+        <td>Dinner with friends</td>
+      </tr>
+      <!-- Add more rows for additional transactions -->
     </table>
   </div>
   <script>
@@ -57,7 +72,7 @@
     const transactionsPage = document.getElementById('transactions-table');
     const mainPage = document.getElementById('y-main-page');
     const goToSearchPage = document.getElementById('go-search-button');
-    const table = document.getElementById('transactions-table');
+    const table = document.getElementById('myTable');
     const tbody = table.querySelector('tbody');
 
     let email = ''
@@ -104,33 +119,7 @@
       } catch (error) {
         console.error('API call failed:', error);
       }
-      globalResponse.result.output.forEach(item => {
-        const row = document.createElement('tr');
-        const dateCell = document.createElement('td');
-        dateCell.textContent = item.transaction_timestamp;
-        const cardNumberCell = document.createElement('td');
-        cardNumberCell.textContent = item.card_number;
-        const amountCell = document.createElement('td');
-        amountCell.textContent = item.transaction_amount;
-        const merchantCell = document.createElement('td');
-        merchantCell.textContent = item.merchant_id;
-        const authenticationTypeCell = document.createElement('td');
-        authenticationTypeCell.textContent = item.email;
-        const currencyCell = document.createElement('td');
-        currencyCell.textContent = item.transaction_currency;
-        const fraudCell = document.createElement('td');
-        fraudCell.textContent = item.transaction_fraud;
-
-        row.appendChild(dateCell);
-        row.appendChild(cardNumberCell);
-        row.appendChild(amountCell);
-        row.appendChild(merchantCell);
-        row.appendChild(authenticationTypeCell);
-        row.appendChild(currencyCell);
-        row.appendChild(fraudCell);
-
-        tbody.appendChild(row);
-      });
+      console.log(globalResponse.result.output)
     });
 
   </script>
