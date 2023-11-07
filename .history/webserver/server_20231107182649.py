@@ -255,6 +255,7 @@ def signup():
     password = request.json['password']
     params_dict = {"email":email, "password":password, "name":name, "address":address}
     cursor = g.conn.execute(text("INSERT INTO INTERNETFLIX_CUSTOMER_DATA(CUSTOMER_NAME, CUSTOMER_ADDRESS, CUSTOMER_EMAIL, PASS_WORD) VALUES (:name, :address, :email, :password);"), params_dict)
+    
 
    # Check if the insert was successful
     isValid = cursor.rowcount > 0
