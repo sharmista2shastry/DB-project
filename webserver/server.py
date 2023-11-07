@@ -124,6 +124,7 @@ def index():
   # Indexing result by column number
   names = []
   for result in cursor:
+    print('Entered')
     names.append(result[0])  
 
   # Indexing result by column name
@@ -145,7 +146,7 @@ def index():
   # for example, "data" key in the context variable defined below will be
   # accessible as a variable in index.html:
   #
-  #     # will print: [u'grace hopper', u'alan turing', u'ada lovelace']
+  #     # will te: [u'grace hopper', u'alan turing', u'ada lovelace']
   #     <div>{{data}}</div>
   #
   #     # creates a <div> tag for each element in data
