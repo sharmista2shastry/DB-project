@@ -208,11 +208,11 @@ def gettransactions():
     # 2 ways to get results
 
     # Indexing result by column number
-    complete_results = []
+    result = []
     for result in cursor:
-      complete_results.append(result)
+      print(result)
     result = {
-        "output": complete_results
+        "output": result[0]
     }
     result = {str(key): value for key, value in result.items()}
     return jsonify(result=result)

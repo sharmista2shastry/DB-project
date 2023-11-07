@@ -212,7 +212,7 @@ def gettransactions():
     for result in cursor:
       complete_results.append(result)
     result = {
-        "output": complete_results
+        "output": result[0]
     }
     result = {str(key): value for key, value in result.items()}
     return jsonify(result=result)
