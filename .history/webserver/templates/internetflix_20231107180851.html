@@ -106,7 +106,7 @@
 
             //send the email to the database to retrieve user details
             const apiUrl = "/login";
-           
+            let globalResponse;
             try {
                 const response = await fetch(apiUrl, {
                     method: 'POST',

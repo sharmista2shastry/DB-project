@@ -106,7 +106,7 @@
 
             //send the email to the database to retrieve user details
             const apiUrl = "/login";
-           
+            let globalResponse;
             try {
                 const response = await fetch(apiUrl, {
                     method: 'POST',
@@ -127,7 +127,8 @@
             } catch (error) {
                 console.error('API call failed:', error);
             }
-                if (globalResponse.result.output) {
+                console.log()
+                if (verificationSuccess) {
                     loginForm.style.display = 'none'; // Hide the login form
                     paymentOptions.style.display = 'block'; // Show the country and payment options
                 } else {
