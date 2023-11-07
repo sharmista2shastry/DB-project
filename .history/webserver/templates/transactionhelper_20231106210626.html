@@ -100,7 +100,7 @@
                     // Or 'GET' or 'PUT' depending on your API
                     // Add headers, body, and other options as needed
                 });
-                print(response.result.output); 
+                return response.json(); 
                 // Handle the API response here (e.g., show a success message or handle errors).
                 // You can use response.json() to parse the response if it's in JSON format.
             } catch (error) {
