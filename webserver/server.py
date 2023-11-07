@@ -128,11 +128,12 @@ def index():
     names.append(result[0])  
 
   # Indexing result by column name
-  names = []
-  results = cursor.fetchall()
-  for result in results:
-    print(result["name"])
-    names.append(result["name"])
+  # names = []
+  # results = cursor.fetchall()
+  # print()
+  # for result in results:
+  #   print(result["name"])
+  #   names.append(result["name"])
   cursor.close()
 
   #
