@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Transaction Helper</title>
+</head>
+<body>
+
+<div id="login-form">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <button type="button" id="login-button">Login</button>
+</div>
+
+<div id="y-main-page" style="display: none;">
+  <h1>Welcome back to Y!</h1>
+  <button type="button" id="go-search-button">Search Transactions for a Cardholder</button>
+  <button type="button" id="analytics-button">Client Analytics</button>
+</div>
+
+<div id="find-form" style="display: none;">
+  <h1>Find transactions by email</h1>
+  <label for="search-email">Name:</label>
+  <input type="search-email" id="search-email" name="search-email" required><br>
+
+  <button type="button" id="search-button">Search Transactions</button>
+</div>
+
+<div id="transactions-table" style="display: none;">
+  <table border="1">
+    <tr>
+      <th>Timestamp</th>
+      <th>Amount</th>
+      <th>Merchant</th>
+      <th>Decline Reason</th>
+    </tr>
+    <tr>
+      <td>2023-11-01</td>
+      <td>$50.00</td>
+      <td>Online Store A</td>
+      <td>Online shopping</td>
+    </tr>
+    <tr>
+      <td>2023-10-25</td>
+      <td>$30.00</td>
+      <td>Retail Store B</td>
+      <td>Groceries</td>
+    </tr>
+    <tr>
+      <td>2023-10-15</td>
+      <td>$15.50</td>
+      <td>Restaurant C</td>
+      <td>Dinner with friends</td>
+    </tr>
+    <!-- Add more rows for additional transactions -->
+  </table>
+</div>
+<script>
+  const loginButton = document.getElementById('login-button');
+  const searchButton = document.getElementById('search-button');
+  const searchPage = document.getElementById('find-form');
+  const loginPage = document.getElementById('login-form');
+  const transactionsPage = document.getElementById('transactions-table');
+  const mainPage = document.getElementById('y-main-page');
+  const goToSearchPage = document.getElementById('go-search-button');
+
+  let email = ''
+  loginButton.addEventListener('click', async () => {
+            email = document.getElementById('email').value;
+            loginPage.style.display = 'none'; 
+            mainPage.style.display = 'block'; 
+        });
+
+  goToSearchPage.addEventListener('click', async () => {
+            email = document.getElementById('email').value;
+            mainPage.style.display = 'none'; 
+            searchPage.style.display = 'block'; 
+        });
+
+  searchButton.addEventListener('click', async () => {
+            email = document.getElementById('search-email').value;
+            const data = {
+              'email': email
+            };
+            searchPage.style.display = 'none'; 
+            transactionsPage.style.display = 'block'; 
+
+            const apiUrl = "/gettransactions";
+            let globalResponse;
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST', 
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                    // Or 'GET' or 'PUT' depending on your API
+                    // Add headers, body, and other options as needed
+                });
+                if (response.ok) {
+                globalResponse = await response.json(); // Store the response in the global variable
+                console.log(globalResponse); // Log the response
+            } else {
+                console.error('API call failed with status:', response.status);
+            }
+                // Handle the API response here (e.g., show a success message or handle errors).
+                // You can use response.json() to parse the response if it's in JSON format.
+            } catch (error) {
+                console.error('API call failed:', error);
+            }
+        });
+
+</script>
+</body>
+</html>
