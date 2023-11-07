@@ -93,6 +93,9 @@
             try {
                 const response = await fetch(apiUrl, {
                     method: 'POST', 
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
                     body: JSON.stringify(data)
                     // Or 'GET' or 'PUT' depending on your API
                     // Add headers, body, and other options as needed
