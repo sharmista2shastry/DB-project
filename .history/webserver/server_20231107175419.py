@@ -231,31 +231,12 @@ def gettransactions():
 def login():
     email = request.json['email']
     password = request.json['password']
+    print()
     params_dict = {"email":email, "password":password}
     cursor = g.conn.execute(text("SELECT 1 FROM INTERNETFLIX_CUSTOMER_DATA WHERE CUSTOMER_EMAIL=(:email) AND PASS_WORD=(:password)"), params_dict)
     g.conn.commit()
 
-    complete_results = []
-    for result in cursor:
-      complete_results.append({
-        "transaction_id": result[0],
-        "transaction_amount": float(result[1]),
-        "transaction_currency": result[2],
-        "transaction_fraud": result[3],
-        "transaction_timestamp": result[4],
-        "merchant_id": result[5],
-        "acquirer_id": result[6],
-        "transaction_type_id": result[7],
-        "decline_reason_id": result[8],
-        "authentication_type_id": result[9],
-        "card_number": result[10],
-        "cardholder_id": result[11]
-      })
-    result = {
-        "output": complete_results
-    }
-    result = {str(key): value for key, value in result.items()}
-    return jsonify(result=result)
+    print(cursor)
 
 
 if __name__ == "__main__":
