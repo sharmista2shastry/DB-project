@@ -237,10 +237,12 @@ def login():
 
     isValid = false
     for result in cursor:
-      if result[0]==1:
-        isValid = true
+      print(result[0])
+      complete_results.append({
+        result[0]
+      })
     result = {
-        "output": isValid
+        "output": complete_results
     }
     result = {str(key): value for key, value in result.items()}
     return jsonify(result=result)

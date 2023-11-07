@@ -235,12 +235,14 @@ def login():
     cursor = g.conn.execute(text("SELECT 1 FROM INTERNETFLIX_CUSTOMER_DATA WHERE CUSTOMER_EMAIL=(:email) AND PASS_WORD=(:password)"), params_dict)
     g.conn.commit()
 
-    isValid = false
+    isValid = false;
     for result in cursor:
-      if result[0]==1:
-        isValid = true
+      print(result[0])
+      complete_results.append({
+        result[0]
+      })
     result = {
-        "output": isValid
+        "output": complete_results
     }
     result = {str(key): value for key, value in result.items()}
     return jsonify(result=result)
