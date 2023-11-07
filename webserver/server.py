@@ -12,7 +12,7 @@ import os
   # accessible as a variable in index.html:
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
-from flask import Flask, request, render_template, g, redirect, Response, abort
+from flask import Flask, request, render_template, g, redirect, Response, abort, jsonify
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask(__name__, template_folder=tmpl_dir)
@@ -192,6 +192,27 @@ def add():
   g.conn.execute(text('INSERT INTO test(name) VALUES (:name)'), params_dict)
   g.conn.commit()
   return redirect('/')
+
+@app.route('/gettransactions', methods=['GET','POST'])
+def gettransactions():
+    print(request)
+    email = request.form['email']
+    params_dict = {"email":email}
+    print(email)
+    cursor = g.conn.execute(text("SELECT * FROM GET_SUCCESSFUL_TRANSACTIONS_BY_EMAIL(:email)"), params_dict)
+    g.conn.commit()
+
+    # 2 ways to get results
+
+    # Indexing result by column number
+    names = []
+    for result in cursor:
+      print(result)
+    result = {
+        "output": result[0]
+    }
+    result = {str(key): value for key, value in result.items()}
+    return jsonify(result=result)
 
 
 @app.route('/login')

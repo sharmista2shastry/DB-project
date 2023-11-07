@@ -34,7 +34,7 @@ BEGIN
     JOIN
         CARDHOLDER_DETAILS CD ON T.CARDHOLDER_ID = CD.CARDHOLDER_ID
     WHERE
-        CD.EMAIL = email_id
+        CD.EMAIL = customer_email
         AND T.TRANSACTION_STATUS = TRUE;
 END;
 $$ LANGUAGE plpgsql;
