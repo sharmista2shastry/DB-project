@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Internetflix US</title>
+</head>
+<body>
+    <h1>Welcome to the world of entertainment!</h1>
+    
+    <div id="login-form">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <button type="button" id="login-button">Login</button>
+        <button type="button" id="sign-up-button">Sign Up</button>
+    </div>
+
+    <div id="sign-up-section" style="display: none;">
+        <label for="name">Name:</label>
+        <input type="name" id="name" name="name" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="address">Address:</label>
+        <input type="address" id="address" name="address" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <button type="button" id="submit">Submit and proceed</button>
+    </div>
+    
+    <div id="plan-options" style="display: none;">
+        <label for="country">Select your country:</label>
+        <select id="country" name="country" required>
+            <option value="USA">United States of America</option>
+            <option value="India">India</option>
+            <option value="Indonesia">Indonesia</option>
+            <option value="China">China</option>
+            <option value="Portugal">Portugal</option>
+            <option value="SouthAfrica">South Africa</option>
+            <option value="Brazil">Brazil</option>
+            <!-- Add more options as needed -->
+        </select><br>
+
+        <label for="plan">Select your plan:</label>
+        <select id="plan" name="plan" required>
+            <option value="weekly">Weekly Subscription - $5</option>
+            <option value="monthly">Monthly Subscription - $20</option>
+            <option value="annual">Annual Subscription - $200</option>
+            <!-- Add more options as needed -->
+        </select><br>
+        
+        <h2>Make a Payment</h2>
+        <button type="button" id="go-to-payment-button">Make Payment</button>
+    </div>
+
+    <div id="payment-options" style="display: none;">
+        <label for="card-options">Select your payment method:</label>
+        <form>
+            <input type="radio" name="option1" value="existing-token" id="existing-token">
+            <label for="male">Existing card</label><br>
+
+            <input type="radio" name="option1" value="store-and-pay" id="store-and-pay">
+            <label for="female">Pay with a new card and store it</label><br>
+          
+            <input type="radio" name="option1" value="just-pay" id="just-pay">
+            <label for="other">Pay without storing</label><br>
+          </form>
+            <!-- Add more options as needed -->
+        </select><br>
+        <button type="button" id="process-payment-button">Pay</button>
+    </div>
+        
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const loginButton = document.getElementById('login-button');
+        const signupButton = document.getElementById('sign-up-button');
+        const paymentOptions = document.getElementById('plan-options');
+        const goToPaymentSection = document.getElementById('go-to-payment-button');
+        const paymentSection = document.getElementById('payment-options');
+        const makePaymentButton = document.getElementById('process-payment-button');
+        const signupSection = document.getElementById('sign-up-section');
+        const submit = document.getElementById('submit');
+
+        let paymentPlan = "";
+        let countrySelected = "";
+        let paymentMethod = "";
+
+        loginButton.addEventListener('click', async () => {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+                        
+            // Simulate a successful login verification.
+            let verificationSuccess = true;
+
+            //send the email to the database to retrieve user details
+            
+            if (verificationSuccess) {
+                loginForm.style.display = 'none'; // Hide the login form
+                paymentOptions.style.display = 'block'; // Show the country and payment options
+            } else {
+                alert('Invalid email or password. Please try again.');
+            }
+        });
+
+        submit.addEventListener('click', async () => {
+            signupSection.style.display = 'none'; // Hide the login form
+            paymentOptions.style.display = 'block'; // Show the country and payment options
+        });
+
+        signupButton.addEventListener('click', async () => {
+            loginForm.style.display = 'none'; // Hide the login form
+            signupSection.style.display = 'block'; // Show the country and payment options
+        });
+
+        goToPaymentSection.addEventListener('click', async () => {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            paymentOptions.style.display = 'none'; 
+            paymentPlan = document.getElementById('plan').value;
+            countrySelected = document.getElementById('country').value;
+            paymentSection.style.display = 'block'; 
+        });
+
+        makePaymentButton.addEventListener('click', async () => {
+            const radioButtons = document.getElementsByName("option1");
+
+            // Initialize a variable to store the selected value
+
+            // Loop through the radio buttons to find the selected one
+            for (let i = 0; i < radioButtons.length; i++) {
+                if (radioButtons[i].checked) {
+                    paymentMethod = radioButtons[i].value;
+                    break; // Exit the loop once a selection is found
+                }
+  }
+            // You can make an API call here using JavaScript (e.g., using the fetch function).
+            // Replace the URL with the actual API endpoint you want to call.
+            const apiUrl = 'https://example.com/api/make-payment';
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST', // Or 'GET' or 'PUT' depending on your API
+                    // Add headers, body, and other options as needed
+                });
+
+                // Handle the API response here (e.g., show a success message or handle errors).
+                // You can use response.json() to parse the response if it's in JSON format.
+            } catch (error) {
+                console.error('API call failed:', error);
+            }
+        });
+    </script>
+</body>
+</html>

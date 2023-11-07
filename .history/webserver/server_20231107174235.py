@@ -180,8 +180,8 @@ def index():
 # The functions for each app.route need to have different names
 #
 @app.route('/internetflix')
-def internetflix():
-  return render_template("internetflix.html")
+def another():
+  return render_template("another.html")
 
 
 # Example of adding new data to the database

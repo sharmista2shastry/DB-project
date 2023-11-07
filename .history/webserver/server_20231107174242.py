@@ -181,7 +181,7 @@ def index():
 #
 @app.route('/internetflix')
 def internetflix():
-  return render_template("internetflix.html")
+  return render_template("test.html")
 
 
 # Example of adding new data to the database

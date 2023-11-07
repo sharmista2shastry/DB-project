@@ -179,9 +179,9 @@ def index():
 # Notice that the function name is another() rather than index()
 # The functions for each app.route need to have different names
 #
-@app.route('/internetflix')
-def internetflix():
-  return render_template("internetflix.html")
+@app.route('/another')
+def another():
+  return render_template("another.html")
 
 
 # Example of adding new data to the database
@@ -235,7 +235,7 @@ def login():
     cursor = g.conn.execute(text("SELECT 1 FROM INTERNETFLIX_CUSTOMER_DATA WHERE CUSTOMER_EMAIL=(:email) AND PASS_WORD=(:password)"), params_dict)
     g.conn.commit()
 
-    print(cursor)
+    print()
 
 
 if __name__ == "__main__":
