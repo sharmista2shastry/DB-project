@@ -124,7 +124,7 @@ def index():
   # Indexing result by column number
   names = []
   for result in cursor:
-    print('Entered')
+    print(result[0])
     names.append(result[0])  
 
   # Indexing result by column name
