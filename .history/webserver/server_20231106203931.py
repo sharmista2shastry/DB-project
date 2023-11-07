@@ -199,7 +199,7 @@ def gettransactions():
     # print(request.args)
     print(request.json)
     # print(request.values)
-    # print(request.get_json())
+    print(request.get_json())
     email = request.json['email']
     params_dict = {"email":email}
     print(email)
