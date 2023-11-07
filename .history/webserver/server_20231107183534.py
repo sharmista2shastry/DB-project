@@ -262,12 +262,11 @@ def signup():
    # Check if the insert was successful
       isValid = cursor.rowcount > 0
 
-      g.conn.commit()
+    g.conn.commit()
 
     # Close the cursor
-      cursor.close()
-    except:
-       isValid = False
+    cursor.close()
+
     response = {
         "output": isValid
     }

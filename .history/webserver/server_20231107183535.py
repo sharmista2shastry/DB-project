@@ -265,9 +265,8 @@ def signup():
       g.conn.commit()
 
     # Close the cursor
-      cursor.close()
-    except:
-       isValid = False
+    cursor.close()
+
     response = {
         "output": isValid
     }

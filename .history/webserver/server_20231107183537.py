@@ -266,8 +266,7 @@ def signup():
 
     # Close the cursor
       cursor.close()
-    except:
-       isValid = False
+
     response = {
         "output": isValid
     }

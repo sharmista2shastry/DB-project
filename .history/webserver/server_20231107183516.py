@@ -255,19 +255,17 @@ def signup():
     address = request.json['address']
     password = request.json['password']
     params_dict = {"email":email, "password":password, "name":name, "address":address}
-    isValid = False
     try:
-      cursor = g.conn.execute(text("INSERT INTO INTERNETFLIX_CUSTOMER_DATA(CUSTOMER_NAME, CUSTOMER_ADDRESS, CUSTOMER_EMAIL, PASS_WORD) VALUES (:name, :address, :email, :password);"), params_dict)
+    cursor = g.conn.execute(text("INSERT INTO INTERNETFLIX_CUSTOMER_DATA(CUSTOMER_NAME, CUSTOMER_ADDRESS, CUSTOMER_EMAIL, PASS_WORD) VALUES (:name, :address, :email, :password);"), params_dict)
 
    # Check if the insert was successful
-      isValid = cursor.rowcount > 0
+    isValid = cursor.rowcount > 0
 
-      g.conn.commit()
+    g.conn.commit()
 
     # Close the cursor
-      cursor.close()
-    except:
-       isValid = False
+    cursor.close()
+
     response = {
         "output": isValid
     }
