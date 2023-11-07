@@ -218,11 +218,11 @@ def gettransactions():
         "transaction_timestamp": result[4],
         "merchant_id": result[5],
         "acquirer_id": result[6],
-        "transaction_type_id": result[7],
-        "decline_reason_id": result[8],
-        "authentication_type_id": result[9],
-        "card_number": result[10],
-        "cardholder_id": result[11]
+        "transaction_type_id": item[7],
+        "decline_reason_id": item[8],
+        "authentication_type_id": item[9],
+        "card_number": item[10],
+        "cardholder_id": item[11]
       })
     result = {
         "output": complete_results
