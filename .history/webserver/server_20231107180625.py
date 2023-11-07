@@ -236,16 +236,16 @@ def login():
     g.conn.commit()
 
     isValid = False
-    for result in cursor:
-        if result[0] == 1:
-            isValid = True
+for result in cursor:
+    if result[0] == 1:
+        isValid = True
 
-    response = {
-        "output": isValid
-    }
-    response = {str(key): value for key, value in response.items()}
+response = {
+    "output": isValid
+}
+response = {str(key): value for key, value in response.items()}
 
-    return jsonify(result=response)
+return jsonify(result=response)
 
 
 if __name__ == "__main__":
