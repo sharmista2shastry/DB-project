@@ -204,6 +204,8 @@ def gettransactions():
     cursor = g.conn.execute(text("SELECT * FROM GET_SUCCESSFUL_TRANSACTIONS_BY_EMAIL(:email)"), params_dict)
     g.conn.commit()
 
+
+    # Indexing result by column number
     complete_results = []
     for result in cursor:
       complete_results.append({

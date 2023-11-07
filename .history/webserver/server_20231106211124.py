@@ -195,15 +195,14 @@ def add():
 
 @app.route('/gettransactions', methods=['GET','POST'])
 def gettransactions():
-    # print(request.data)
-    # print(request.args)
-    # print(request.values)
-    # print(request.get_json())
     email = request.json['email']
     params_dict = {"email":email}
     cursor = g.conn.execute(text("SELECT * FROM GET_SUCCESSFUL_TRANSACTIONS_BY_EMAIL(:email)"), params_dict)
     g.conn.commit()
 
+    # 2 ways to get results
+
+    # Indexing result by column number
     complete_results = []
     for result in cursor:
       complete_results.append({
