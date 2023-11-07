@@ -96,6 +96,9 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
+            // Simulate a successful login verification.
+            let verificationSuccess;
+
             const data = {
                 'email': email,
                 'password': password
@@ -111,12 +114,16 @@
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(data)
+                    // Or 'GET' or 'PUT' depending on your API
+                    // Add headers, body, and other options as needed
                 });
                 if (response.ok) {
                     globalResponse = await response.json(); // Store the response in the global variable
                 } else {
                     console.error('API call failed with status:', response.status);
                 }
+                // Handle the API response here (e.g., show a success message or handle errors).
+                // You can use response.json() to parse the response if it's in JSON format.
             } catch (error) {
                 console.error('API call failed:', error);
             }
@@ -131,17 +138,9 @@
         submit.addEventListener('click', async () => {
             const signupName = document.getElementById('signup-name').value;
             const signupEmail = document.getElementById('signup-email').value;
-            const signupAddress = document.getElementById('signup-address').value;
-            const signupPassword = document.getElementById('signup-password').value;
+            const signupAddress = document.getElementById('signup-address');
+            const signupPassword = document.getElementById('signup-password');
 
-            const data = {
-                'email': signupEmail,
-                'password': signupPassword,
-                'address': signupAddress,
-                'name': signupName
-            };
-
-            let globalResponse;
             const apiUrl = "/signup";
 
             try {
@@ -151,6 +150,8 @@
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(data)
+                    // Or 'GET' or 'PUT' depending on your API
+                    // Add headers, body, and other options as needed
                 });
                 if (response.ok) {
                     globalResponse = await response.json(); // Store the response in the global variable

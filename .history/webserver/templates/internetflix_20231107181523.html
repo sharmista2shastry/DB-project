@@ -21,16 +21,16 @@
 
     <div id="sign-up-section" style="display: none;">
         <label for="name">Name:</label>
-        <input type="name" id="signup-name" name="name" required><br>
+        <input type="name" id="name" name="name" required><br>
 
         <label for="email">Email:</label>
-        <input type="email" id="signup-email" name="email" required><br>
+        <input type="email" id="email" name="email" required><br>
 
         <label for="address">Address:</label>
-        <input type="address" id="signup-address" name="address" required><br>
+        <input type="address" id="address" name="address" required><br>
 
         <label for="password">Password:</label>
-        <input type="password" id="signup-password" name="password" required><br>
+        <input type="password" id="password" name="password" required><br>
 
         <button type="button" id="submit">Submit and proceed</button>
     </div>
@@ -96,6 +96,9 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
+            // Simulate a successful login verification.
+            let verificationSuccess;
+
             const data = {
                 'email': email,
                 'password': password
@@ -111,12 +114,16 @@
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(data)
+                    // Or 'GET' or 'PUT' depending on your API
+                    // Add headers, body, and other options as needed
                 });
                 if (response.ok) {
                     globalResponse = await response.json(); // Store the response in the global variable
                 } else {
                     console.error('API call failed with status:', response.status);
                 }
+                // Handle the API response here (e.g., show a success message or handle errors).
+                // You can use response.json() to parse the response if it's in JSON format.
             } catch (error) {
                 console.error('API call failed:', error);
             }
@@ -129,21 +136,6 @@
         });
 
         submit.addEventListener('click', async () => {
-            const signupName = document.getElementById('signup-name').value;
-            const signupEmail = document.getElementById('signup-email').value;
-            const signupAddress = document.getElementById('signup-address').value;
-            const signupPassword = document.getElementById('signup-password').value;
-
-            const data = {
-                'email': signupEmail,
-                'password': signupPassword,
-                'address': signupAddress,
-                'name': signupName
-            };
-
-            let globalResponse;
-            const apiUrl = "/signup";
-
             try {
                 const response = await fetch(apiUrl, {
                     method: 'POST',
@@ -151,6 +143,8 @@
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(data)
+                    // Or 'GET' or 'PUT' depending on your API
+                    // Add headers, body, and other options as needed
                 });
                 if (response.ok) {
                     globalResponse = await response.json(); // Store the response in the global variable

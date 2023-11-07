@@ -244,6 +244,7 @@ def login():
         "output": isValid
     }
     response = {str(key): value for key, value in response.items()}
+
     return jsonify(result=response)
 
 @app.route('/signup', methods=['GET','POST'])
@@ -258,7 +259,7 @@ def signup():
 
     isValid = False
     for result in cursor:
-        print(result)
+        print
         if result[0] == 1:
             isValid = True
 
@@ -266,6 +267,7 @@ def signup():
         "output": isValid
     }
     response = {str(key): value for key, value in response.items()}
+
     return jsonify(result=response)
 
 

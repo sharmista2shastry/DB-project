@@ -111,6 +111,7 @@
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(data)
+                    // Or 'GET' or 'PUT' depending on your API
                 });
                 if (response.ok) {
                     globalResponse = await response.json(); // Store the response in the global variable
@@ -141,7 +142,6 @@
                 'name': signupName
             };
 
-            let globalResponse;
             const apiUrl = "/signup";
 
             try {

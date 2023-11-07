@@ -244,6 +244,7 @@ def login():
         "output": isValid
     }
     response = {str(key): value for key, value in response.items()}
+
     return jsonify(result=response)
 
 @app.route('/signup', methods=['GET','POST'])
@@ -252,13 +253,12 @@ def signup():
     name = request.json['name']
     address = request.json['address']
     password = request.json['password']
-    params_dict = {"email":email, "password":password, "name":name, "address":address}
-    cursor = g.conn.execute(text("INSERT INTO INTERNETFLIX_CUSTOMER_DATA(CUSTOMER_NAME, CUSTOMER_ADDRESS, CUSTOMER_EMAIL, PASS_WORD) VALUES (:name, :address, :email, :password);"), params_dict)
+    params_dict = {"email":email, "password":password, "name":name, ""}
+    cursor = g.conn.execute(text("SELECT 1 FROM INTERNETFLIX_CUSTOMER_DATA WHERE CUSTOMER_EMAIL=(:email) AND PASS_WORD=(:password)"), params_dict)
     g.conn.commit()
 
     isValid = False
     for result in cursor:
-        print(result)
         if result[0] == 1:
             isValid = True
 
@@ -266,6 +266,7 @@ def signup():
         "output": isValid
     }
     response = {str(key): value for key, value in response.items()}
+
     return jsonify(result=response)
 
 
