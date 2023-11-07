@@ -237,7 +237,7 @@ def login():
 
     complete_results = []
     for result in cursor:
-      print(result)
+      
       complete_results.append({
         result[0]
       })
