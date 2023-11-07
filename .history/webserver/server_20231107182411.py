@@ -220,7 +220,6 @@ def gettransactions():
         "card_number": result[10],
         "cardholder_id": result[11]
       })
-    cursor.close()
     result = {
         "output": complete_results
     }
@@ -240,7 +239,7 @@ def login():
     for result in cursor:
         if result[0] == 1:
             isValid = True
-    cursor.close()
+
     response = {
         "output": isValid
     }
@@ -258,10 +257,10 @@ def signup():
     g.conn.commit()
 
    # Check if the insert was successful
-    isValid = cursor.rowcount > 0
+isValid = cursor.rowcount > 0
 
-    # Close the cursor
-    cursor.close()
+# Close the cursor
+cursor.close()
 
     response = {
         "output": isValid

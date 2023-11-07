@@ -240,7 +240,7 @@ def login():
     for result in cursor:
         if result[0] == 1:
             isValid = True
-    cursor.close()
+
     response = {
         "output": isValid
     }
