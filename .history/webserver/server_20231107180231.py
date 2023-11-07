@@ -235,7 +235,7 @@ def login():
     cursor = g.conn.execute(text("SELECT 1 FROM INTERNETFLIX_CUSTOMER_DATA WHERE CUSTOMER_EMAIL=(:email) AND PASS_WORD=(:password)"), params_dict)
     g.conn.commit()
 
-    complete_results = []
+    ifValid = []
     for result in cursor:
       print(result[0])
       complete_results.append({
