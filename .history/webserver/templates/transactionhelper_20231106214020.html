@@ -95,6 +95,7 @@
         });
         if (response.ok) {
           globalResponse = await response.json(); // Store the response in the global variable
+          console.log(globalResponse); // Log the response
         } else {
           console.error('API call failed with status:', response.status);
         }

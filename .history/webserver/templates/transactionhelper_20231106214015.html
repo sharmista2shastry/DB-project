@@ -95,6 +95,7 @@
         });
         if (response.ok) {
           globalResponse = await response.json(); // Store the response in the global variable
+          console.log(globalResponse); // Log the response
         } else {
           console.error('API call failed with status:', response.status);
         }
@@ -114,7 +115,7 @@
         const merchantCell = document.createElement('td');
         merchantCell.textContent = item.merchant_id;
         const authenticationTypeCell = document.createElement('td');
-        authenticationTypeCell.textContent = item.authentication_type_id;
+        authenticationTypeCell.textContent = item.auteh;
         const currencyCell = document.createElement('td');
         currencyCell.textContent = item.transaction_currency;
         const fraudCell = document.createElement('td');
