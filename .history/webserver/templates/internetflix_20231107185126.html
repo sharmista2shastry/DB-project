@@ -201,11 +201,13 @@
             if (paymentMethod == 'existing-token') {
                 const data = {
                     'email': email,
-                    'country': countrySelected
+                    'country': countrySelected,
+                    'address': signupAddress,
+                    'name': signupName
                 };
 
                 let globalResponse;
-                const apiUrl = "/paywithtoken";
+                const apiUrl = "/signup";
 
                 try {
                     const response = await fetch(apiUrl, {

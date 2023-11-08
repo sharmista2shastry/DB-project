@@ -91,10 +91,9 @@
         let paymentPlan = "";
         let countrySelected = "";
         let paymentMethod = "";
-        let email = ""
 
         loginButton.addEventListener('click', async () => {
-            email = document.getElementById('email').value;
+            const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
             const data = {
@@ -134,51 +133,9 @@
             signupSection.style.display = 'block'; // Show the country and payment options
         });
 
-        submit.addEventListener('click', async () => {
-            const signupName = document.getElementById('signup-name').value;
-            email = document.getElementById('signup-email').value;
-            const signupAddress = document.getElementById('signup-address').value;
-            const signupPassword = document.getElementById('signup-password').value;
-
-            const data = {
-                'email': email,
-                'password': signupPassword,
-                'address': signupAddress,
-                'name': signupName
-            };
-
-            let globalResponse;
-            const apiUrl = "/signup";
-
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
-                });
-                if (response.ok) {
-                    globalResponse = await response.json(); // Store the response in the global variable
-                } else {
-                    console.error('API call failed with status:', response.status);
-                }
-                // Handle the API response here (e.g., show a success message or handle errors).
-                // You can use response.json() to parse the response if it's in JSON format.
-            } catch (error) {
-                console.error('API call failed:', error);
-            }
-            if (globalResponse.result.output) {
-                signupSection.style.display = 'none'; // Hide the login form
-                paymentOptions.style.display = 'block'; // Show the country and payment options
-            } else {
-                alert('Either the email exists or your password is weak. Ensure that the password has atleast 5 characters.');
-            }
-        });
-
         goToPaymentSection.addEventListener('click', async () => {
-            // email = document.getElementById('email').value;
-            // const password = document.getElementById('password').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
             paymentOptions.style.display = 'none';
             paymentPlan = document.getElementById('plan').value;
             countrySelected = document.getElementById('country').value;
@@ -196,47 +153,6 @@
                     paymentMethod = radioButtons[i].value;
                     break; // Exit the loop once a selection is found
                 }
-            }
-
-            if (paymentMethod == 'existing-token') {
-                const data = {
-                    'email': email,
-                    'country': countrySelected
-                };
-
-                let globalResponse;
-                const apiUrl = "/paywithtoken";
-
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(data)
-                    });
-                    if (response.ok) {
-                        globalResponse = await response.json(); // Store the response in the global variable
-                    } else {
-                        console.error('API call failed with status:', response.status);
-                    }
-                    // Handle the API response here (e.g., show a success message or handle errors).
-                    // You can use response.json() to parse the response if it's in JSON format.
-                } catch (error) {
-                    console.error('API call failed:', error);
-                }
-                if (globalResponse.result.output) {
-                    signupSection.style.display = 'none'; // Hide the login form
-                    paymentOptions.style.display = 'block'; // Show the country and payment options
-                } else {
-                    alert('Either the email exists or your password is weak. Ensure that the password has atleast 5 characters.');
-                }
-            }
-            else if (paymentMethod == 'store-and-pay') {
-
-            }
-            else if (paymentMethod == 'just-pay') {
-
             }
             // You can make an API call here using JavaScript (e.g., using the fetch function).
             // Replace the URL with the actual API endpoint you want to call.

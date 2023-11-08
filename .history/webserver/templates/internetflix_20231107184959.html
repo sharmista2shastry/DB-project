@@ -198,44 +198,13 @@
                 }
             }
 
-            if (paymentMethod == 'existing-token') {
-                const data = {
-                    'email': email,
-                    'country': countrySelected
-                };
-
-                let globalResponse;
-                const apiUrl = "/paywithtoken";
-
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(data)
-                    });
-                    if (response.ok) {
-                        globalResponse = await response.json(); // Store the response in the global variable
-                    } else {
-                        console.error('API call failed with status:', response.status);
-                    }
-                    // Handle the API response here (e.g., show a success message or handle errors).
-                    // You can use response.json() to parse the response if it's in JSON format.
-                } catch (error) {
-                    console.error('API call failed:', error);
-                }
-                if (globalResponse.result.output) {
-                    signupSection.style.display = 'none'; // Hide the login form
-                    paymentOptions.style.display = 'block'; // Show the country and payment options
-                } else {
-                    alert('Either the email exists or your password is weak. Ensure that the password has atleast 5 characters.');
-                }
-            }
-            else if (paymentMethod == 'store-and-pay') {
+            if(paymentMethod == 'existing-token'){
 
             }
-            else if (paymentMethod == 'just-pay') {
+            else if(paymentMethod == 'store-and-pay'){
+
+            }
+            else if(paymentMethod == 'just-pay'){
 
             }
             // You can make an API call here using JavaScript (e.g., using the fetch function).

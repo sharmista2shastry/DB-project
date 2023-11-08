@@ -277,15 +277,14 @@ def signup():
 @app.route('/paywithtoken', methods=['GET','POST'])
 def paywithtoken():
     email = request.json['email']
-    country = request.json['country']
-    params_dict = {"email":email, "country":country}
+    merchant_id = request.json['merchant_id']
+    params_dict = {"email":email, "password":password, "name":name, "address":address}
     isValid = False
     try:
-      cursor = g.conn.execute(text("SELECT S.CARD_TOKEN FROM internetflix_stored_card_data S WHERE S.STORED_CARD_ID = (SELECT A.STORED_CARD_ID FROM INTERNETFLIX_CUSTOMER_DATA A WHERE A.EMAIL=(:email)) AND S.MERCHANT_ID=(SELECT M.MERCHANT_ID FROM MERCHANTS M WHERE M.MERCHANT_NAME ILIKE 'internetflix ltd.' AND M.COUNTRY_ID=(SELECT C.COUNTRY_ID FROM COUNTRIES C WHERE C.COUNTRY=(:country)));"), params_dict)
+      cursor = g.conn.execute(text("INSERT INTO INTERNETFLIX_CUSTOMER_DATA(CUSTOMER_NAME, CUSTOMER_ADDRESS, CUSTOMER_EMAIL, PASS_WORD) VALUES (:name, :address, :email, :password);"), params_dict)
 
    # Check if the insert was successful
-      for result in cursor:
-         print(result)
+      isValid = cursor.rowcount > 0
 
       g.conn.commit()
 
