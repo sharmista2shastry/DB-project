@@ -278,9 +278,9 @@
                 saveAndPaySection.style.display = 'block';
                 saveAndPayButton.addEventListener('click', async () => {
                     cardNumber = document.getElementById('save-and-pay-number').value;
-                    cardEmail = document.getElementById('save-and-pay-email').value;
-                    cardExpiry = document.getElementById('save-and-pay-expiry').value;
-                    cardCVV = document.getElementById('save-and-pay-cvv').value;
+                    cardEmail = document.getElementById('save-and-pay-number').value;
+                    cardExpiry = document.getElementById('save-card-expiry').value;
+                    cardCVV = document.getElementById('save-card-cvv').value;
 
                     const data = {
                         'email': cardEmail,
