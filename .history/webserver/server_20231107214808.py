@@ -327,7 +327,7 @@ def paywithtoken():
     # Close the cursor
       cursor.close()
     except Exception as error:
-       print('Ecveption',error)
+       print('Ecveption')
        isValid = False
     response = {
         "output": isValid
