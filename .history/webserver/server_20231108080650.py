@@ -378,8 +378,8 @@ def paywithcard():
     response = {str(key): value for key, value in response.items()}
     return jsonify(result=response)
 
-@app.route('/saveandpay', methods=['GET','POST'])
-def saveandpay():
+@app.route('/paywithcard', methods=['GET','POST'])
+def paywithcard():
     email = request.json['email']
     country = request.json['country']
     amount = request.json['amount']
@@ -398,10 +398,6 @@ def saveandpay():
              isValidCard = True
 
       if isValidCard:
-        #save the token before paying
-        params_dict = {"email":email,"card_number":cardNumber,"country":country}
-        cursor = g.conn.execute(text("SELECT CREATE_AND_SAVE_TOKEN((SELECT M.MERCHANT_ID FROM MERCHANTS M WHERE M.MERCHANT_NAME ILIKE ('%Internetflix Ltd.%') AND M.COUNTRY_ID = (SELECT C.COUNTRY_ID FROM COUNTRIES C WHERE C.COUNTRY=:country)), :card_number, :email);"), params_dict)
-        
         params_dict = {"email":email,"card_number":cardNumber,"amount":amount,"country":country,"transaction_id":1}
         cursor = g.conn.execute(text("SELECT PROCESS_TRANSACTION(:email, :card_number, :amount, (SELECT M.MERCHANT_ID FROM MERCHANTS M WHERE M.MERCHANT_NAME ILIKE ('%Internetflix Ltd.%') AND M.COUNTRY_ID = (SELECT C.COUNTRY_ID FROM COUNTRIES C WHERE C.COUNTRY=:country)), :transaction_id);"), params_dict)
 

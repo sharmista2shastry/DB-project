@@ -50,4 +50,4 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- SELECT CREATE_AND_SAVE_TOKEN('1','4652-2125-0227-2528','mmeates5@godaddy.com');
+SELECT CREATE_AND_SAVE_TOKEN('1','4652-2125-0227-2528','mmeates5@godaddy.com');
