@@ -1,0 +1,117 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+#login-form, #sign-up-section, #plan-options, #payment-options, #card-pay, #save-and-pay {
+    width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+/* Login form */
+#login-form {
+    display: flex;
+    justify-content: space-between;
+}
+
+#login-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#login-form input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+#login-button, #sign-up-button {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* Sign up section */
+#sign-up-section {
+    display: none;
+}
+
+#sign-up-section label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#sign-up-section input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+#submit {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* Plan options */
+#plan-options {
+    display: none;
+}
+
+#plan-options select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+#go-to-payment-button {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* Payment options */
+#payment-options {
+    display: none;
+}
+
+#payment-options form {
+    margin-top: 10px;
+}
+
+#process-payment-button {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#card-pay, #save-and-pay {
+    display: none;
+}
+
+#card-email, #save-and-pay-email {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#card-number, #save-and-pay-number {
+    width: 160px;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+#card-expiry, #save-and-pay-expiry {
+    width: 80px;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+#card-cvv, #save-and-pay-cvv {
+    width: 40px;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+#pay-by-card, #save-and-pay-button {
+    padding: 10px 20px;
+    cursor: pointer;
+}
