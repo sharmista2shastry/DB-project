@@ -292,7 +292,7 @@ def paywithtoken():
       cursor = g.conn.execute(text("SELECT * FROM DECRYPTTOKEN(:token);"), params_dict)
 
       for result in cursor:
-         print(result)
+         print(result[0])
 
       g.conn.commit()
 
