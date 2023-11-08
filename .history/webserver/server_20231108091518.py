@@ -387,7 +387,6 @@ def saveandpay():
     expiry = request.json['card-expiry']
     cardNumber = request.json['card-number']
     params_dict = {"email":email, "amount": amount, "cvv": cvv, "expiry":expiry, "card_number":cardNumber, "country":country}
-    
     try:
       cursor = g.conn.execute(text("SELECT CHECK_CARD_MATCH(:email, :card_number, :expiry, :cvv, :country);"), params_dict)
 
@@ -407,6 +406,7 @@ def saveandpay():
 
         for result in cursor2:
           if result[0]==True:
+             print('Here')
              isSuccess = True
 
       g.conn.commit()

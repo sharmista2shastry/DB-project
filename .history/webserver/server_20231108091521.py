@@ -407,6 +407,7 @@ def saveandpay():
 
         for result in cursor2:
           if result[0]==True:
+             print('Here')
              isSuccess = True
 
       g.conn.commit()
