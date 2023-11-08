@@ -278,7 +278,6 @@ def signup():
 def paywithtoken():
     email = request.json['email']
     country = request.json['country']
-    amount = request.json['amount']
     params_dict = {"email":email, "country":country}
     isValid = False
     try:
@@ -295,24 +294,16 @@ def paywithtoken():
       merchant_id = ''
       card_number = ''
       token_creation_date = ''
+      cardholder_id = ''
 
       for result in cursor:
          merchant_id = result[0]
          card_number = result[2]
          token_creation_date = result[3]
+         cardholder_id = result[4]
 
-      params_dict = {"dater":token_creation_date}
-      cursor = g.conn.execute(text("SELECT EXTRACT(MONTH FROM age((:dater)::date, current_date)) < 6;"), params_dict)
+      cursor = g.conn.execute(text("SELECT EXTRACT(MONTH FROM age('2023-11-01'::date, current_date)) < 6;"), params_dict)
 
-      for result in cursor:
-         if result[0]=='t':
-          isValid = True
-      print('running process transaction now')
-      params_dict = {"email":email,"card_number":card_number,"amount":amount,"merchant_id":merchant_id,"transaction_id":1}
-      cursor = g.conn.execute(text("SELECT PROCESS_TRANSACTION(:email, :card_number, :amount, :merchant_id, :transaction_id);"), params_dict)
-
-      for result in cursor:
-         print(result)
 
       g.conn.commit()
 

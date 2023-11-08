@@ -3,6 +3,7 @@ CREATE OR REPLACE FUNCTION PROCESS_TRANSACTION(
     card_number TEXT,
     amount INT,
 	merchant_id INT,
+	issuer_id INT,
 	transaction_type INT
 )
 RETURNS BOOL

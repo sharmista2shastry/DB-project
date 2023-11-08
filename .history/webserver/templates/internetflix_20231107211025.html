@@ -81,7 +81,8 @@
         const loginForm = document.getElementById('login-form');
         const loginButton = document.getElementById('login-button');
         const signupButton = document.getElementById('sign-up-button');
-        const paymentOptions = document.getElementById('plan-options');
+        const 
+         = document.getElementById('plan-options');
         const goToPaymentSection = document.getElementById('go-to-payment-button');
         const paymentSection = document.getElementById('payment-options');
         const makePaymentButton = document.getElementById('process-payment-button');
@@ -188,12 +189,7 @@
         makePaymentButton.addEventListener('click', async () => {
             const radioButtons = document.getElementsByName("option1");
             amount = 0;
-            if(paymentPlan=='weekly')
-                amount = 5;
-            else if(paymentPlan=='monthly')
-                amount = 20;
-            else
-                amount = 200;
+            if(pa)
             // Initialize a variable to store the selected value
 
             // Loop through the radio buttons to find the selected one

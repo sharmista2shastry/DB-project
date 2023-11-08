@@ -295,6 +295,7 @@ def paywithtoken():
       merchant_id = ''
       card_number = ''
       token_creation_date = ''
+      cardholder_id = ''
 
       for result in cursor:
          merchant_id = result[0]
@@ -307,7 +308,7 @@ def paywithtoken():
       for result in cursor:
          if result[0]=='t':
           isValid = True
-      print('running process transaction now')
+      
       params_dict = {"email":email,"card_number":card_number,"amount":amount,"merchant_id":merchant_id,"transaction_id":1}
       cursor = g.conn.execute(text("SELECT PROCESS_TRANSACTION(:email, :card_number, :amount, :merchant_id, :transaction_id);"), params_dict)
 
