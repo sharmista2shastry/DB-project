@@ -38,6 +38,6 @@ BEGIN
                 END LOOP;
         END CASE;
     END LOOP;
-    RETURN QUERY SELECT split_text1, split_text2, split_text3, split_text4;
+    RETURN QUERY SELECT split_text1, split_text2, split_text3, split_text4, split_text5;
 END;
 $$ LANGUAGE plpgsql;

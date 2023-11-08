@@ -298,8 +298,8 @@ def paywithtoken():
 
       for result in cursor:
          merchant_id = result[0]
-         card_number = result[1]
-         token_creation_date = result[2]
+         card_number = result[2]
+         token_creation_date = result[1]
 
       print(card_number)
       print(token_creation_date)

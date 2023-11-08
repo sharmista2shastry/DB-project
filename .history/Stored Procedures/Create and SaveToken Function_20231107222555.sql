@@ -1,9 +1,9 @@
 CREATE OR REPLACE FUNCTION CREATE_AND_SAVE_TOKEN(
-    MerchantId varchar(100),
-	CardNumber varchar(100),
-	Dater varchar(100),
-	Cardholder_Id varchar(100),
-	CustomerEmail varchar(100)
+    MerchantId TEXT,
+	CardNumber TEXT,
+	Dater TEXT,
+	Cardholder_Id TEXT,
+	CustomerEmail TEXT
 ) RETURNS text AS $$
 DECLARE
     shifted_string1 VARCHAR(100);
@@ -43,7 +43,7 @@ BEGIN
 	
 	card_token_id = (SELECT STORED_CARD_ID FROM INTERNETFLIX_STORED_CARD_DATA WHERE CARD_TOKEN = concatenated_string);
 	
-	UPDATE INTERNETFLIX_CUSTOMER_DATA SET STORED_CARD_ID = card_token_id WHERE CUSTOMER_EMAIL = $5;
+	UPDATE INTERNETFLIX_CUSTOMER_DATA SET STORED_CARD_ID = card_token_id WHERE CUSTOMER_EMAIL = $6;
 
     RETURN concatenated_string;
 END;

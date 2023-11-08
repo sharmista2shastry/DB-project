@@ -1,12 +1,14 @@
 CREATE OR REPLACE FUNCTION CREATE_AND_SAVE_TOKEN(
-    MerchantId varchar(100),
-	CardNumber varchar(100),
-	Dater varchar(100),
-	Cardholder_Id varchar(100),
-	CustomerEmail varchar(100)
+    MerchantId TEXT,
+    Country TEXT,
+	CardNumber TEXT,
+	Dater TEXT,
+	Cardholder_Id TEXT,
+	CustomerEmail TEXT
 ) RETURNS text AS $$
 DECLARE
     shifted_string1 VARCHAR(100);
+    shifted_string2 VARCHAR(100);
     shifted_string3 VARCHAR(100);
     shifted_string4 VARCHAR(100);
 	shifted_string5 VARCHAR(100);
@@ -18,7 +20,6 @@ BEGIN
     FOR i IN 1..length(MerchantId) LOOP
         shifted_string1 := shifted_string1 || chr((ascii(substring(MerchantId, i, 1)) + 1)::integer);
     END LOOP;
-     
     -- Shift ASCII values by 9 for String3
     shifted_string3 := '';
     FOR i IN 1..length(CardNumber) LOOP
@@ -37,13 +38,13 @@ BEGIN
     END LOOP;
 
     -- Concatenate the shifted strings with hyphens every 4 characters
-    concatenated_string := shifted_string1 || '-' || shifted_string3  || '-' || shifted_string4  || '-' || shifted_string5;
+    concatenated_string := shifted_string1 || '-' || shifted_string2  || '-' || shifted_string3  || '-' || shifted_string4  || '-' || shifted_string5;
    
     INSERT INTO INTERNETFLIX_STORED_CARD_DATA(CARD_TOKEN, MERCHANT_ID) VALUES (concatenated_string, 1);
 	
 	card_token_id = (SELECT STORED_CARD_ID FROM INTERNETFLIX_STORED_CARD_DATA WHERE CARD_TOKEN = concatenated_string);
 	
-	UPDATE INTERNETFLIX_CUSTOMER_DATA SET STORED_CARD_ID = card_token_id WHERE CUSTOMER_EMAIL = $5;
+	UPDATE INTERNETFLIX_CUSTOMER_DATA SET STORED_CARD_ID = card_token_id WHERE CUSTOMER_EMAIL = $6;
 
     RETURN concatenated_string;
 END;
