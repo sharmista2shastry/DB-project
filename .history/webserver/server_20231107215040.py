@@ -310,7 +310,7 @@ def paywithtoken():
       print('Hola2')
       for result in cursor:
          print(result)
-         if result[0]=='True':
+         if result[0]=='t':
           isValid = True
       print(isValid)
       print('running process transaction now')

@@ -304,13 +304,15 @@ def paywithtoken():
       print(card_number)
       print(token_creation_date)
       params_dict = {"dater":token_creation_date}
-      
+      sql_query = text("SELECT EXTRACT(MONTH FROM age(:dater::date, current_date)) < 6;")
+      formatted_sql = sql_query.as_string(params=params_dict)
+      print(formatted_sql)
       print('Hola1')
       cursor = g.conn.execute(text("SELECT EXTRACT(MONTH FROM age((:dater)::date, current_date)) < 6;"), params_dict)
       print('Hola2')
       for result in cursor:
          print(result)
-         if result[0]=='True':
+         if result[0]=='t':
           isValid = True
       print(isValid)
       print('running process transaction now')
