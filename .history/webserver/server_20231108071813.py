@@ -328,7 +328,7 @@ def paywithtoken():
     # Close the cursor
       cursor.close()
     except Exception as error:
-       print('Exception',error)
+       print('Ecveption',error)
        isValid = False
     response = {
         "isValid": isValid,
@@ -351,14 +351,40 @@ def paywithcard():
       cursor = g.conn.execute(text("SELECT CHECK_CARD_MATCH(:email, :card_number, :expiry, :cvv, :country);"), params_dict)
 
       isValidCard = False 
-      isSuccess = False
       for result in cursor:
          if result[0]==True:
              isValidCard = True
 
       if isValidCard:
-        params_dict = {"email":email,"card_number":cardNumber,"amount":amount,"country":country,"transaction_id":1}
-        cursor = g.conn.execute(text("SELECT PROCESS_TRANSACTION(:email, :card_number, :amount, (SELECT M.MERCHANT_ID FROM MERCHANTS M WHERE M.MERCHANT_NAME ILIKE ('%Internetflix Ltd.%') AND M.COUNTRY_ID = (SELECT C.COUNTRY_ID FROM COUNTRIES C WHERE C.COUNTRY=:country)), :transaction_id);"), params_dict)
+      params_dict = {"token":card_token}
+      cursor = g.conn.execute(text("SELECT * FROM DECRYPTTOKEN(:token);"), params_dict)
+
+      merchant_id = ''
+      card_number = ''
+      token_creation_date = ''
+
+      for result in cursor:
+         merchant_id = result[0]
+         card_number = result[1]
+         token_creation_date = result[2]
+
+      # print(card_number)
+      # print(token_creation_date)
+      params_dict = {"dater":token_creation_date}
+      
+      # print('Hola1')
+      cursor = g.conn.execute(text("SELECT EXTRACT(MONTH FROM age((:dater)::date, current_date)) < 6;"), params_dict)
+      # print('Hola2')
+      for result in cursor:
+        #  print(result[0])
+         if result[0]==True:
+          isValid = True
+      # print(isValid)
+      isSuccess = False
+      if isValid:
+        # print('running process transaction now')
+        params_dict = {"email":email,"card_number":card_number,"amount":amount,"merchant_id":merchant_id,"transaction_id":1}
+        cursor = g.conn.execute(text("SELECT PROCESS_TRANSACTION(:email, :card_number, :amount, :merchant_id, :transaction_id);"), params_dict)
 
         for result in cursor:
           if result[0]==True:
@@ -369,11 +395,11 @@ def paywithcard():
     # Close the cursor
       cursor.close()
     except Exception as error:
-       print('Exception',error)
+       print('Ecveption',error)
        isValid = False
     response = {
         "isValid": isValidCard,
-        "isSuccess": isSuccess
+        "transaction": isSuccess
     }
     response = {str(key): value for key, value in response.items()}
     return jsonify(result=response)

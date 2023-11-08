@@ -77,22 +77,21 @@
         <button type="button" id="process-payment-button">Pay</button>
     </div>
 
-    <div id="card-pay" style="display: none;">
-        <label for="card-email">Please enter the email associated with your card:</label>
-        <input type="card-email" id="card-email" name="card-email" required><br>
+    <div id="sign-up-section" style="display: none;">
+        <label for="name">Name:</label>
+        <input type="name" id="card-email" name="name" required><br>
 
-        <label for="card-number">Card Number with hyphen between the digits:</label>
-        <input type="card-number" id="card-number" name="card-number" required><br>
+        <label for="email">Email:</label>
+        <input type="email" id="signup-email" name="email" required><br>
 
-        <label for="card-expiry">Expiry date in YYYY-MM-DD format:</label>
-        <input type="card-expiry" id="card-expiry" name="card-expiry" required><br>
+        <label for="address">Address:</label>
+        <input type="address" id="signup-address" name="address" required><br>
 
-        <label for="card-cvv">CVV:</label>
-        <input type="password" id="card-cvv" name="card-cvv" required><br>
+        <label for="password">Password:</label>
+        <input type="password" id="signup-password" name="password" required><br>
 
-        <button type="button" id="pay-by-card">Pay</button>
+        <button type="button" id="pay-by-card">Submit and proceed</button>
     </div>
-
     <script>
         const loginForm = document.getElementById('login-form');
         const loginButton = document.getElementById('login-button');
@@ -103,7 +102,6 @@
         const makePaymentButton = document.getElementById('process-payment-button');
         const signupSection = document.getElementById('sign-up-section');
         const submit = document.getElementById('submit');
-        const payByCardSection = document.getElementById('card-pay');
 
         let paymentPlan = "";
         let countrySelected = "";
@@ -222,6 +220,7 @@
             }
 
             if (paymentMethod == 'existing-token') {
+                console.log('Entered');
                 const data = {
                     'email': email,
                     'country': countrySelected,
@@ -249,7 +248,8 @@
                 } catch (error) {
                     console.error('API call failed:', error);
                 }
-                if (globalResponse.result.isSuccess) {
+                if (globalResponse.result.transaction) {
+                    signupSection.style.display = 'none'; 
                     paymentOptions.style.display = 'none';
                     paymentSection.style.display = 'none';
                     alert("Hooray, your transaction has succeeded. Enjoy watching Internetflix!");
@@ -261,53 +261,6 @@
 
             }
             else if (paymentMethod == 'just-pay') {
-                paymentOptions.style.display = 'none';
-                paymentSection.style.display = 'none';
-                payByCardSection.style.display = 'block';
-                cardNumber = document.getElementById('card-number').value;
-                cardEmail = document.getElementById('card-email').value;
-                cardExpiry = document.getElementById('card-expiry').value;
-                cardCVV = document.getElementById('card-cvv').value;
-                
-                const data = {
-                    'email': cardEmail,
-                    'country': countrySelected,
-                    'amount': amount,
-                    'card-number': cardNumber,
-                    'card-expiry': cardExpiry,
-                    'card-cvv': cardCVV
-                };
-
-                let globalResponse;
-                const apiUrl = "/paywithcard";
-
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(data)
-                    });
-                    if (response.ok) {
-                        globalResponse = await response.json(); // Store the response in the global variable
-                    } else {
-                        console.error('API call failed with status:', response.status);
-                    }
-                    // Handle the API response here (e.g., show a success message or handle errors).
-                    // You can use response.json() to parse the response if it's in JSON format.
-                } catch (error) {
-                    console.error('API call failed:', error);
-                }
-                if (globalResponse.result.isSuccess) {
-                    paymentOptions.style.display = 'none';
-                    paymentSection.style.display = 'none';
-                    alert("Hooray, your transaction has succeeded. Enjoy watching Internetflix!");
-                } else if(!globalResponse.result.isValid){
-                    alert("Your card details could not be validated, please try again");
-                } else{
-                    alert("Could not process your transaction, please contact Y's customer helpline for 24/7 assistance. Thank you!");
-                }
 
             }
             // You can make an API call here using JavaScript (e.g., using the fetch function).

@@ -373,7 +373,7 @@ def paywithcard():
        isValid = False
     response = {
         "isValid": isValidCard,
-        "isSuccess": isSuccess
+        "transaction": isSuccess
     }
     response = {str(key): value for key, value in response.items()}
     return jsonify(result=response)

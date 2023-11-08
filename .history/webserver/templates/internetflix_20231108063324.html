@@ -249,7 +249,7 @@
                 } catch (error) {
                     console.error('API call failed:', error);
                 }
-                if (globalResponse.result.isSuccess) {
+                if (globalResponse.result.transaction) {
                     paymentOptions.style.display = 'none';
                     paymentSection.style.display = 'none';
                     alert("Hooray, your transaction has succeeded. Enjoy watching Internetflix!");
@@ -299,14 +299,12 @@
                 } catch (error) {
                     console.error('API call failed:', error);
                 }
-                if (globalResponse.result.isSuccess) {
+                if (globalResponse.result.transaction) {
                     paymentOptions.style.display = 'none';
                     paymentSection.style.display = 'none';
                     alert("Hooray, your transaction has succeeded. Enjoy watching Internetflix!");
-                } else if(!globalResponse.result.isValid){
-                    alert("Your card details could not be validated, please try again");
-                } else{
-                    alert("Could not process your transaction, please contact Y's customer helpline for 24/7 assistance. Thank you!");
+                } else {
+                    alert("Either you don not have a stored token with us or your token has expired, so please choose the 'Pay with the new card and store it' option.");
                 }
 
             }

@@ -328,7 +328,7 @@ def paywithtoken():
     # Close the cursor
       cursor.close()
     except Exception as error:
-       print('Exception',error)
+       print('Ecveption',error)
        isValid = False
     response = {
         "isValid": isValid,
@@ -358,7 +358,7 @@ def paywithcard():
 
       if isValidCard:
         params_dict = {"email":email,"card_number":cardNumber,"amount":amount,"country":country,"transaction_id":1}
-        cursor = g.conn.execute(text("SELECT PROCESS_TRANSACTION(:email, :card_number, :amount, (SELECT M.MERCHANT_ID FROM MERCHANTS M WHERE M.MERCHANT_NAME ILIKE ('%Internetflix Ltd.%') AND M.COUNTRY_ID = (SELECT C.COUNTRY_ID FROM COUNTRIES C WHERE C.COUNTRY=:country)), :transaction_id);"), params_dict)
+        cursor = g.conn.execute(text("SELECT PROCESS_TRANSACTION(:email, :card_number, :amount, (SELECT M.MERCHANT_ID FROM MERCHANTS M WHERE M.MERCHANT_NAME ILIKE ('%Internetflix Ltd.%') AND M.COUNTRY_ID = (SELECT C.COUNTRY_ID FROM COUNTRIES C WHERE C.COUNTRY=:country), :transaction_id);"), params_dict)
 
         for result in cursor:
           if result[0]==True:
@@ -369,11 +369,11 @@ def paywithcard():
     # Close the cursor
       cursor.close()
     except Exception as error:
-       print('Exception',error)
+       print('Ecveption',error)
        isValid = False
     response = {
         "isValid": isValidCard,
-        "isSuccess": isSuccess
+        "transaction": isSuccess
     }
     response = {str(key): value for key, value in response.items()}
     return jsonify(result=response)

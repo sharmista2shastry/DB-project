@@ -54,5 +54,3 @@ BEGIN
     END IF;
 END;
 $$ LANGUAGE plpgsql;
-
---SELECT CHECK_CARD_MATCH('vjorry0@yahoo.co.jp', '1234-5696-3702-9692', '2024-07-02', 789, 'Idonesia');

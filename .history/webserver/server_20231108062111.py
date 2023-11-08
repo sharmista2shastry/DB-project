@@ -328,52 +328,11 @@ def paywithtoken():
     # Close the cursor
       cursor.close()
     except Exception as error:
-       print('Exception',error)
+       print('Ecveption',error)
        isValid = False
     response = {
-        "isValid": isValid,
+       ""
         "transaction": isSuccess
-    }
-    response = {str(key): value for key, value in response.items()}
-    return jsonify(result=response)
-
-@app.route('/paywithcard', methods=['GET','POST'])
-def paywithcard():
-    email = request.json['email']
-    country = request.json['country']
-    amount = request.json['amount']
-    cvv = request.json['card-cvv']
-    expiry = request.json['card-expiry']
-    cardNumber = request.json['card-number']
-    params_dict = {"email":email, "amount": amount, "cvv": cvv, "expiry":expiry, "card_number":cardNumber, "country":country}
-    isValid = False
-    try:
-      cursor = g.conn.execute(text("SELECT CHECK_CARD_MATCH(:email, :card_number, :expiry, :cvv, :country);"), params_dict)
-
-      isValidCard = False 
-      isSuccess = False
-      for result in cursor:
-         if result[0]==True:
-             isValidCard = True
-
-      if isValidCard:
-        params_dict = {"email":email,"card_number":cardNumber,"amount":amount,"country":country,"transaction_id":1}
-        cursor = g.conn.execute(text("SELECT PROCESS_TRANSACTION(:email, :card_number, :amount, (SELECT M.MERCHANT_ID FROM MERCHANTS M WHERE M.MERCHANT_NAME ILIKE ('%Internetflix Ltd.%') AND M.COUNTRY_ID = (SELECT C.COUNTRY_ID FROM COUNTRIES C WHERE C.COUNTRY=:country)), :transaction_id);"), params_dict)
-
-        for result in cursor:
-          if result[0]==True:
-             isSuccess = True
-
-      g.conn.commit()
-
-    # Close the cursor
-      cursor.close()
-    except Exception as error:
-       print('Exception',error)
-       isValid = False
-    response = {
-        "isValid": isValidCard,
-        "isSuccess": isSuccess
     }
     response = {str(key): value for key, value in response.items()}
     return jsonify(result=response)

@@ -328,7 +328,7 @@ def paywithtoken():
     # Close the cursor
       cursor.close()
     except Exception as error:
-       print('Exception',error)
+       print('Eccveption',error)
        isValid = False
     response = {
         "isValid": isValid,
@@ -373,7 +373,7 @@ def paywithcard():
        isValid = False
     response = {
         "isValid": isValidCard,
-        "isSuccess": isSuccess
+        "transaction": isSuccess
     }
     response = {str(key): value for key, value in response.items()}
     return jsonify(result=response)
