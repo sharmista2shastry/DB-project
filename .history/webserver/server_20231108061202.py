@@ -307,21 +307,19 @@ def paywithtoken():
       
       # print('Hola1')
       cursor = g.conn.execute(text("SELECT EXTRACT(MONTH FROM age((:dater)::date, current_date)) < 6;"), params_dict)
-      # print('Hola2')
+      print('Hola2')
       for result in cursor:
         #  print(result[0])
          if result[0]==True:
           isValid = True
-      # print(isValid)
-      isSuccess = False
+      print(isValid)
       if isValid:
-        # print('running process transaction now')
+        print('running process transaction now')
         params_dict = {"email":email,"card_number":card_number,"amount":amount,"merchant_id":merchant_id,"transaction_id":1}
         cursor = g.conn.execute(text("SELECT PROCESS_TRANSACTION(:email, :card_number, :amount, :merchant_id, :transaction_id);"), params_dict)
 
         for result in cursor:
-          if result[0]==True:
-             isSuccess = True
+          print(result)
 
       g.conn.commit()
 
@@ -331,7 +329,7 @@ def paywithtoken():
        print('Ecveption',error)
        isValid = False
     response = {
-        "output": isSuccess
+        "output": isValid
     }
     response = {str(key): value for key, value in response.items()}
     return jsonify(result=response)

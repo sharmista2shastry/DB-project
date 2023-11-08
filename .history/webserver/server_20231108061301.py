@@ -321,7 +321,7 @@ def paywithtoken():
 
         for result in cursor:
           if result[0]==True:
-             isSuccess = True
+             
 
       g.conn.commit()
 
@@ -331,7 +331,7 @@ def paywithtoken():
        print('Ecveption',error)
        isValid = False
     response = {
-        "output": isSuccess
+        "output": isValid
     }
     response = {str(key): value for key, value in response.items()}
     return jsonify(result=response)
