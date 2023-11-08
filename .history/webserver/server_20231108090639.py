@@ -403,13 +403,12 @@ def saveandpay():
         cursor = g.conn.execute(text("SELECT CREATE_AND_SAVE_TOKEN((SELECT M.MERCHANT_ID::text FROM MERCHANTS M WHERE M.MERCHANT_NAME ILIKE ('%Internetflix Ltd.%') AND M.COUNTRY_ID = (SELECT C.COUNTRY_ID FROM COUNTRIES C WHERE C.COUNTRY=:country)), :card_number, :email);"), params_dict)
 
         params_dict = {"email":email,"card_number":cardNumber,"amount":amount,"country":country,"transaction_id":1}
-        cursor2 = g.conn.execute(text("SELECT PROCESS_TRANSACTION(:email, :card_number, :amount, (SELECT M.MERCHANT_ID FROM MERCHANTS M WHERE M.MERCHANT_NAME ILIKE ('%Internetflix Ltd.%') AND M.COUNTRY_ID = (SELECT C.COUNTRY_ID FROM COUNTRIES C WHERE C.COUNTRY=:country)), :transaction_id);"), params_dict)
+        cursor = g.conn.execute(text("SELECT PROCESS_TRANSACTION(:email, :card_number, :amount, (SELECT M.MERCHANT_ID FROM MERCHANTS M WHERE M.MERCHANT_NAME ILIKE ('%Internetflix Ltd.%') AND M.COUNTRY_ID = (SELECT C.COUNTRY_ID FROM COUNTRIES C WHERE C.COUNTRY=:country)), :transaction_id);"), params_dict)
 
-        for result in cursor2:
+        for result in cursor:
           if result[0]==True:
-             print('Here')
              isSuccess = True
-
+        
       g.conn.commit()
 
     # Close the cursor
