@@ -309,7 +309,7 @@ def paywithtoken():
       print(formatted_sql)
       print('Hola1')
       cursor = g.conn.execute(text("SELECT EXTRACT(MONTH FROM age((:dater)::date, current_date)) < 6;"), params_dict)
-      print('Hola2')
+
       for result in cursor:
          print(result)
          if result[0]=='t':
