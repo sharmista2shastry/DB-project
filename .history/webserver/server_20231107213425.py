@@ -302,7 +302,7 @@ def paywithtoken():
          token_creation_date = result[3]
 
       print(card_number)
-      print(token_creation_date)
+      print(t)
       params_dict = {"dater":token_creation_date}
       cursor = g.conn.execute(text("SELECT EXTRACT(MONTH FROM age((:dater)::date, current_date)) < 6;"), params_dict)
 
