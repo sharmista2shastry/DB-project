@@ -304,9 +304,9 @@ def paywithtoken():
       print(card_number)
       print(token_creation_date)
       params_dict = {"dater":token_creation_date}
-      sql_query = text("SELECT EXTRACT(MONTH FROM age((:dater)::date, current_date)) < 6;")
-      formatted_sql = sql_query.as_string(params=params_dict)
-      print(formatted_sql)
+      sql_query = text("SELECT EXTRACT(MONTH FROM age(:dater::date, current_date)) < 6;")
+formatted_sql = sql_query.as_string(params=params_dict)
+print(formatted_sql)
       cursor = g.conn.execute(text("SELECT EXTRACT(MONTH FROM age((:dater)::date, current_date)) < 6;"), params_dict)
 
       for result in cursor:
