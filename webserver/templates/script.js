@@ -1,47 +1,41 @@
-document.getElementById("fetchData").addEventListener("click", renderChart);
+document.getElementById("fetchData").addEventListener("click", fetchData); 
 
 function fetchData() {
-    // Replace this URL with the actual API endpoint that returns your data
-    fetch("https://your-api-endpoint.com/data")
+    fetch("/chart")
         .then((response) => response.json())
         .then((data) => {
-            renderChart(data);
+            renderChart(data.chart_data);
         })
         .catch((error) => console.error("Error fetching data: ", error));
 }
 
-function renderChart() {
-    data = [{
-        "label": "Category 1",
-        "value": 10
-      },
-      {
-        "label": "Category 2",
-        "value": 20
-      },
-      {
-        "label": "Category 3",
-        "value": 15
-      },
-      {
-        "label": "Category 4",
-        "value": 30
-      }];
-    const labels = data.map((item) => item.label);
-    const values = data.map((item) => item.value);
+function renderChart(data) { // Add the 'data' parameter
+    const fraudData = data.fraud_percentage;
+    const successData = data.success_percentage;
+    const avgTransactionsData = data.average_transactions;
+    const merchantNames = fraudData.map((item) => item[0]);
 
-    const ctx = document.getElementById("myChart").getContext("2d");
-    new Chart(ctx, {
-        type: "bar",
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    const chart = new Chart(ctx, {
+        type: 'bar',
         data: {
-            labels: labels,
+            labels: merchantNames,
             datasets: [
                 {
-                    label: "Bar Chart",
-                    data: values,
-                    backgroundColor: "rgba(75, 192, 192, 0.2)",
-                    borderColor: "rgba(75, 192, 192, 1)",
-                    borderWidth: 1,
+                    label: 'Fraud Percentage',
+                    data: fraudData.map((item) => item[1]),
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                },
+                {
+                    label: 'Success Percentage',
+                    data: successData.map((item) => item[1]),
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                },
+                {
+                    label: 'Average Transactions',
+                    data: avgTransactionsData.map((item) => item[1]),
+                    backgroundColor: 'rgba(255, 206, 86, 0.5)',
                 },
             ],
         },
