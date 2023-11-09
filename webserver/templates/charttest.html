@@ -1,65 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Bar Chart Example</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="chartstyle.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
-    <button id="fetchData">Fetch Data</button>
-    <canvas id="myChart" width="400" height="200"></canvas>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="card shadow">
+            <div class="card-body">
+                <h5 class="card-title mb-4">Bar Chart Example</h5>
+                <div class="form-group" id="chartTypeGroup">
+                    <label for="chartType">Select Chart Type:</label>
+                    <select id="chartType" class="form-control">
+                        <option value="fraud_percentage">Fraud Percentage</option>
+                        <option value="success_percentage">Success Percentage</option>
+                        <option value="average_transactions">Average Transactions</option>
+                    </select>
+                </div>
+                <button id="fetchData" class="btn btn-success btn-block" onclick="fetchAndRender()">Fetch Data</button>
+                <canvas id="myChart" width="400" height="200" class="mt-4"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function fetchAndRender() {
+            const chartType = document.getElementById("chartType").value;
+            fetch(`/chart-data?type=${chartType}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    renderChart(data[chartType], chartType);
+                    hideDropdownAndButton();
+                })
+                .catch((error) => console.error("Error fetching data: ", error));
+        }
+
+        function hideDropdownAndButton() {
+            document.getElementById("chartTypeGroup").style.display = "none";
+            document.getElementById("fetchData").style.display = "none";
+        }
+
+        function renderChart(chartData, chartType) {
+            const merchantNames = chartData.map((item) => item.name);
+    
+            const ctx = document.getElementById('myChart').getContext('2d');
+    
+            const chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: merchantNames,
+                    datasets: [
+                        {
+                            label: 'Chart Data',
+                            data: chartData.map((item) => chartType === 'average_transactions' ? item.average : item.percentage),
+                            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                        },
+                    ],
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                        },
+                    },
+                },
+            });
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
-<script>
-    document.getElementById("fetchData").addEventListener("click", fetchData);
-
-function fetchData() {
-    fetch("/chart-data")
-        .then((response) => response.json())
-        .then((data) => {
-            renderChart(data);
-        })
-        .catch((error) => console.error("Error fetching data: ", error));
-}
-
-
-function renderChart(data) {
-    const fraudData = data.fraud_percentage;
-    const successData = data.success_percentage;
-    const avgTransactionsData = data.average_transactions;
-    const merchantNames = fraudData.map((item) => item.name); 
-
-    const ctx = document.getElementById('myChart').getContext('2d');
-
-    const chart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: merchantNames,
-            datasets: [
-                {
-                    label: 'Fraud Percentage',
-                    data: fraudData.map((item) => item.percentage), 
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                },
-                {
-                    label: 'Success Percentage',
-                    data: successData.map((item) => item.percentage), 
-                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                },
-                {
-                    label: 'Average Transactions',
-                    data: avgTransactionsData.map((item) => item.average), 
-                    backgroundColor: 'rgba(255, 206, 86, 0.5)',
-                },
-            ],
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                },
-            },
-        },
-    });
-}
-
-</script>
 </html>

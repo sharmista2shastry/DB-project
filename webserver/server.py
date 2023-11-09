@@ -423,50 +423,51 @@ def saveandpay():
     response = {str(key): value for key, value in response.items()}
     return jsonify(result=response)
 
+
 @app.route('/chart-data', methods=['GET'])
 def chart_data():
+    fraud_query = text("""
+    SELECT M.MERCHANT_NAME, (COUNT(CASE WHEN T.FRAUD = TRUE THEN 1 ELSE NULL END) * 100.0 / COUNT(*)) AS FRAUD_PERCENTAGE
+    FROM MERCHANTS M
+    INNER JOIN TRANSACTIONS T ON M.MERCHANT_ID = T.MERCHANT_ID
+    GROUP BY M.MERCHANT_NAME;
+    """)
 
-   fraud_query = text("""
-   SELECT M.MERCHANT_NAME, (COUNT(CASE WHEN T.FRAUD = TRUE THEN 1 ELSE NULL END) * 100.0 / COUNT(*)) AS FRAUD_PERCENTAGE
-   FROM MERCHANTS M
-   LEFT JOIN TRANSACTIONS T ON M.MERCHANT_ID = T.MERCHANT_ID
-   GROUP BY M.MERCHANT_NAME;
-   """)
-   
-   success_query = text("""
-   SELECT M.MERCHANT_NAME, (COUNT(CASE WHEN T.TRANSACTION_STATUS = TRUE THEN 1 ELSE NULL END) * 100.0 / COUNT(*)) AS SUCCESS_PERCENTAGE
-   FROM MERCHANTS M
-   LEFT JOIN TRANSACTIONS T ON M.MERCHANT_ID = T.MERCHANT_ID
-   GROUP BY M.MERCHANT_NAME;
-   """)
-   
-   avg_transactions_query = text("""
-   SELECT M.MERCHANT_NAME, AVG(1) AS AVERAGE_TRANSACTIONS
-   FROM MERCHANTS M
-   LEFT JOIN TRANSACTIONS T ON M.MERCHANT_ID = T.MERCHANT_ID
-   GROUP BY M.MERCHANT_NAME;
-   """)
-   
-   # Execute the SQL queries
-   fraud_data = g.conn.execute(fraud_query).fetchall()
-   success_data = g.conn.execute(success_query).fetchall()
-   avg_transactions_data = g.conn.execute(avg_transactions_query).fetchall()
-   
-   # Close the database connection
-   g.conn.close()
-   
-   # Organize the data
-   chart_data = {
+    success_query = text("""
+    SELECT M.MERCHANT_NAME, (COUNT(CASE WHEN T.TRANSACTION_STATUS = TRUE THEN 1 ELSE NULL END) * 100.0 / COUNT(*)) AS SUCCESS_PERCENTAGE
+    FROM MERCHANTS M
+    INNER JOIN TRANSACTIONS T ON M.MERCHANT_ID = T.MERCHANT_ID
+    GROUP BY M.MERCHANT_NAME;
+    """)
+
+    avg_transactions_query = text("""
+    SELECT M.MERCHANT_NAME, COUNT(*) AS AVERAGE_TRANSACTIONS
+    FROM MERCHANTS M
+    INNER JOIN TRANSACTIONS T ON M.MERCHANT_ID = T.MERCHANT_ID
+    GROUP BY M.MERCHANT_NAME;
+    """)
+
+    # Execute the SQL queries
+    fraud_data = g.conn.execute(fraud_query).fetchall()
+    success_data = g.conn.execute(success_query).fetchall()
+    avg_transactions_data = g.conn.execute(avg_transactions_query).fetchall()
+
+    # Close the database connection
+    g.conn.close()
+
+    # Organize the data
+    chart_data = {
         "fraud_percentage": [{'name': row[0], 'percentage': row[1]} for row in fraud_data],
         "success_percentage": [{'name': row[0], 'percentage': row[1]} for row in success_data],
         "average_transactions": [{'name': row[0], 'average': row[1]} for row in avg_transactions_data]
     }
-   
-   return jsonify(chart_data)
+
+    return jsonify(chart_data)
+
 
 @app.route('/chart', methods=['GET'])
 def chart():
-    return render_template('charttest.html')
+   return render_template("charttest.html")
 
 
 if __name__ == "__main__":
