@@ -109,20 +109,18 @@ body {
   }
 
   #search-again{
-    margin-bottom: 1%;
+    margin-bottom: ;
   }
 
   #search-again-button {
     display: block;
-    width: 11%;
+    width: 100%;
     padding: 10px;
     background-color: #007BFF;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-left: 1%;
-    display: inline-block;
   }
   
   #search-button:hover {

@@ -114,7 +114,7 @@ body {
 
   #search-again-button {
     display: block;
-    width: 11%;
+    width: 100%;
     padding: 10px;
     background-color: #007BFF;
     color: #fff;
