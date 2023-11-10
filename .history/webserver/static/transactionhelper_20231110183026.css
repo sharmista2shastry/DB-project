@@ -80,7 +80,6 @@ body {
   #find-form h1 {
     font-size: 24px;
     margin-bottom: 20px;
-    width: 102%;
   }
   
   #find-form label {
@@ -90,7 +89,7 @@ body {
   }
   
   #find-form input {
-    width: 90%;
+    width: 9%;
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;

@@ -213,13 +213,14 @@ def gettransactions():
         "transaction_currency": result[2],
         "transaction_fraud": result[3],
         "transaction_timestamp": result[4],
-        "merchant": result[14],
+        "merchant_id": result[5],
         "acquirer_id": result[6],
-        "transaction_type": result[13],
+        "transaction_type_id": result[7],
         "decline_reason_id": result[8],
-        "authentication_type": result[12],
+        "authentication_type_id": result[9],
         "card_number": result[10],
         "cardholder_id": result[11],
+        
       })
     cursor.close()
     result = {

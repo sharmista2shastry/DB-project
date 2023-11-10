@@ -215,7 +215,7 @@ def gettransactions():
         "transaction_timestamp": result[4],
         "merchant": result[14],
         "acquirer_id": result[6],
-        "transaction_type": result[13],
+        "transaction_type_id": result[7],
         "decline_reason_id": result[8],
         "authentication_type": result[12],
         "card_number": result[10],
