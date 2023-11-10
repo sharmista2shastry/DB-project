@@ -126,7 +126,7 @@
         const amountCell = document.createElement('td');
         amountCell.textContent = item.transaction_amount;
         const merchantCell = document.createElement('td');
-        merchantCell.textContent = item.merchant;
+        merchantCell.textContent = item.merchant_id;
         const authenticationTypeCell = document.createElement('td');
         authenticationTypeCell.textContent = item.authentication_type_id;
         const currencyCell = document.createElement('td');
@@ -181,6 +181,7 @@
         console.error('API call failed:', error);
       }
       globalResponse.result.output.forEach(item => {
+        print(item)
         const row = document.createElement('tr');
         const dateCell = document.createElement('td');
         dateCell.textContent = item.transaction_timestamp;
