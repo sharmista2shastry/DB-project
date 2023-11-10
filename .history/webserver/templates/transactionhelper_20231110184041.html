@@ -37,7 +37,7 @@
   <div id="transactions-table" style="display: none;">
     <div>
       Search by another email:
-      <input type="search-email" id="search-again-email" name="search-email" required><br>
+      <input type="search-email" id="search-email" name="search-email" required><br>
       <button type="button" id="search-again-button">Search Transactions</button>
     </div>
     <table border="1">
@@ -147,7 +147,7 @@
     });
 
     searchAgainButton.addEventListener('click', async () => {
-      email = document.getElementById('search-again-email').value;
+      email = document.getElementById('search-email').value;
       const data = {
         'email': email
       };
@@ -191,7 +191,7 @@
         const merchantCell = document.createElement('td');
         merchantCell.textContent = item.merchant;
         const authenticationTypeCell = document.createElement('td');
-        authenticationTypeCell.textContent = item.authentication_type;
+        authenticationTypeCell.textContent = item.authentication_type_id;
         const currencyCell = document.createElement('td');
         currencyCell.textContent = item.transaction_currency;
         const fraudCell = document.createElement('td');
