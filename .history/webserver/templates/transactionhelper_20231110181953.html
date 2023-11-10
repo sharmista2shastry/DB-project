@@ -38,7 +38,6 @@
     <div>
       Search by another email:
       <input type="search-email" id="search-email" name="search-email" required><br>
-      <button type="button" id="search-again-button">Search Transactions</button>
     </div>
     <table border="1">
       <thead>
@@ -56,11 +55,6 @@
 
       </tbody>
     </table>
-    <div>
-      Search by another email:
-      <input type="search-email" id="search-email" name="search-email" required><br>
-      <button type="button" id="search-again-button">Search Transactions</button>
-    </div>
   </div>
   <script>
     const loginButton = document.getElementById('login-button');
@@ -72,7 +66,6 @@
     const goToSearchPage = document.getElementById('go-search-button');
     const table = document.getElementById('transactions-table');
     const tbody = table.querySelector('tbody');
-    const searchAgainButton = document.getElementById('search-again-button');
 
     let email = ''
     loginButton.addEventListener('click', async () => {
@@ -144,64 +137,6 @@
 
         tbody.appendChild(row);
       });
-    });
-
-    searchButton.addEventListener('click', async () => {
-      email = document.getElementById('search-email').value;
-      const data = {
-        'email': email
-      };
-      transactionsPage.style.display = 'none';
-      const apiUrl = "/gettransactions";
-      let globalResponse;
-      try {
-        const response = await fetch(apiUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-          // Or 'GET' or 'PUT' depending on your API
-          // Add headers, body, and other options as needed
-        });
-        if (response.ok) {
-          globalResponse = await response.json(); // Store the response in the global variable
-        } else {
-          console.error('API call failed with status:', response.status);
-        }
-        // Handle the API response here (e.g., show a success message or handle errors).
-        // You can use response.json() to parse the response if it's in JSON format.
-      } catch (error) {
-        console.error('API call failed:', error);
-      }
-      globalResponse.result.output.forEach(item => {
-        const row = document.createElement('tr');
-        const dateCell = document.createElement('td');
-        dateCell.textContent = item.transaction_timestamp;
-        const cardNumberCell = document.createElement('td');
-        cardNumberCell.textContent = item.card_number;
-        const amountCell = document.createElement('td');
-        amountCell.textContent = item.transaction_amount;
-        const merchantCell = document.createElement('td');
-        merchantCell.textContent = item.merchant_id;
-        const authenticationTypeCell = document.createElement('td');
-        authenticationTypeCell.textContent = item.authentication_type_id;
-        const currencyCell = document.createElement('td');
-        currencyCell.textContent = item.transaction_currency;
-        const fraudCell = document.createElement('td');
-        fraudCell.textContent = item.transaction_fraud;
-
-        row.appendChild(dateCell);
-        row.appendChild(cardNumberCell);
-        row.appendChild(amountCell);
-        row.appendChild(merchantCell);
-        row.appendChild(authenticationTypeCell);
-        row.appendChild(currencyCell);
-        row.appendChild(fraudCell);
-
-        tbody.appendChild(row);
-      });
-      transactionsPage.style.display = 'block';
     });
 
   </script>

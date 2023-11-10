@@ -152,6 +152,7 @@
         'email': email
       };
       transactionsPage.style.display = 'none';
+
       const apiUrl = "/gettransactions";
       let globalResponse;
       try {
@@ -201,7 +202,6 @@
 
         tbody.appendChild(row);
       });
-      transactionsPage.style.display = 'block';
     });
 
   </script>
