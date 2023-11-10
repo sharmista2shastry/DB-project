@@ -152,12 +152,7 @@
         'email': email
       };
       transactionsPage.style.display = 'none';
-      if (tbody) {
-        // Remove all child nodes (contents) of the tbody
-        while (tbody.firstChild) {
-          tbody.removeChild(tbody.firstChild);
-        }
-      }
+      tbody.
       const apiUrl = "/gettransactions";
       let globalResponse;
       try {
