@@ -347,35 +347,24 @@ def getname():
 def getCardholderDetails():
     email = request.json['email']
     params_dict = {"email":email}
-    cursor = g.conn.execute(text("SELECT CARDHOLDER_NAME, CARDHOLDER_ID FROM CARDHOLDER_DETAILS WHERE EMAIL=(:email);"), params_dict)
-    g.conn.commit()
+    try:
+      cursor = g.conn.execute(text("INSERT INTO INTERNETFLIX_CUSTOMER_DATA(CUSTOMER_NAME, CUSTOMER_ADDRESS, CUSTOMER_EMAIL, PASS_WORD) VALUES (:name, :address, :email, :password);"), params_dict)
 
-    cards = []
-    name = ''
-    cardholder_id = 0
-    for result in cursor:
-        name = result[0]
-        cardholder_id = result[1]
-    params_dict = {"cardholder_id":cardholder_id}
-    cursor = g.conn.execute(text("SELECT CARD_NUMBER, AVAILABLE_FUNDS FROM CARDS WHERE CARDHOLDER_ID=(:cardholder_id);"), params_dict)
-    g.conn.commit()
+   # Check if the insert was successful
+      isValid = cursor.rowcount > 0
 
-    for result in cursor:
-      cards.append({
-        "card_number": result[0],
-        "available_funds": result[1]
-      })
+      g.conn.commit()
 
-    cursor.close()
-
+    # Close the cursor
+      cursor.close()
+    except:
+       isValid = False
     response = {
-        "name": name,
-        "card_list": cards
+        "output": isValid
     }
-
     response = {str(key): value for key, value in response.items()}
     return jsonify(result=response)
-
+    
 @app.route('/signup', methods=['GET','POST'])
 def signup():
     email = request.json['email']

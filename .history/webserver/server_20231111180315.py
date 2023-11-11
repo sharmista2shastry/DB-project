@@ -366,6 +366,10 @@ def getCardholderDetails():
         "available_funds": result[1]
       })
 
+    name = ''
+    for result in cursor:
+        name =result[0]
+
     cursor.close()
 
     response = {

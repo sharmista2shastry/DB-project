@@ -366,11 +366,15 @@ def getCardholderDetails():
         "available_funds": result[1]
       })
 
+    name = ''
+    for result in cursor:
+        name =result[0]
+
     cursor.close()
 
     response = {
         "name": name,
-        "card_list": cards
+        "card_list"
     }
 
     response = {str(key): value for key, value in response.items()}

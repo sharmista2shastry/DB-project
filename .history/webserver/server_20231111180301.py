@@ -363,14 +363,30 @@ def getCardholderDetails():
     for result in cursor:
       cards.append({
         "card_number": result[0],
-        "available_funds": result[1]
+        "available": float(result[1]) if result[1] is not None else float(0),
+        "transaction_currency": result[2],
+        "transaction_fraud": result[3],
+        "transaction_timestamp": result[4],
+        "merchant": result[14],
+        "acquirer_id": result[6],
+        "transaction_type": result[13],
+        "decline_reason_id": result[8],
+        "authentication_type": result[12],
+        "card_number": result[10],
+        "cardholder_id": result[11],
+        "transaction_status": result[15],
+        "decline_reason": result[16]
       })
+
+    name = ''
+    for result in cursor:
+        name =result[0]
 
     cursor.close()
 
     response = {
         "name": name,
-        "card_list": cards
+        "card_list"
     }
 
     response = {str(key): value for key, value in response.items()}

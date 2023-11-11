@@ -207,7 +207,7 @@
         }
       }
 
-      apiUrl = "/getCardholderDetails";
+      apiUrl = "/getcards";
 
       data = {
         'email': email,
@@ -229,12 +229,16 @@
       } catch (error) {
         console.error('API call failed:', error);
       }
-      print(globalResponse.result)
+      print(globalResponse,)
       globalResponse.result.card_list.forEach(item => {
         print(item)
       });
 
       let apiUrl = "/getcards";
+
+      data = {
+        'email': email,
+      };
 
       try {
         const response = await fetch(apiUrl, {

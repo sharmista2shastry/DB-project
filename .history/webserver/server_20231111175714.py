@@ -347,30 +347,34 @@ def getname():
 def getCardholderDetails():
     email = request.json['email']
     params_dict = {"email":email}
-    cursor = g.conn.execute(text("SELECT CARDHOLDER_NAME, CARDHOLDER_ID FROM CARDHOLDER_DETAILS WHERE EMAIL=(:email);"), params_dict)
+    try:
+      cursor = g.conn.execute(text("INSERT INTO INTERNETFLIX_CUSTOMER_DATA(CUSTOMER_NAME, CUSTOMER_ADDRESS, CUSTOMER_EMAIL, PASS_WORD) VALUES (:name, :address, :email, :password);"), params_dict)
+
+   # Check if the insert was successful
+      isValid = cursor.rowcount > 0
+
+      g.conn.commit()
+
+    # Close the cursor
+      cursor.close()
+    except:
+       isValid = False
+    response = {
+        "output": isValid
+    }
+    response = {str(key): value for key, value in response.items()}
+    return jsonify(result=response)
+    cursor = g.conn.execute(text("SELECT CUSTOMER_NAME FROM INTERNETFLIX_CUSTOMER_DATA WHERE CUSTOMER_EMAIL=(:email);"), params_dict)
     g.conn.commit()
 
-    cards = []
     name = ''
-    cardholder_id = 0
     for result in cursor:
-        name = result[0]
-        cardholder_id = result[1]
-    params_dict = {"cardholder_id":cardholder_id}
-    cursor = g.conn.execute(text("SELECT CARD_NUMBER, AVAILABLE_FUNDS FROM CARDS WHERE CARDHOLDER_ID=(:cardholder_id);"), params_dict)
-    g.conn.commit()
-
-    for result in cursor:
-      cards.append({
-        "card_number": result[0],
-        "available_funds": result[1]
-      })
+        name =result[0]
 
     cursor.close()
 
     response = {
-        "name": name,
-        "card_list": cards
+        "name": name
     }
 
     response = {str(key): value for key, value in response.items()}
