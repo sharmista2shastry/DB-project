@@ -9,7 +9,7 @@
 <body>
 
     <div id="login-form">
-        <h1 id="main-header">Welcome to Internetflix, entertainment redefined!</h1>
+        <h1 id="main-header">Welcome to Internetflix, the world of entertainment!</h1>
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required><br>
 
@@ -21,7 +21,7 @@
     </div>
 
     <div id="sign-up-section" style="display: none;">
-        <h1 id="main-header">Welcome to Internetflix, entertainment redefined!</h1>
+        <h1 id="main-header">Welcome to Internetflix, the world of entertainment!</h1>
         <label for="name">Name:</label>
         <input type="name" id="signup-name" name="name" required><br>
 
@@ -62,6 +62,7 @@
     </div>
 
     <div id="payment-options" style="display: none;">
+        <h1 id="welcome-text">Welcome, </h1>
         <label for="card-options">Select your payment method:</label>
         <form>
             <input type="radio" name="option1" value="existing-token" id="existing-token">
@@ -109,10 +110,6 @@
         <button type="button" id="save-and-pay-button">Pay</button>
     </div>
 
-    <div id="payment-confirmation" style="display: none;">
-       Congratulations on your unlimited ticket to entertainment!
-    </div>
-
     <script>
         const loginForm = document.getElementById('login-form');
         const loginButton = document.getElementById('login-button');
@@ -129,7 +126,6 @@
         const saveAndPayButton = document.getElementById('save-and-pay-button');
         const existingTokenOption = document.getElementById('existing-token');
         const welcomeText = document.getElementById('welcome-text');
-        const paymentConfirmationPage = document.getElementById('payment-confirmation');
 
         let paymentPlan = "";
         let countrySelected = "";
@@ -259,6 +255,7 @@
                     console.error('API call failed:', error);
                 }
                 if (globalResponse.result.name) {
+                    print(globalResponse.result)
                     welcomeText.textContent = 'Welcome, ' + globalResponse.result.name;
                 }
                 signupSection.style.display = 'none'; // Hide the login form
@@ -355,7 +352,6 @@
                 if (globalResponse.result.transaction) {
                     paymentOptions.style.display = 'none';
                     paymentSection.style.display = 'none';
-                    paymentConfirmationPage.style.display = 'block';
                     alert("Hooray, your transaction has succeeded. Enjoy watching Internetflix!");
                 } else {
                     alert("Either your token has expired or your transaction failed. Please choose the 'Pay with the new card and store it' option and if it still does not work, please contact Y's customer helpline for 24/7 assistance. Thank you!");
@@ -404,7 +400,6 @@
                     if (globalResponse.result.isSuccess) {
                         paymentOptions.style.display = 'none';
                         paymentSection.style.display = 'none';
-                        paymentConfirmationPage.style.display = 'block';
                         alert("Hooray, your transaction has succeeded. Enjoy watching Internetflix!");
                     } else if (!globalResponse.result.isValid) {
                         alert("Your card details could not be validated, please try again");
@@ -458,7 +453,6 @@
                     if (globalResponse.result.isSuccess) {
                         paymentOptions.style.display = 'none';
                         paymentSection.style.display = 'none';
-                        paymentConfirmationPage.style.display = 'block';
                         alert("Hooray, your transaction has succeeded. Enjoy watching Internetflix!");
                     } else if (!globalResponse.result.isValid) {
                         alert("Your card details could not be validated, please try again");

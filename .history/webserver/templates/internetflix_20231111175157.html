@@ -458,7 +458,6 @@
                     if (globalResponse.result.isSuccess) {
                         paymentOptions.style.display = 'none';
                         paymentSection.style.display = 'none';
-                        paymentConfirmationPage.style.display = 'block';
                         alert("Hooray, your transaction has succeeded. Enjoy watching Internetflix!");
                     } else if (!globalResponse.result.isValid) {
                         alert("Your card details could not be validated, please try again");

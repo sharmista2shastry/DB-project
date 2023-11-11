@@ -129,7 +129,7 @@
         const saveAndPayButton = document.getElementById('save-and-pay-button');
         const existingTokenOption = document.getElementById('existing-token');
         const welcomeText = document.getElementById('welcome-text');
-        const paymentConfirmationPage = document.getElementById('payment-confirmation');
+        const welcomeText = document.getElementById('welcome-text');
 
         let paymentPlan = "";
         let countrySelected = "";
@@ -355,7 +355,6 @@
                 if (globalResponse.result.transaction) {
                     paymentOptions.style.display = 'none';
                     paymentSection.style.display = 'none';
-                    paymentConfirmationPage.style.display = 'block';
                     alert("Hooray, your transaction has succeeded. Enjoy watching Internetflix!");
                 } else {
                     alert("Either your token has expired or your transaction failed. Please choose the 'Pay with the new card and store it' option and if it still does not work, please contact Y's customer helpline for 24/7 assistance. Thank you!");
@@ -404,7 +403,6 @@
                     if (globalResponse.result.isSuccess) {
                         paymentOptions.style.display = 'none';
                         paymentSection.style.display = 'none';
-                        paymentConfirmationPage.style.display = 'block';
                         alert("Hooray, your transaction has succeeded. Enjoy watching Internetflix!");
                     } else if (!globalResponse.result.isValid) {
                         alert("Your card details could not be validated, please try again");
@@ -458,7 +456,6 @@
                     if (globalResponse.result.isSuccess) {
                         paymentOptions.style.display = 'none';
                         paymentSection.style.display = 'none';
-                        paymentConfirmationPage.style.display = 'block';
                         alert("Hooray, your transaction has succeeded. Enjoy watching Internetflix!");
                     } else if (!globalResponse.result.isValid) {
                         alert("Your card details could not be validated, please try again");
