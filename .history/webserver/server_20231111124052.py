@@ -353,13 +353,15 @@ def checkexistingtoken():
     email = request.json['email']
     
     params_dict = {"email":email}
-    doesExist = False
+    isValid = False
     try:
       cursor = g.conn.execute(text("SELECT S.CARD_TOKEN FROM internetflix_stored_card_data S WHERE S.STORED_CARD_ID = (SELECT A.STORED_CARD_ID FROM INTERNETFLIX_CUSTOMER_DATA A WHERE A.CUSTOMER_EMAIL=(:email)) AND S.MERCHANT_ID=(SELECT M.MERCHANT_ID FROM MERCHANTS M WHERE M.MERCHANT_NAME ILIKE 'internetflix ltd.' AND M.COUNTRY_ID=(SELECT C.COUNTRY_ID FROM COUNTRIES C WHERE C.COUNTRY=(:country)));"), params_dict)
             
       for result in cursor:
-          print(result)
-    
+         card_token = result[0]
+
+     
+      
       g.conn.commit()
 
     # Close the cursor
@@ -368,7 +370,8 @@ def checkexistingtoken():
        print('Exception',error)
        isValid = False
     response = {
-        "doesExist": doesExist,
+        "isValid": isValid,
+        "transaction": isSuccess
     }
     response = {str(key): value for key, value in response.items()}
     return jsonify(result=response)

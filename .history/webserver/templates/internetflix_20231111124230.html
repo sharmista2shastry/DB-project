@@ -121,12 +121,12 @@
         const payByCardButton = document.getElementById('pay-by-card');
         const saveAndPaySection = document.getElementById('save-and-pay');
         const saveAndPayButton = document.getElementById('save-and-pay-button');
-        const existingTokenOption = document.getElementById('existing-token');
 
         let paymentPlan = "";
         let countrySelected = "";
         let paymentMethod = "";
         let email = ""
+        let isExistingToken = false;
 
         loginButton.addEventListener('click', async () => {
             email = document.getElementById('email').value;
@@ -212,32 +212,32 @@
 
         goToPaymentSection.addEventListener('click', async () => {
             const apiUrl = "/checkexistingtoken";
-            data = {
-                'email': email
-            };
-            let globalResponse;
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
-                });
-                if (response.ok) {
-                    globalResponse = await response.json(); // Store the response in the global variable
-                } else {
-                    console.error('API call failed with status:', response.status);
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    });
+                    if (response.ok) {
+                        globalResponse = await response.json(); // Store the response in the global variable
+                    } else {
+                        console.error('API call failed with status:', response.status);
+                    }
+                    // Handle the API response here (e.g., show a success message or handle errors).
+                    // You can use response.json() to parse the response if it's in JSON format.
+                } catch (error) {
+                    console.error('API call failed:', error);
                 }
-                // Handle the API response here (e.g., show a success message or handle errors).
-                // You can use response.json() to parse the response if it's in JSON format.
-            } catch (error) {
-                console.error('API call failed:', error);
-            }
-            if (!globalResponse.result.doesExist) {
-                console.log(globalResponse);
-                existingTokenOption.disabled = true;
-            }
+                if (globalResponse.result.transaction) {
+                    paymentOptions.style.display = 'none';
+                    paymentSection.style.display = 'none';
+                    alert("Hooray, your transaction has succeeded. Enjoy watching Internetflix!");
+                } else {
+                    alert("Either you don not have a stored token with us or your token has expired, so please choose the 'Pay with the new card and store it' option.");
+                }
             // email = document.getElementById('email').value;
             // const password = document.getElementById('password').value;
             paymentOptions.style.display = 'none';

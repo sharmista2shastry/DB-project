@@ -127,6 +127,7 @@
         let countrySelected = "";
         let paymentMethod = "";
         let email = ""
+        let isExistingToken = false;
 
         loginButton.addEventListener('click', async () => {
             email = document.getElementById('email').value;
@@ -234,9 +235,9 @@
             } catch (error) {
                 console.error('API call failed:', error);
             }
-            if (!globalResponse.result.doesExist) {
+            if (globalResponse.result.doesExist) {
                 console.log(globalResponse);
-                existingTokenOption.disabled = true;
+                
             }
             // email = document.getElementById('email').value;
             // const password = document.getElementById('password').value;

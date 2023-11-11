@@ -234,7 +234,7 @@
             } catch (error) {
                 console.error('API call failed:', error);
             }
-            if (!globalResponse.result.doesExist) {
+            if (globalResponse.result.doesExist) {
                 console.log(globalResponse);
                 existingTokenOption.disabled = true;
             }
