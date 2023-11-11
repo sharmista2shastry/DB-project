@@ -366,6 +366,7 @@ def checkexistingtoken():
       cursor.close()
     except Exception as error:
        print('Exception',error)
+       isValid = False
     response = {
         "doesExist": doesExist,
     }
