@@ -101,29 +101,29 @@
       searchPage.style.display = 'block';
       let apiUrl = "/getmerchants";
 
-      try {
-        const response = await fetch(apiUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        });
-        if (response.ok) {
-          globalResponse = await response.json(); // Store the response in the global variable
-        } else {
-          console.error('API call failed with status:', response.status);
-        }
-      } catch (error) {
-        console.error('API call failed:', error);
-      }
-      console.log(globalResponse.result);
-      globalResponse.result.merchant_list.forEach(item => {
-        const option = document.createElement('option');
-        option.value = item;
-        option.textContent = item;
-        dropdown.appendChild(option);
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
       });
+      if (response.ok) {
+        globalResponse = await response.json(); // Store the response in the global variable
+      } else {
+        console.error('API call failed with status:', response.status);
+      }
+    } catch (error) {
+      console.error('API call failed:', error);
+    }
+    console.log(globalResponse.result);
+    globalResponse.result.merchant_list.forEach(item => {
+      const option = document.createElement('option');
+      option.value = item;
+      option.textContent = item;
+      dropdown.appendChild(option);
+    });
     });
 
     dropdown.addEventListener('change', function () {
