@@ -232,9 +232,10 @@
     });
 
     searchAgainButton.addEventListener('click', async () => {
-      if(document.getElementById('search-again-email').value != "")
+      if(document.getElementById('search-again-email').value){
         email = document.getElementById('search-again-email').value;
-      document.getElementById('search-again-email').value = email;
+      }
+      
       data = {
         'email': email,
         'merchantSelected': merchantSelected
