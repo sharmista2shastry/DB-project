@@ -381,8 +381,6 @@ def paywithtoken():
     amount = request.json['amount']
     params_dict = {"email":email, "country":country}
     isValid = False
-    isSuccess = False
-
     try:
       cursor = g.conn.execute(text("SELECT S.CARD_TOKEN FROM internetflix_stored_card_data S WHERE S.STORED_CARD_ID = (SELECT A.STORED_CARD_ID FROM INTERNETFLIX_CUSTOMER_DATA A WHERE A.CUSTOMER_EMAIL=(:email)) AND S.MERCHANT_ID=(SELECT M.MERCHANT_ID FROM MERCHANTS M WHERE M.MERCHANT_NAME ILIKE 'internetflix ltd.' AND M.COUNTRY_ID=(SELECT C.COUNTRY_ID FROM COUNTRIES C WHERE C.COUNTRY=(:country)));"), params_dict)
       
@@ -415,6 +413,7 @@ def paywithtoken():
          if result[0]==True:
           isValid = True
       # print(isValid)
+      isSuccess = False
       if isValid:
         # print('running process transaction now')
         params_dict = {"email":email,"card_number":card_number,"amount":amount,"merchant_id":merchant_id,"transaction_id":1}
@@ -447,12 +446,11 @@ def paywithcard():
     expiry = request.json['card-expiry']
     cardNumber = request.json['card-number']
     params_dict = {"email":email, "amount": amount, "cvv": cvv, "expiry":expiry, "card_number":cardNumber, "country":country}
-    isValidCard = False 
-    isSuccess = False
-
+    isValid = False
     try:
       cursor = g.conn.execute(text("SELECT CHECK_CARD_MATCH(:email, :card_number, :expiry, :cvv, :country);"), params_dict)
 
+      
       for result in cursor:
          if result[0]==True:
              isValidCard = True
@@ -488,11 +486,12 @@ def saveandpay():
     expiry = request.json['card-expiry']
     cardNumber = request.json['card-number']
     params_dict = {"email":email, "amount": amount, "cvv": cvv, "expiry":expiry, "card_number":cardNumber, "country":country}
-    isValidCard = False 
-    isSuccess = False
+    
     try:
       cursor = g.conn.execute(text("SELECT CHECK_CARD_MATCH(:email, :card_number, :expiry, :cvv, :country);"), params_dict)
 
+      isValidCard = False 
+      isSuccess = False
       for result in cursor:
          if result[0]==True:
              isValidCard = True
@@ -568,6 +567,7 @@ def chart_data():
 @app.route('/chart', methods=['GET'])
 def chart():
    return render_template("charttest.html")
+
 
 if __name__ == "__main__":
   import click

@@ -569,6 +569,7 @@ def chart_data():
 def chart():
    return render_template("charttest.html")
 
+
 if __name__ == "__main__":
   import click
 

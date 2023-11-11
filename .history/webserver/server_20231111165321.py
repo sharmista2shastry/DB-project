@@ -488,11 +488,12 @@ def saveandpay():
     expiry = request.json['card-expiry']
     cardNumber = request.json['card-number']
     params_dict = {"email":email, "amount": amount, "cvv": cvv, "expiry":expiry, "card_number":cardNumber, "country":country}
-    isValidCard = False 
+    sValidCard = False 
     isSuccess = False
     try:
       cursor = g.conn.execute(text("SELECT CHECK_CARD_MATCH(:email, :card_number, :expiry, :cvv, :country);"), params_dict)
 
+      i
       for result in cursor:
          if result[0]==True:
              isValidCard = True
@@ -568,6 +569,7 @@ def chart_data():
 @app.route('/chart', methods=['GET'])
 def chart():
    return render_template("charttest.html")
+
 
 if __name__ == "__main__":
   import click
