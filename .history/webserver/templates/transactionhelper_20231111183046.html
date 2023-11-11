@@ -220,8 +220,8 @@
 
       if (tbody2) {
         // Remove all child nodes (contents) of the tbody
-        while (tbody2.firstChild) {
-          tbody2.removeChild(tbody2.firstChild);
+        while (tbody.firstChild) {
+          tbody.removeChild(tbody.firstChild);
         }
       }
 
@@ -258,7 +258,7 @@
         row.appendChild(cardNumberCell);
         row.appendChild(availableFundsCell);
 
-        tbody.appendChild(row);
+        tbody2.appendChild(row);
       });
 
       apiUrl = "/getcards";
@@ -412,7 +412,7 @@
         row.appendChild(cardNumberCell);
         row.appendChild(availableFundsCell);
 
-        tbody.appendChild(row);
+        tbody2.appendChild(row);
       });
 
       apiUrl = "/gettransactions";
