@@ -212,13 +212,13 @@ def gettransactions():
        flag = True
     if len(cardNumber) > 0 and cardNumber!='All Cards':
       if flag:
-          queryStringAppend += ' AND CARD_NUMBER = (:cardNumber)'
+          queryStringAppend += 'AND CARD_NUMBER = (:cardNumber)'
       else:
          queryStringAppend += 'CARD_NUMBER = (:cardNumber)'
          flag = True
     if len(transactionStatus) > 0 and transactionStatus!='all':
       if flag:
-          queryStringAppend += ' AND TRANSACTION_STATUS = (:transactionStatus)'
+          queryStringAppend += 'AND TRANSACTION_STATUS = (:transactionStatus)'
       else:
          queryStringAppend += 'TRANSACTION_STATUS = (:transactionStatus)'
     params_dict = {"email":email, "merchant":merchantName,'cardNumber':cardNumber,'transactionStatus':transactionStatus}

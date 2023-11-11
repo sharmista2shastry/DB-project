@@ -212,7 +212,7 @@ def gettransactions():
        flag = True
     if len(cardNumber) > 0 and cardNumber!='All Cards':
       if flag:
-          queryStringAppend += ' AND CARD_NUMBER = (:cardNumber)'
+          queryStringAppend += 'AND CARD_NUMBER = (:cardNumber)'
       else:
          queryStringAppend += 'CARD_NUMBER = (:cardNumber)'
          flag = True
