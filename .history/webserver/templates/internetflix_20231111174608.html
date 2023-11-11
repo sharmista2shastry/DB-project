@@ -136,7 +136,7 @@
             email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            let data = {
+            data = {
                 'email': email,
                 'password': password
             };
@@ -144,7 +144,7 @@
             const apiUrl = "/login";
 
             try {
-                let response = await fetch(apiUrl, {
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
