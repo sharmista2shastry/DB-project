@@ -159,7 +159,6 @@ html, body {
     padding: 5px;
     border: 1px solid #ccc;
     background-color: #eee;
-    margin-bottom: 1%;
   }
   
   #card-cvv, #save-and-pay-cvv {
@@ -167,7 +166,6 @@ html, body {
     padding: 5px;
     border: 1px solid #ccc;
     background-color: #eee;
-    margin-bottom: 1%;
   }
   
   #pay-by-card, #save-and-pay-button {
@@ -177,5 +175,4 @@ html, body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 6%
   }  
