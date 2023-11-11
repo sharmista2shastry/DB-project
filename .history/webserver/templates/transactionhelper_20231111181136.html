@@ -56,6 +56,7 @@
     </div>
     <div id="cardholder-details">
       <div id="cardholder-name"></div>
+      <div></div>
     </div>
     <table border="1">
       <thead>
@@ -231,9 +232,9 @@
       } catch (error) {
         console.error('API call failed:', error);
       }
-      document.getElementById('cardholder-name').innerHTML = globalResponse.result.name;
+      print(globalResponse.result)
       globalResponse.result.card_list.forEach(item => {
-        console.log(item)
+        print(item)
       });
 
       apiUrl = "/getcards";

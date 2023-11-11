@@ -231,9 +231,9 @@
       } catch (error) {
         console.error('API call failed:', error);
       }
-      document.getElementById('cardholder-name').innerHTML = globalResponse.result.name;
+      document.getElementById('login-button')
       globalResponse.result.card_list.forEach(item => {
-        console.log(item)
+        print(item)
       });
 
       apiUrl = "/getcards";
