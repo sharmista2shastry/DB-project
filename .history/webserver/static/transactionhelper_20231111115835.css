@@ -148,12 +148,16 @@ body {
     background-color: #0056b3;
   }
 
-  #merchant-dropdown{
-    margin-left: 2%;
+  #transaction-status-dropdown{
+    margin-left: 3%;
+  }
+  
+  #card-number-dropdown{
+    margin-right: 3%;
   }
 
-  #card-number-dropdown{
-    margin-right: 2%;
+  #transaction-status-dropdown{
+    margin-left: 3%;
   }
   
   /* Style the transactions table */
