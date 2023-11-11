@@ -63,7 +63,7 @@
             <th>Available Funds</th>
           </tr>
         </thead>
-        <tbody id="tbody">
+        <tbody>
   
         </tbody>
       </table>
@@ -82,7 +82,7 @@
           <th>Decline Reason</th>
         </tr>
       </thead>
-      <tbody id="tbody2">
+      <tbody>
 
       </tbody>
     </table>
@@ -101,8 +101,7 @@
     const mainPage = document.getElementById('y-main-page');
     const goToSearchPage = document.getElementById('go-search-button');
     const table = document.getElementById('transactions-table');
-    const tbody = document.getElementById('tbody');
-    const tbody2 = document.getElementById('tbody2');
+    const tbody = table.querySelector('tbody2');
     const searchAgainButton = document.getElementById('search-again-button');
     const merchantDropdown = document.getElementById('merchant-dropdown');
     const cardNumberDropdown = document.getElementById('card-number-dropdown');
@@ -251,7 +250,7 @@
         row.appendChild(cardNumberCell);
         row.appendChild(availableFundsCell);
 
-        tbody2.appendChild(row);
+        tbody.appendChild(row);
       });
 
       apiUrl = "/getcards";
@@ -405,7 +404,7 @@
         row.appendChild(cardNumberCell);
         row.appendChild(availableFundsCell);
 
-        tbody2.appendChild(row);
+        tbody.appendChild(row);
       });
 
       apiUrl = "/gettransactions";
