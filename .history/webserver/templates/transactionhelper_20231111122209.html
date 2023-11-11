@@ -286,7 +286,7 @@
         const currencyCell = document.createElement('td');
         currencyCell.textContent = item.transaction_currency;
         const transactionStatus = document.createElement('td');
-        if(item.transaction_status===true)
+        if(item.transaction_status==true)
           transactionStatus.textContent = 'Approved';
         else
           transactionStatus.textContent = 'Not Approved ';
