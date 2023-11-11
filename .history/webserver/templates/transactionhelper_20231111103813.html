@@ -176,7 +176,7 @@
       option.value = 'All Cards';
       option.textContent = 'All Cards';
       cardNumberDropdown.appendChild(option);
-      globalResponse.result.cards.forEach(item => {
+      globalResponse.result.card_list.forEach(item => {
         const option = document.createElement('option');
         option.value = item;
         option.textContent = item;

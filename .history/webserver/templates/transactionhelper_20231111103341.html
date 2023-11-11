@@ -79,8 +79,7 @@
     const table = document.getElementById('transactions-table');
     const tbody = table.querySelector('tbody');
     const searchAgainButton = document.getElementById('search-again-button');
-    const merchantDropdown = document.getElementById('merchant-dropdown');
-    const cardNumberDropdown = document.getElementById('card-number-dropdown');
+    const merchantDropdown = document.getElementById('dropdown');
 
     let email = '';
     let merchants = '';
@@ -103,7 +102,6 @@
       email = document.getElementById('email').value;
       mainPage.style.display = 'none';
       searchPage.style.display = 'block';
-
       let apiUrl = "/getmerchants";
 
       try {
@@ -125,12 +123,12 @@
       const option = document.createElement('option');
       option.value = 'All Merchants';
       option.textContent = 'All Merchants';
-      merchantDropdown.appendChild(option);
+      dropdown.appendChild(option);
       globalResponse.result.merchant_list.forEach(item => {
         const option = document.createElement('option');
         option.value = item;
         option.textContent = item;
-        merchantDropdown.appendChild(option);
+        dropdown.appendChild(option);
       });
     });
 
@@ -154,39 +152,37 @@
         }
       }
 
-      let apiUrl = "/getcards";
-
-      try {
-        const response = await fetch(apiUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        });
-        if (response.ok) {
-          globalResponse = await response.json(); // Store the response in the global variable
-        } else {
-          console.error('API call failed with status:', response.status);
-        }
-      } catch (error) {
-        console.error('API call failed:', error);
-      }
-      const option = document.createElement('option');
-      option.value = 'All Cards';
-      option.textContent = 'All Cards';
-      cardNumberDropdown.appendChild(option);
-      globalResponse.result.cards.forEach(item => {
-        const option = document.createElement('option');
-        option.value = item;
-        option.textContent = item;
-        cardNumberDropdown.appendChild(option);
-      });
       data = {
         'email': email,
         'merchantSelected': merchantSelected,
         'card-number': cardNumber
       };
+
+      // apiUrl = "/cardNumberList";
+
+      // try {
+      //   const response = await fetch(apiUrl, {
+      //     method: 'POST',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify(data)
+      //   });
+      //   if (response.ok) {
+      //     globalResponse = await response.json(); // Store the response in the global variable
+      //   } else {
+      //     console.error('API call failed with status:', response.status);
+      //   }
+      // } catch (error) {
+      //   console.error('API call failed:', error);
+      // }
+      // globalResponse.result.output.forEach(item => {
+      //   console.log(item)
+      //   const option = document.createElement('option');
+      //     option.value = item.id;
+      //     option.textContent = item.name;
+      //     dropdown.appendChild(option);
+      // });
 
       searchPage.style.display = 'none';
       transactionsPage.style.display = 'block';

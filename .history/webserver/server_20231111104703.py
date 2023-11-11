@@ -283,7 +283,7 @@ def getcards():
         merchant_list.append(result[0])
     cursor.close()
     response = {
-        "cards": merchant_list
+        "merchant_list": merchant_list
     }
     response = {str(key): value for key, value in response.items()}
     return jsonify(result=response)

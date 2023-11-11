@@ -206,7 +206,7 @@ def gettransactions():
     print(request.json)
     params_dict = {"email":email, "merchant":merchantName}
     print(merchantName)
-    if len(merchantName) > 0 or merchantName!='All Merchants':
+    if len(merchantName) > 0 || merchantName!='All Merchants':
       cursor = g.conn.execute(text("SELECT * FROM GET_TRANSACTIONS_BY_EMAIL(:email) WHERE MERCHANT_NAME=(:merchant)"), params_dict)
       g.conn.commit()
     else:
@@ -267,23 +267,6 @@ def getmerchants():
     cursor.close()
     response = {
         "merchant_list": merchant_list
-    }
-    response = {str(key): value for key, value in response.items()}
-    return jsonify(result=response)
-
-@app.route('/getcards', methods=['GET','POST'])
-def getcards():
-    email = request.json['email']
-    params_dict = {"email":email}
-    cursor = g.conn.execute(text("SELECT DISTINCT(CARD_NUMBER) FROM CARDS C JOIN CARDHOLDER_DETAILS CD ON C.CARDHOLDER_ID = CD.CARDHOLDER_ID WHERE CD.EMAIL=(:email);"), params_dict)
-    g.conn.commit()
-
-    merchant_list = []
-    for result in cursor:
-        merchant_list.append(result[0])
-    cursor.close()
-    response = {
-        "cards": merchant_list
     }
     response = {str(key): value for key, value in response.items()}
     return jsonify(result=response)
