@@ -26,25 +26,14 @@ html, body {
     background-color: #eee;
   }
   
-  #login-button {
+  #login-button, #sign-up-button {
     background-color: #007bff;
     color: #fff;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 1%;
-  }
-
-  #sign-up-button{
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 1%;
-    margin-left: 1.5%;
+    margin-top
   }
   
   /* Sign up section */
