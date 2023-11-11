@@ -250,7 +250,7 @@ def gettransactions():
     for result in cursor:
       complete_results.append({
         "transaction_id": result[0],
-        "transaction_amount": float(result[1]) if result[1] is not None else float(0),
+        "transaction_amount": float(result[1]) if result[1] is not None else 0,
         "transaction_currency": result[2],
         "transaction_fraud": result[3],
         "transaction_timestamp": result[4],

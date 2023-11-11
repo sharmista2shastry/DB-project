@@ -4,7 +4,7 @@ RETURNS TABLE (
     transaction_amount REAL,
     transaction_currency VARCHAR(100),
     transaction_fraud BOOLEAN,
-    transaction_timestamp TIMESTAMP,
+    transaction_timestamp DATE,
     merchant_id INT,
     acquirer_id INT,
     transaction_type_id INT,

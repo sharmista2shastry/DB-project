@@ -4,7 +4,7 @@ RETURNS TABLE (
     transaction_amount REAL,
     transaction_currency VARCHAR(100),
     transaction_fraud BOOLEAN,
-    transaction_timestamp TIMESTAMP,
+    transaction_timestamp DATE,
     merchant_id INT,
     acquirer_id INT,
     transaction_type_id INT,
@@ -25,7 +25,7 @@ BEGIN
         T.AMOUNT,
         T.CURRENCY,
         T.FRAUD,
-        T.TRANSACTION_TIMESTAMP,
+        T.TRANSACTION_TIMESTAMP),
         T.MERCHANT_ID,
         T.ACQUIRER_ID,
         T.TRANSACTION_TYPE_ID,
@@ -42,10 +42,9 @@ BEGIN
     JOIN
         CARDHOLDER_DETAILS CD ON T.CARDHOLDER_ID = CD.CARDHOLDER_ID
         JOIN MERCHANTS M ON M.MERCHANT_ID = T.MERCHANT_ID
-        LEFT JOIN AUTHENTICATION_TYPES AT ON AT.AUTHENTICATION_TYPE_ID = T.AUTHENTICATION_TYPE_ID
+        JOIN AUTHENTICATION_TYPES AT ON AT.AUTHENTICATION_TYPE_ID = T.AUTHENTICATION_TYPE_ID
 		JOIN TRANSACTION_TYPES TT ON TT.TRANSACTION_TYPE_ID = T.TRANSACTION_TYPE_ID
     WHERE
-        CD.EMAIL = customer_email
-    ORDER BY T.TRANSACTION_TIMESTAMP DESC;
+        CD.EMAIL = customer_email;
 END;
 $$ LANGUAGE plpgsql;
