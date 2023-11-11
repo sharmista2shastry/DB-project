@@ -243,12 +243,36 @@
       globalResponse.result.card_list.forEach(item => {
         const row = document.createElement('tr');
         const cardNumberCell = document.createElement('td');
+        dateCell.textContent = item.transaction_timestamp;
+        const cardNumberCell = document.createElement('td');
         cardNumberCell.textContent = item.card_number;
-        const availableFundsCell = document.createElement('td');
-        cardNumberCell.textContent = item.available_funds;
-        
+        const amountCell = document.createElement('td');
+        amountCell.textContent = item.transaction_amount;
+        const merchantCell = document.createElement('td');
+        merchantCell.textContent = item.merchant;
+        const authenticationTypeCell = document.createElement('td');
+        authenticationTypeCell.textContent = item.authentication_type;
+        const currencyCell = document.createElement('td');
+        currencyCell.textContent = item.transaction_currency;
+        const transactionStatus = document.createElement('td');
+        if(item.transaction_status===true)
+          transactionStatus.textContent = 'Approved';
+        else
+          transactionStatus.textContent = 'Not Approved ';
+        const fraudCell = document.createElement('td');
+        fraudCell.textContent = item.transaction_fraud;
+        const declineReason = document.createElement('td');
+        declineReason.textContent = item.decline_reason;
+
+        row.appendChild(dateCell);
         row.appendChild(cardNumberCell);
-        row.appendChild(availableFundsCell);
+        row.appendChild(amountCell);
+        row.appendChild(merchantCell);
+        row.appendChild(authenticationTypeCell);
+        row.appendChild(currencyCell);
+        row.appendChild(transactionStatus);
+        row.appendChild(fraudCell);
+        row.appendChild(declineReason);
 
         tbody.appendChild(row);
       });
@@ -370,44 +394,8 @@
           tbody.removeChild(tbody.firstChild);
         }
       }
-      let apiUrl = "/getCardholderDetails";
-
-      data = {
-        'email': email,
-      };
+      const apiUrl = "/gettransactions";
       let globalResponse;
-
-      try {
-        const response = await fetch(apiUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        });
-        if (response.ok) {
-          globalResponse = await response.json(); // Store the response in the global variable
-        } else {
-          console.error('API call failed with status:', response.status);
-        }
-      } catch (error) {
-        console.error('API call failed:', error);
-      }
-      document.getElementById('cardholder-name').innerHTML = 'Cardholder Name :' + globalResponse.result.name;
-      globalResponse.result.card_list.forEach(item => {
-        const row = document.createElement('tr');
-        const cardNumberCell = document.createElement('td');
-        cardNumberCell.textContent = item.card_number;
-        const availableFundsCell = document.createElement('td');
-        cardNumberCell.textContent = item.available_funds;
-        
-        row.appendChild(cardNumberCell);
-        row.appendChild(availableFundsCell);
-
-        tbody.appendChild(row);
-      });
-
-      apiUrl = "/gettransactions";
       try {
         const response = await fetch(apiUrl, {
           method: 'POST',

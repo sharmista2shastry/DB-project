@@ -375,7 +375,6 @@
       data = {
         'email': email,
       };
-      let globalResponse;
 
       try {
         const response = await fetch(apiUrl, {
@@ -407,7 +406,8 @@
         tbody.appendChild(row);
       });
 
-      apiUrl = "/gettransactions";
+      const apiUrl = "/gettransactions";
+      let globalResponse;
       try {
         const response = await fetch(apiUrl, {
           method: 'POST',

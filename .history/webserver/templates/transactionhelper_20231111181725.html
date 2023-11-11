@@ -375,7 +375,6 @@
       data = {
         'email': email,
       };
-      let globalResponse;
 
       try {
         const response = await fetch(apiUrl, {
@@ -408,6 +407,7 @@
       });
 
       apiUrl = "/gettransactions";
+      let globalResponse;
       try {
         const response = await fetch(apiUrl, {
           method: 'POST',

@@ -59,8 +59,15 @@
       <table border="1">
         <thead>
           <tr>
+            <th>Date</th>
             <th>Card Number</th>
-            <th>Available Funds</th>
+            <th>Amount</th>
+            <th>Merchant</th>
+            <th>Authentication Type</th>
+            <th>Currency</th>
+            <th>Transaction Status</th>
+            <th>Fraud</th>
+            <th>Decline Reason</th>
           </tr>
         </thead>
         <tbody>
@@ -241,16 +248,7 @@
       }
       document.getElementById('cardholder-name').innerHTML = 'Cardholder Name :' + globalResponse.result.name;
       globalResponse.result.card_list.forEach(item => {
-        const row = document.createElement('tr');
-        const cardNumberCell = document.createElement('td');
-        cardNumberCell.textContent = item.card_number;
-        const availableFundsCell = document.createElement('td');
-        cardNumberCell.textContent = item.available_funds;
-        
-        row.appendChild(cardNumberCell);
-        row.appendChild(availableFundsCell);
-
-        tbody.appendChild(row);
+        console.log(item)
       });
 
       apiUrl = "/getcards";
@@ -370,44 +368,8 @@
           tbody.removeChild(tbody.firstChild);
         }
       }
-      let apiUrl = "/getCardholderDetails";
-
-      data = {
-        'email': email,
-      };
+      const apiUrl = "/gettransactions";
       let globalResponse;
-
-      try {
-        const response = await fetch(apiUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        });
-        if (response.ok) {
-          globalResponse = await response.json(); // Store the response in the global variable
-        } else {
-          console.error('API call failed with status:', response.status);
-        }
-      } catch (error) {
-        console.error('API call failed:', error);
-      }
-      document.getElementById('cardholder-name').innerHTML = 'Cardholder Name :' + globalResponse.result.name;
-      globalResponse.result.card_list.forEach(item => {
-        const row = document.createElement('tr');
-        const cardNumberCell = document.createElement('td');
-        cardNumberCell.textContent = item.card_number;
-        const availableFundsCell = document.createElement('td');
-        cardNumberCell.textContent = item.available_funds;
-        
-        row.appendChild(cardNumberCell);
-        row.appendChild(availableFundsCell);
-
-        tbody.appendChild(row);
-      });
-
-      apiUrl = "/gettransactions";
       try {
         const response = await fetch(apiUrl, {
           method: 'POST',
