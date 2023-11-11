@@ -128,7 +128,7 @@
 
     dropdown.addEventListener('change', function () {
       // Get the selected option
-      merchantSelected = dropdown.options[dropdown.selectedIndex].value;
+      merchantSelected = dropdown.options[dropdown.selectedIndex];
       // Log the selected option value and text
       console.log('Selected Option:', merchantSelected);
       searchButton.click();
