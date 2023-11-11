@@ -16,7 +16,6 @@ RETURNS TABLE (
 	transaction_type VARCHAR(100),
 	MERCHANT_NAME VARCHAR(100),
     transaction_status BOOLEAN
-    decline_reason VARCHAR(100)
 )
 AS $$
 BEGIN

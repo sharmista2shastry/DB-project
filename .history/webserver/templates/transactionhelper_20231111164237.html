@@ -66,7 +66,6 @@
           <th>Currency</th>
           <th>Transaction Status</th>
           <th>Fraud</th>
-          <th>Decline Reason</th>
         </tr>
       </thead>
       <tbody>
@@ -293,8 +292,8 @@
           transactionStatus.textContent = 'Not Approved ';
         const fraudCell = document.createElement('td');
         fraudCell.textContent = item.transaction_fraud;
-        const declineReason = document.createElement('td');
-        declineReason.textContent = item.decline_reason;
+        const fraudCell = document.createElement('td');
+        fraudCell.textContent = item.transaction_fraud;
 
         row.appendChild(dateCell);
         row.appendChild(cardNumberCell);
@@ -304,7 +303,6 @@
         row.appendChild(currencyCell);
         row.appendChild(transactionStatus);
         row.appendChild(fraudCell);
-        row.appendChild(declineReason);
 
         tbody.appendChild(row);
       });
@@ -370,8 +368,8 @@
         else
           transactionStatus.textContent = 'Not Approved ';
         // transactionStatus.textContent = item.transaction_status;
-        const declineReason = document.createElement('td');
-        declineReason.textContent = item.decline_reason;
+        const fraudCell = document.createElement('td');
+        fraudCell.textContent = item.transaction_fraud;
 
         row.appendChild(dateCell);
         row.appendChild(cardNumberCell);
@@ -381,7 +379,6 @@
         row.appendChild(currencyCell);
         row.appendChild(transactionStatus);
         row.appendChild(fraudCell);
-        row.appendChild(declineReason);
 
         tbody.appendChild(row);
       });

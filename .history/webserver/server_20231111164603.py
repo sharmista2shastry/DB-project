@@ -262,7 +262,7 @@ def gettransactions():
         "card_number": result[10],
         "cardholder_id": result[11],
         "transaction_status": result[15],
-        "decline_reason": result[16]
+        "decline_reason": 
       })
     cursor.close()
     result = {
