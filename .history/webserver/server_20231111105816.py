@@ -202,6 +202,7 @@ def gettransactions():
     # print(request.get_json())
     email = request.json['email']
     merchantName = request.json['merchantSelected']
+    merchantName = request.json['merchantSelected']
     print(request.json)
     params_dict = {"email":email, "merchant":merchantName}
     if len(merchantName) > 0 or merchantName!='All Merchants':
