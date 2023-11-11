@@ -252,10 +252,7 @@ def login():
 def getmerchants():
     cursor = g.conn.execute(text("SELECT MERCHANT_NAME FROM MERCHANTS;"))
     g.conn.commit()
-
-    merchant_list = []
-    for result in cursor:
-        print(result)
+*
         merchant_list.append(result)
     cursor.close()
     response = {

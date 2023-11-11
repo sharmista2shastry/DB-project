@@ -255,7 +255,7 @@ def getmerchants():
 
     merchant_list = []
     for result in cursor:
-        print(result)
+        print
         merchant_list.append(result)
     cursor.close()
     response = {
