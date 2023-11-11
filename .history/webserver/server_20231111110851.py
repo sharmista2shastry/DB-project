@@ -213,8 +213,6 @@ def gettransactions():
       if flag:
           queryStringAppend += ('AND CARD_NUMBER = '+cardNumber)
       else:
-         queryStringAppend += ('CARD_NUMBER = '+cardNumber)
-         
     params_dict = {"email":email, "merchant":merchantName}
     if len(merchantName) > 0 and merchantName!='All Merchants':
       cursor = g.conn.execute(text("SELECT * FROM GET_TRANSACTIONS_BY_EMAIL(:email) WHERE MERCHANT_NAME=(:merchant)"), params_dict)

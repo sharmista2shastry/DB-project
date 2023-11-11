@@ -198,7 +198,7 @@
       data = {
         'email': email,
         'merchantSelected': merchantSelected,
-        'cardNumber': cardNumber
+        'card-number': cardNumber
       };
 
       searchPage.style.display = 'none';
@@ -259,7 +259,6 @@
       if(document.getElementById('search-again-email').value != "")
         email = document.getElementById('search-again-email').value;
       document.getElementById('search-again-email').value = email;
-      document.getElementById('search-again-email-2').value = email;
       data = {
         'email': email,
         'merchantSelected': merchantSelected

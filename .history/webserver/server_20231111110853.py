@@ -213,7 +213,6 @@ def gettransactions():
       if flag:
           queryStringAppend += ('AND CARD_NUMBER = '+cardNumber)
       else:
-         queryStringAppend += ('CARD_NUMBER = '+cardNumber)
          
     params_dict = {"email":email, "merchant":merchantName}
     if len(merchantName) > 0 and merchantName!='All Merchants':

@@ -202,19 +202,8 @@ def gettransactions():
     # print(request.get_json())
     email = request.json['email']
     merchantName = request.json['merchantSelected']
-    cardNumber = request.json['cardNumber']
+    cardNumber = 
     print(request.json)
-    queryStringAppend = 'WHERE'
-    flag = False
-    if len(merchantName) > 0 and merchantName!='All Merchants':
-       queryStringAppend += ('MERCHANT_NAME = '+email)
-       flag = True
-    if len(cardNumber) > 0 and cardNumber!='All Cards':
-      if flag:
-          queryStringAppend += ('AND CARD_NUMBER = '+cardNumber)
-      else:
-         queryStringAppend += ('CARD_NUMBER = '+cardNumber)
-         
     params_dict = {"email":email, "merchant":merchantName}
     if len(merchantName) > 0 and merchantName!='All Merchants':
       cursor = g.conn.execute(text("SELECT * FROM GET_TRANSACTIONS_BY_EMAIL(:email) WHERE MERCHANT_NAME=(:merchant)"), params_dict)
