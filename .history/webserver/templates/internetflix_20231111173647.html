@@ -62,7 +62,6 @@
     </div>
 
     <div id="payment-options" style="display: none;">
-        <h1 id="welcome-text">Welcome, </h1>
         <label for="card-options">Select your payment method:</label>
         <form>
             <input type="radio" name="option1" value="existing-token" id="existing-token">
@@ -208,8 +207,8 @@
             }
             if (globalResponse.result.output) {
                 data = {
-                    'email': email,
-                };
+                'email': email,
+            };
 
                 const apiUrl = "/getname";
 
@@ -229,8 +228,11 @@
                 } catch (error) {
                     console.error('API call failed:', error);
                 }
-                if (globalResponse.result.name) {
-                    welcomeText.textContent = 'Welcome, '+ globalResponse.result.name;
+                if (globalResponse.result.output) {
+                    loginForm.style.display = 'none'; // Hide the login form
+                    paymentOptions.style.display = 'block'; // Show the country and payment options
+                } else {
+                    alert('Invalid email or password. Please try again.');
                 }
                 signupSection.style.display = 'none'; // Hide the login form
                 paymentOptions.style.display = 'block'; // Show the country and payment options
@@ -267,6 +269,7 @@
                 console.error('API call failed:', error);
             }
             if (!globalResponse.result.doesExist) {
+                console.log(globalResponse);
                 existingTokenOption.disabled = true;
             }
             // email = document.getElementById('email').value;

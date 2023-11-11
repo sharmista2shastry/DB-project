@@ -323,23 +323,20 @@ def getcards():
     response = {str(key): value for key, value in response.items()}
     return jsonify(result=response)
 
-@app.route('/getname', methods=['GET','POST'])
+@app.route('/getcards', methods=['GET','POST'])
 def getcards():
     email = request.json['email']
     params_dict = {"email":email}
-    cursor = g.conn.execute(text("SELECT CUSTOMER_NAME FROM INTERNETFLIX_CUSTOMER_DATE WHERE CUSTOMER_EMAIL=(:email);"), params_dict)
+    cursor = g.conn.execute(text("SELECT DISTINCT(CARD_NUMBER) FROM CARDS C JOIN CARDHOLDER_DETAILS CD ON C.CARDHOLDER_ID = CD.CARDHOLDER_ID WHERE CD.EMAIL=(:email);"), params_dict)
     g.conn.commit()
 
-    name = ''
+    merchant_list = []
     for result in cursor:
-        name =result[0]
-
+        merchant_list.append(result[0])
     cursor.close()
-
     response = {
-        "name": name
+        "cards": merchant_list
     }
-    
     response = {str(key): value for key, value in response.items()}
     return jsonify(result=response)
 

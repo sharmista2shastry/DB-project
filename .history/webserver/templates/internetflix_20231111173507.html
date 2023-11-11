@@ -7,7 +7,7 @@
 </head>
 
 <body>
-
+   
     <div id="login-form">
         <h1 id="main-header">Welcome to Internetflix, the world of entertainment!</h1>
         <label for="email">Email:</label>
@@ -62,7 +62,6 @@
     </div>
 
     <div id="payment-options" style="display: none;">
-        <h1 id="welcome-text">Welcome, </h1>
         <label for="card-options">Select your payment method:</label>
         <form>
             <input type="radio" name="option1" value="existing-token" id="existing-token">
@@ -125,7 +124,7 @@
         const saveAndPaySection = document.getElementById('save-and-pay');
         const saveAndPayButton = document.getElementById('save-and-pay-button');
         const existingTokenOption = document.getElementById('existing-token');
-        const welcomeText = document.getElementById('welcome-text');
+        const welcomeText = document.getElementById('existing-token');
 
         let paymentPlan = "";
         let countrySelected = "";
@@ -178,7 +177,7 @@
             const signupAddress = document.getElementById('signup-address').value;
             const signupPassword = document.getElementById('signup-password').value;
 
-            let data = {
+            const data = {
                 'email': email,
                 'password': signupPassword,
                 'address': signupAddress,
@@ -207,31 +206,6 @@
                 console.error('API call failed:', error);
             }
             if (globalResponse.result.output) {
-                data = {
-                    'email': email,
-                };
-
-                const apiUrl = "/getname";
-
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(data)
-                    });
-                    if (response.ok) {
-                        globalResponse = await response.json(); // Store the response in the global variable
-                    } else {
-                        console.error('API call failed with status:', response.status);
-                    }
-                } catch (error) {
-                    console.error('API call failed:', error);
-                }
-                if (globalResponse.result.name) {
-                    welcomeText.textContent = 'Welcome, '+ globalResponse.result.name;
-                }
                 signupSection.style.display = 'none'; // Hide the login form
                 paymentOptions.style.display = 'block'; // Show the country and payment options
             } else {
@@ -267,6 +241,7 @@
                 console.error('API call failed:', error);
             }
             if (!globalResponse.result.doesExist) {
+                console.log(globalResponse);
                 existingTokenOption.disabled = true;
             }
             // email = document.getElementById('email').value;

@@ -62,7 +62,6 @@
     </div>
 
     <div id="payment-options" style="display: none;">
-        <h1 id="welcome-text">Welcome, </h1>
         <label for="card-options">Select your payment method:</label>
         <form>
             <input type="radio" name="option1" value="existing-token" id="existing-token">
@@ -230,7 +229,7 @@
                     console.error('API call failed:', error);
                 }
                 if (globalResponse.result.name) {
-                    welcomeText.textContent = 'Welcome, '+ globalResponse.result.name;
+                    welcomeText.textContent = 'Welcome, '+
                 }
                 signupSection.style.display = 'none'; // Hide the login form
                 paymentOptions.style.display = 'block'; // Show the country and payment options

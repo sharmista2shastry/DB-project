@@ -333,13 +333,11 @@ def getcards():
     name = ''
     for result in cursor:
         name =result[0]
-
+        
     cursor.close()
-
     response = {
         "name": name
     }
-    
     response = {str(key): value for key, value in response.items()}
     return jsonify(result=response)
 
