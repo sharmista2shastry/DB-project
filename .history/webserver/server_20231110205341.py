@@ -249,16 +249,17 @@ def login():
     return jsonify(result=response)
 
 @app.route('/getmerchants', methods=['GET','POST'])
-def getmerchants():
-    cursor = g.conn.execute(text("SELECT MERCHANT_NAME FROM MERCHANTS;"))
+def login():
+    cursor = g.conn.execute(text("SELECT 1 FROM INTERNETFLIX_CUSTOMER_DATA WHERE CUSTOMER_EMAIL=(:email) AND PASS_WORD=(:password)"), params_dict)
     g.conn.commit()
 
-    merchant_list = []
+    isValid = False
     for result in cursor:
-        merchant_list.append(result)
+        if result[0] == 1:
+            isValid = True
     cursor.close()
     response = {
-        "merchant_list": merchant_list
+        "output": isValid
     }
     response = {str(key): value for key, value in response.items()}
     return jsonify(result=response)

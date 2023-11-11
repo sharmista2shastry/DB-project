@@ -253,12 +253,13 @@ def getmerchants():
     cursor = g.conn.execute(text("SELECT MERCHANT_NAME FROM MERCHANTS;"))
     g.conn.commit()
 
-    merchant_list = []
+    merchant_list=
     for result in cursor:
-        merchant_list.append(result)
+        if result[0] == 1:
+            isValid = True
     cursor.close()
     response = {
-        "merchant_list": merchant_list
+        "output": isValid
     }
     response = {str(key): value for key, value in response.items()}
     return jsonify(result=response)

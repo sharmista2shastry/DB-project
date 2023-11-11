@@ -258,7 +258,7 @@ def getmerchants():
         merchant_list.append(result)
     cursor.close()
     response = {
-        "merchant_list": merchant_list
+        "merchant_list": isValid
     }
     response = {str(key): value for key, value in response.items()}
     return jsonify(result=response)
