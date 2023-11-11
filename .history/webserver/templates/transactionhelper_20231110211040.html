@@ -119,8 +119,7 @@
       } catch (error) {
         console.error('API call failed:', error);
       }
-      console.log(globalResponse.result);
-      globalResponse.result.merchant_list.forEach(item => {
+      globalResponse.result..forEach(item => {
         console.log(item)
         const option = document.createElement('option');
           option.value = item.id;

@@ -119,7 +119,7 @@
       } catch (error) {
         console.error('API call failed:', error);
       }
-      console.log(globalResponse.result);
+      
       globalResponse.result.merchant_list.forEach(item => {
         console.log(item)
         const option = document.createElement('option');
