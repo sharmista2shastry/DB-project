@@ -82,11 +82,11 @@ html, body {
   /* Plan options */
   #plan-options {
     display: none;
-    margin-left: 1%;
+    margin-left: 1%
   }
   
   #plan-options select {
-    width: 15%;
+    width: 100%;
     padding: 5px;
     border: 1px solid #ccc;
     background-color: #eee;
