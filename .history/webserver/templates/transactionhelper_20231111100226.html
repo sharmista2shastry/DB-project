@@ -78,10 +78,8 @@
     const searchAgainButton = document.getElementById('search-again-button');
     const dropdown = document.getElementById('dropdown');
 
-    let email = '';
-    let merchants = '';
-    let merchantSelected = '';
-
+    let email = ''
+    let merchants = ''
     loginButton.addEventListener('click', async () => {
       email = document.getElementById('email').value;
       loginPage.style.display = 'none';
@@ -96,9 +94,9 @@
 
     dropdown.addEventListener('change', function() {
           // Get the selected option
-          merchantSelected = dropdown.options[dropdown.selectedIndex];
+          const selectedOption = dropdown.options[dropdown.selectedIndex];
           // Log the selected option value and text
-          console.log('Selected Option:', merchantSelected);
+          console.log('Selected Option:', selectedOption.value, selectedOption.textContent);
     });
 
     searchButton.addEventListener('click', async () => {
@@ -108,7 +106,7 @@
 
       let data = {
         'email': email,
-        'merchantSelected': merchantSelected
+        ''
       };
       
       let globalResponse;

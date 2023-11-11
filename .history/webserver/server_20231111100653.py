@@ -202,13 +202,9 @@ def gettransactions():
     # print(request.get_json())
     email = request.json['email']
     merchantName = request.json['merchantSelected']
-    params_dict = {"email":email, "merchant":merchantName}
-    if len(merchantName) > 0:
-      cursor = g.conn.execute(text("SELECT * FROM GET_TRANSACTIONS_BY_EMAIL(:email) WHERE MERCHANT_NAME=(:merchant)"), params_dict)
-      g.conn.commit()
-    else:
-      cursor = g.conn.execute(text("SELECT * FROM GET_TRANSACTIONS_BY_EMAIL(:email)"), params_dict)
-      g.conn.commit()
+    params_dict = {"email":email, "merchant"L}
+    cursor = g.conn.execute(text("SELECT * FROM GET_TRANSACTIONS_BY_EMAIL(:email)"), params_dict)
+    g.conn.commit()
 
     complete_results = []
     for result in cursor:
