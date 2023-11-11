@@ -153,6 +153,7 @@
 
     searchButton.addEventListener('click', async () => {
       email = document.getElementById('search-email').value;
+      console.log(email);
       transactionsPage.style.display = 'none';
 
       if (tbody) {
@@ -194,7 +195,6 @@
         option.textContent = item;
         cardNumberDropdown.appendChild(option);
       });
-      
       data = {
         'email': email,
         'merchantSelected': merchantSelected,
