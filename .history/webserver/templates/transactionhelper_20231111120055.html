@@ -50,8 +50,8 @@
       <label for="transaction-status-dropdown">Select a transaction status:</label>
       <select id="transaction-status-dropdown" name="dropdown">
         <option value="all">All Transactions</option>
-        <option value="true">Approved</option>
-        <option value="false">Not Approved</option>
+        <option value="true">Success</option>
+        <option value="false">Not Success</option>
       </select>
     </div>
 
@@ -262,10 +262,7 @@
         const currencyCell = document.createElement('td');
         currencyCell.textContent = item.transaction_currency;
         const transactionStatus = document.createElement('td');
-        if(item.transaction_status=='true')
-          transactionStatus.textContent = 'Approved';
-        else
-          transactionStatus.textContent = 'Not Approved ';
+        transactionStatus.textContent = item.transaction_status;
         const fraudCell = document.createElement('td');
         fraudCell.textContent = item.transaction_fraud;
 
@@ -338,10 +335,7 @@
         currencyCell.textContent = item.transaction_currency;
         const transactionStatus = document.createElement('td');
         if(item.transaction_status=='true')
-          transactionStatus.textContent = 'Approved';
-        else
-          transactionStatus.textContent = 'Not Approved ';
-        // transactionStatus.textContent = item.transaction_status;
+        transactionStatus.textContent = item.transaction_status;
         const fraudCell = document.createElement('td');
         fraudCell.textContent = item.transaction_fraud;
 

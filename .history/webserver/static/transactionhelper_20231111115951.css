@@ -109,11 +109,7 @@ body {
   }
 
   #search-again{
-    display: flex;
-    margin-left: 33%;
-    text-align: center;
-    align-items: center;
-    margin-bottom: 1.5%;
+    margin-bottom: 1%;
   }
 
   #search-toggles{

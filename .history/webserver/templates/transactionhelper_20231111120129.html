@@ -262,10 +262,7 @@
         const currencyCell = document.createElement('td');
         currencyCell.textContent = item.transaction_currency;
         const transactionStatus = document.createElement('td');
-        if(item.transaction_status=='true')
-          transactionStatus.textContent = 'Approved';
-        else
-          transactionStatus.textContent = 'Not Approved ';
+        transactionStatus.textContent = item.transaction_status;
         const fraudCell = document.createElement('td');
         fraudCell.textContent = item.transaction_fraud;
 
@@ -339,9 +336,7 @@
         const transactionStatus = document.createElement('td');
         if(item.transaction_status=='true')
           transactionStatus.textContent = 'Approved';
-        else
-          transactionStatus.textContent = 'Not Approved ';
-        // transactionStatus.textContent = item.transaction_status;
+        transactionStatus.textContent = item.transaction_status;
         const fraudCell = document.createElement('td');
         fraudCell.textContent = item.transaction_fraud;
 
