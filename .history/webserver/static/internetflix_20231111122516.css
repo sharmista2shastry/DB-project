@@ -82,7 +82,7 @@ html, body {
   /* Plan options */
   #plan-options {
     display: none;
-    margin-left: 1.5%;
+    margin-left: 1%;
   }
 
   #country{
@@ -108,7 +108,6 @@ html, body {
   /* Payment options */
   #payment-options {
     display: none;
-    margin-left: 1.5%;
   }
   
   #payment-options form {
@@ -122,14 +121,6 @@ html, body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
-
-  #existing-token{
-    margin-bottom: 1%;
-  }
-
-  #store-and-pay{
-    margin-bottom: 1%;
   }
   
   #card-pay, #save-and-pay {

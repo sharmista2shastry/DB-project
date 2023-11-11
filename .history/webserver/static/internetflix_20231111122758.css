@@ -127,10 +127,6 @@ html, body {
   #existing-token{
     margin-bottom: 1%;
   }
-
-  #store-and-pay{
-    margin-bottom: 1%;
-  }
   
   #card-pay, #save-and-pay {
     display: none;
