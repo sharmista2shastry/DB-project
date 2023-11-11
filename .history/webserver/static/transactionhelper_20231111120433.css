@@ -132,21 +132,12 @@ body {
     display: inline-block;
   }
 
-  #search-again-email{
-    margin-left: 1.5%;
-   }
- 
-
   #search-again-2{
     display: flex;
     margin-left: 33%;
     text-align: center;
     align-items: center;
     margin-bottom: 1.5%;
-  }
-
-  #search-again-email-2{
-   margin-left: 1.5%;
   }
 
   #search-again-button-2  {
