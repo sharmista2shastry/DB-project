@@ -45,11 +45,8 @@
     </select>
     <label for="card-number-dropdown">Select a card:</label>
     <select id="card-number-dropdown" name="dropdown">
-    <label for="transaction-status-dropdown">Select a transaction status:</label>
-    <select id="transaction-status-dropdown" name="dropdown">
-      <option value="all">All Transactions</option>
-      <option value="true">Success</option>
-      <option value="false">Not Success</option>
+    <label for="transaction-status-dropdown">Select a card:</label>
+    <select id="card-number-dropdown" name="dropdown">
     </select>
     <table border="1">
       <thead>
@@ -87,13 +84,11 @@
     const searchAgainButton = document.getElementById('search-again-button');
     const merchantDropdown = document.getElementById('merchant-dropdown');
     const cardNumberDropdown = document.getElementById('card-number-dropdown');
-    const transactionStatusDropdown = document.getElementById('transaction-status-dropdown');
 
     let email = '';
     let merchants = '';
     let merchantSelected = '';
     let cardNumber = '';
-    let transactionStatusSelected = '';
 
     let data = {
       'email': email,
@@ -156,14 +151,6 @@
       cardNumber = cardNumberDropdown.options[cardNumberDropdown.selectedIndex].value;
       // Log the selected option value and text
       console.log('Selected Option:', cardNumber);
-      searchAgainButton.click();
-    });
-
-    transactionStatusDropdown.addEventListener('change', function () {
-      // Get the selected option
-      transactionStatusSelected = transactionStatusDropdown.options[transactionStatusDropdown.selectedIndex].value;
-      // Log the selected option value and text
-      console.log('Selected Option:', transactionStatusSelected);
       searchAgainButton.click();
     });
 
@@ -282,8 +269,7 @@
       data = {
         'email': email,
         'merchantSelected': merchantSelected,
-        'cardNumber': cardNumber,
-        'transactionStatus': transactionStatusSelected
+        'cardNumber': cardNumber
       };
       transactionsPage.style.display = 'none';
       if (tbody) {

@@ -87,13 +87,12 @@
     const searchAgainButton = document.getElementById('search-again-button');
     const merchantDropdown = document.getElementById('merchant-dropdown');
     const cardNumberDropdown = document.getElementById('card-number-dropdown');
-    const transactionStatusDropdown = document.getElementById('transaction-status-dropdown');
+    const cardNumberDropdown = document.getElementById('transaction-status-dropdown');
 
     let email = '';
     let merchants = '';
     let merchantSelected = '';
     let cardNumber = '';
-    let transactionStatusSelected = '';
 
     let data = {
       'email': email,
@@ -156,14 +155,6 @@
       cardNumber = cardNumberDropdown.options[cardNumberDropdown.selectedIndex].value;
       // Log the selected option value and text
       console.log('Selected Option:', cardNumber);
-      searchAgainButton.click();
-    });
-
-    transactionStatusDropdown.addEventListener('change', function () {
-      // Get the selected option
-      transactionStatusSelected = transactionStatusDropdown.options[transactionStatusDropdown.selectedIndex].value;
-      // Log the selected option value and text
-      console.log('Selected Option:', transactionStatusSelected);
       searchAgainButton.click();
     });
 
@@ -282,8 +273,7 @@
       data = {
         'email': email,
         'merchantSelected': merchantSelected,
-        'cardNumber': cardNumber,
-        'transactionStatus': transactionStatusSelected
+        'cardNumber': cardNumber
       };
       transactionsPage.style.display = 'none';
       if (tbody) {

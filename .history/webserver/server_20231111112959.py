@@ -222,7 +222,7 @@ def gettransactions():
       else:
          queryStringAppend += 'TRANSACTION_STATUS = (:transactionStatus)'
     params_dict = {"email":email, "merchant":merchantName,'cardNumber':cardNumber,'transactionStatus':transactionStatus}
-    if queryStringAppend != 'WHERE':
+    if queryStringAppend:
       cursor = g.conn.execute(text("SELECT * FROM GET_TRANSACTIONS_BY_EMAIL(:email) WHERE"+queryStringAppend), params_dict)
       g.conn.commit()
     else:

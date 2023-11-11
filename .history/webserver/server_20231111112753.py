@@ -212,18 +212,18 @@ def gettransactions():
        flag = True
     if len(cardNumber) > 0 and cardNumber!='All Cards':
       if flag:
-          queryStringAppend += 'AND CARD_NUMBER = (:cardNumber)'
+          queryStringAppend += ('CARD_NUMBER = '+cardNumber)
       else:
-         queryStringAppend += 'CARD_NUMBER = (:cardNumber)'
+         queryStringAppend += ('CARD_NUMBER = '+cardNumber)
          flag = True
     if len(transactionStatus) > 0 and transactionStatus!='all':
       if flag:
-          queryStringAppend += 'AND TRANSACTION_STATUS = (:transactionStatus)'
+          queryStringAppend += ('AND TRANSACTION_STATUS = '+transactionStatus)
       else:
-         queryStringAppend += 'TRANSACTION_STATUS = (:transactionStatus)'
-    params_dict = {"email":email, "merchant":merchantName,'cardNumber':cardNumber,'transactionStatus':transactionStatus}
-    if queryStringAppend != 'WHERE':
-      cursor = g.conn.execute(text("SELECT * FROM GET_TRANSACTIONS_BY_EMAIL(:email) WHERE"+queryStringAppend), params_dict)
+         queryStringAppend += ('TRANSACTION_STATUS = '+transactionStatus)
+    params_dict = {"email":email, "merchant":merchantName}
+    if len(merchantName) > 0 and merchantName!='All Merchants':
+      cursor = g.conn.execute(text("SELECT * FROM GET_TRANSACTIONS_BY_EMAIL(:email) WHERE MERCHANT_NAME=(:merchant)"), params_dict)
       g.conn.commit()
     else:
       cursor = g.conn.execute(text("SELECT * FROM GET_TRANSACTIONS_BY_EMAIL(:email)"), params_dict)
