@@ -14,8 +14,7 @@ RETURNS TABLE (
     cardholder_id INT,
 	authentication_mechanism VARCHAR(100),
 	transaction_type VARCHAR(100),
-	MERCHANT_NAME VARCHAR(100),
-    transaction_status BOOLEAN
+	MERCHANT_NAME VARCHAR(100)
 )
 AS $$
 BEGIN
@@ -36,7 +35,7 @@ BEGIN
 		AT.AUTHENTICATION_MECHANISM,
 		TT.TRANSACTION_TYPE_NAME,
 		M.MERCHANT_NAME,
-        T.TRANSACTION_STATUS
+        T.MERCHANT_NAME
     FROM
         TRANSACTIONS T
     JOIN

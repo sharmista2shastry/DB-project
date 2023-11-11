@@ -252,7 +252,6 @@
         row.appendChild(merchantCell);
         row.appendChild(authenticationTypeCell);
         row.appendChild(currencyCell);
-        row.appendChild(transactionStatus);
         row.appendChild(fraudCell);
 
         tbody.appendChild(row);
@@ -314,7 +313,7 @@
         currencyCell.textContent = item.transaction_currency;
         const transactionStatus = document.createElement('td');
         transactionStatus.textContent = item.transaction_status;
-        const fraudCell = document.createElement('td');
+        const transactionStatusfraudCell = document.createElement('td');
         fraudCell.textContent = item.transaction_fraud;
 
         row.appendChild(dateCell);
@@ -323,7 +322,7 @@
         row.appendChild(merchantCell);
         row.appendChild(authenticationTypeCell);
         row.appendChild(currencyCell);
-        row.appendChild(transactionStatus);
+        row.appendChild(fraudCell);
         row.appendChild(fraudCell);
 
         tbody.appendChild(row);
