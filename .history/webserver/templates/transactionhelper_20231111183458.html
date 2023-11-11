@@ -249,7 +249,7 @@
       }
       document.getElementById('cardholder-name').innerHTML = 'Cardholder Name :' + globalResponse.result.name;
       globalResponse.result.card_list.forEach(item => {
-        console.log(item);
+        console.log(item)
         const row = document.createElement('tr');
         const cardNumberCell = document.createElement('td');
         cardNumberCell.textContent = item.card_number;
