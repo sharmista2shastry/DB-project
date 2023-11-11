@@ -57,7 +57,7 @@ html, body {
   
   /* Sign up section */
   #sign-up-section {
-    margin-left: 1.5%;
+    margin-left:1.5%
     display: none;
   }
   
@@ -73,7 +73,6 @@ html, body {
     padding: 5px;
     border: 1px solid #ccc;
     background-color: #eee;
-    margin-bottom: 1%;
   }
   
   #submit {

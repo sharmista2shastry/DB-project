@@ -5,9 +5,7 @@ html, body {
     font-family: sans-serif;
   }
 
-  #email{
-    margin-bottom: 1%;
-  }
+  #
 
   #main-header{
     margin-left: 0.5%;
@@ -57,7 +55,6 @@ html, body {
   
   /* Sign up section */
   #sign-up-section {
-    margin-left: 1.5%;
     display: none;
   }
   
@@ -73,7 +70,6 @@ html, body {
     padding: 5px;
     border: 1px solid #ccc;
     background-color: #eee;
-    margin-bottom: 1%;
   }
   
   #submit {
