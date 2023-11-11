@@ -28,28 +28,29 @@
     </div>
 
     <script>
+        let chart;  // Reference to the chart
+
         function fetchAndRender() {
             const chartType = document.getElementById("chartType").value;
             fetch(`/chart-data?type=${chartType}`)
                 .then((response) => response.json())
                 .then((data) => {
                     renderChart(data[chartType], chartType);
-                    hideDropdownAndButton();
                 })
                 .catch((error) => console.error("Error fetching data: ", error));
         }
 
-        function hideDropdownAndButton() {
-            document.getElementById("chartTypeGroup").style.display = "none";
-            document.getElementById("fetchData").style.display = "none";
-        }
-
         function renderChart(chartData, chartType) {
+            if (chart) {
+                // If the chart already exists, destroy it before rendering a new one
+                chart.destroy();
+            }
+
             const merchantNames = chartData.map((item) => item.name);
     
             const ctx = document.getElementById('myChart').getContext('2d');
     
-            const chart = new Chart(ctx, {
+            chart = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: merchantNames,
