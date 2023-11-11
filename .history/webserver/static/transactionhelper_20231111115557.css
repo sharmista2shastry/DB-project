@@ -147,14 +147,6 @@ body {
   #search-button:hover {
     background-color: #0056b3;
   }
-
-  #card-number-dropdown{
-    margin-left: 3%;
-  }
-
-  #transaction-status-dropdown{
-    margin-left: 3%;
-  }
   
   /* Style the transactions table */
   #transactions-table {

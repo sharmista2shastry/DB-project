@@ -112,9 +112,7 @@ body {
     margin-bottom: 1%;
   }
 
-  #search-toggles{
-    margin-bottom: 1.5%;
-  }
+  #search-toggles
 
   #search-again-button {
     width: 15%;
@@ -146,14 +144,6 @@ body {
   
   #search-button:hover {
     background-color: #0056b3;
-  }
-
-  #card-number-dropdown{
-    margin-left: 3%;
-  }
-
-  #transaction-status-dropdown{
-    margin-left: 3%;
   }
   
   /* Style the transactions table */
