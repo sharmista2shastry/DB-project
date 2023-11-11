@@ -121,9 +121,10 @@
       }
       console.log(globalResponse.result);
       globalResponse.result.merchant_list.forEach(item => {
+        console.log(item)
         const option = document.createElement('option');
-          option.value = item;
-          option.textContent = item;
+          option.value = item.id;
+          option.textContent = item.name;
           dropdown.appendChild(option);
       });
 
