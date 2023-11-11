@@ -35,7 +35,7 @@
   </div>
 
   <div id="transactions-table" style="display: none;">
-    <div id="search-again">
+    <div >
       Search by another email:
       <input type="search-email" id="search-again-email" name="search-email" required><br>
       <button type="button" id="search-again-button">Search Transactions</button>
@@ -92,14 +92,8 @@
       searchPage.style.display = 'block';
     });
 
-    dropdown.addEventListener('change', function() {
-          // Get the selected option
-          const selectedOption = dropdown.options[dropdown.selectedIndex];
-          // Log the selected option value and text
-          console.log('Selected Option:', selectedOption.value, selectedOption.textContent);
-    });
-
     searchButton.addEventListener('click', async () => {
+
       email = document.getElementById('search-email').value;
 
       let apiUrl = "/getmerchants";

@@ -97,9 +97,10 @@
           const selectedOption = dropdown.options[dropdown.selectedIndex];
           // Log the selected option value and text
           console.log('Selected Option:', selectedOption.value, selectedOption.textContent);
-    });
+        });
 
     searchButton.addEventListener('click', async () => {
+
       email = document.getElementById('search-email').value;
 
       let apiUrl = "/getmerchants";
