@@ -142,7 +142,6 @@ html, body {
     margin-bottom: 5px;
     font-weight: bold;
     color: #333;
-    display: inline-block;
   }
   
   #card-number, #save-and-pay-number {
