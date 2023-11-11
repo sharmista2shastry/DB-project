@@ -13,7 +13,7 @@ import sys
   # accessible as a variable in index.html:
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
-from flask import Flask, request, render_template, g, redirect, Response, abort, jsonify
+from flask import Flask, request, render_template, g, redirect, Response, abort, jsonify, url_for
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask(__name__, template_folder=tmpl_dir)
@@ -97,6 +97,7 @@ def teardown_request(exception):
 # see for routing: https://flask.palletsprojects.com/en/2.0.x/quickstart/?highlight=routing
 # see for decorators: http://simeonfranklin.com/blog/2012/jul/1/python-decorators-in-12-steps/
 #
+
 @app.route('/')
 def index():
   """
@@ -112,7 +113,6 @@ def index():
 
   # DEBUG: this is debugging code to see what request looks like
   print(request.args)
-
 
   #
   # example of a database query 
@@ -170,7 +170,24 @@ def index():
   # render_template looks in the templates/ folder for files.
   # for example, the below file reads template/index.html
   #
+
   return render_template("transactionhelper.html")
+
+ADMIN_USERNAME = "admin"
+ADMIN_PASSWORD = "adminpassword"
+
+@app.route('/baselogin', methods=['POST'])
+def baselogin():
+    email = request.json['email']
+    password = request.json['password']
+
+    if email == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+        response = {"output": True}
+    else:
+        response = {"output": False}
+
+    response = {str(key): value for key, value in response.items()}
+    return jsonify(result=response)
 
 #
 # This is an example of a different path.  You can see it at:
