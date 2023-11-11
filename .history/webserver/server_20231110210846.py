@@ -250,13 +250,13 @@ def login():
 
 @app.route('/getmerchants', methods=['GET','POST'])
 def getmerchants():
-    cursor = g.conn.execute(text("SELECT DISTINCT(MERCHANT_NAME) FROM MERCHANTS;"))
+    cursor = g.conn.execute(text("SELECT DISTINCTMERCHANT_NAME FROM MERCHANTS;"))
     g.conn.commit()
 
     merchant_list = []
     for result in cursor:
-        print(result[0])
-        merchant_list.append(result[0])
+        print(result)
+        merchant_list.append(result)
     cursor.close()
     response = {
         "merchant_list": merchant_list
