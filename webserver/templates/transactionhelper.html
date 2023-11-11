@@ -105,12 +105,36 @@
     };
 
     let globalResponse;
-
+    let isAdmin = false;
     loginButton.addEventListener('click', async () => {
       email = document.getElementById('email').value;
-      loginPage.style.display = 'none';
-      mainPage.style.display = 'block';
-    });
+      const password = document.getElementById('password').value;
+
+      // Send a request to the server to check if the user is an admin
+      const data = {
+                'email': email,
+                'password': password
+            };
+
+      const apiUrl = "/baselogin";
+
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      globalResponse = await response.json();
+
+      if (globalResponse.result.output) {
+        loginPage.style.display = 'none';
+        mainPage.style.display = 'block';
+      } else {
+        alert('Invalid email or password. Please try again.');
+      }
+});
 
     goToSearchPage.addEventListener('click', async () => {
       email = document.getElementById('email').value;
