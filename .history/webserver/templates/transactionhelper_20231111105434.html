@@ -143,14 +143,6 @@
       searchAgainButton.click();
     });
 
-    cardNumberDropdown.addEventListener('change', function () {
-      // Get the selected option
-      cardNumber = cardNumberDropdown.options[cardNumberDropdown.selectedIndex].value;
-      // Log the selected option value and text
-      console.log('Selected Option:', cardNumber);
-      searchAgainButton.click();
-    });
-
     searchButton.addEventListener('click', async () => {
       email = document.getElementById('search-email').value;
 

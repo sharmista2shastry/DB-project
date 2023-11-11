@@ -85,7 +85,7 @@
     let email = '';
     let merchants = '';
     let merchantSelected = '';
-    let cardNumber = '';
+    let car
 
     let data = {
       'email': email,
@@ -140,14 +140,6 @@
       merchantSelected = merchantDropdown.options[merchantDropdown.selectedIndex].value;
       // Log the selected option value and text
       console.log('Selected Option:', merchantSelected);
-      searchAgainButton.click();
-    });
-
-    cardNumberDropdown.addEventListener('change', function () {
-      // Get the selected option
-      cardNumber = cardNumberDropdown.options[cardNumberDropdown.selectedIndex].value;
-      // Log the selected option value and text
-      console.log('Selected Option:', cardNumber);
       searchAgainButton.click();
     });
 
