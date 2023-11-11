@@ -132,7 +132,6 @@
       merchantSelected = dropdown.options[dropdown.selectedIndex];
       // Log the selected option value and text
       console.log('Selected Option:', merchantSelected);
-      searchButton.click();
     });
 
     searchButton.addEventListener('click', async () => {
@@ -173,7 +172,7 @@
       transactionsPage.style.display = 'block';
 
       apiUrl = "/gettransactions";
-
+      
       try {
         const response = await fetch(apiUrl, {
           method: 'POST',

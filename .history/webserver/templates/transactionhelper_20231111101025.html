@@ -83,35 +83,9 @@
     let merchantSelected = '';
 
     let data = {
-      'email': email,
-      'merchantSelected': merchantSelected
+        'email': email,
+        'merchantSelected': merchantSelected
     };
-
-    let globalResponse;
-
-    try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-      });
-      if (response.ok) {
-        globalResponse = await response.json(); // Store the response in the global variable
-      } else {
-        console.error('API call failed with status:', response.status);
-      }
-    } catch (error) {
-      console.error('API call failed:', error);
-    }
-    console.log(globalResponse.result);
-    globalResponse.result.merchant_list.forEach(item => {
-      const option = document.createElement('option');
-      option.value = item;
-      option.textContent = item;
-      dropdown.appendChild(option);
-    });
 
     let apiUrl = "/getmerchants";
 
@@ -127,12 +101,11 @@
       searchPage.style.display = 'block';
     });
 
-    dropdown.addEventListener('change', function () {
-      // Get the selected option
-      merchantSelected = dropdown.options[dropdown.selectedIndex];
-      // Log the selected option value and text
-      console.log('Selected Option:', merchantSelected);
-      searchButton.click();
+    dropdown.addEventListener('change', function() {
+          // Get the selected option
+          merchantSelected = dropdown.options[dropdown.selectedIndex];
+          // Log the selected option value and text
+          console.log('Selected Option:', merchantSelected);
     });
 
     searchButton.addEventListener('click', async () => {
@@ -141,10 +114,10 @@
       data = {
         'email': email,
         'merchantSelected': merchantSelected
-      };
+    };
 
       // apiUrl = "/cardNumberList";
-
+      
       // try {
       //   const response = await fetch(apiUrl, {
       //     method: 'POST',
@@ -173,7 +146,6 @@
       transactionsPage.style.display = 'block';
 
       apiUrl = "/gettransactions";
-
       try {
         const response = await fetch(apiUrl, {
           method: 'POST',
