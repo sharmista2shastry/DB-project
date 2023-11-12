@@ -206,9 +206,6 @@ body {
 
   #header-img{
     background: black;
+    align-items: center;
     text-align: center;
-  }
-
-  #img-id{
-    width: 20%;
   }

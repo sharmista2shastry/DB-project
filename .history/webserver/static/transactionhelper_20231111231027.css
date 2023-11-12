@@ -205,10 +205,7 @@ body {
   }  
 
   #header-img{
-    background: black;
+    ackground: black;
+    align-items: center;
     text-align: center;
-  }
-
-  #img-id{
-    width: 20%;
   }
