@@ -173,8 +173,8 @@ body {
     margin-right: 2%;
   }
 
-  #cardholder-name{
-    margin-bottom: 1%;
+  #card-number-dropdown{
+    margin-right: 2%;
   }
   
   /* Style the transactions table */
