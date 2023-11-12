@@ -249,9 +249,12 @@
       }
       document.getElementById('cardholder-name').innerHTML = 'Cardholder Name :' + globalResponse.result.name;
       globalResponse.result.card_list.forEach(item => {
+        console.log(item);
+        console.log(item.card_number);
         const row = document.createElement('tr');
         const cardNumberCell = document.createElement('td');
         cardNumberCell.textContent = item.card_number;
+        console.log(cardNumberCell.textContent);
         const availableFundsCell = document.createElement('td');
         availableFundsCell.textContent = item.available_funds;
         
@@ -407,7 +410,7 @@
         const cardNumberCell = document.createElement('td');
         cardNumberCell.textContent = item.card_number;
         const availableFundsCell = document.createElement('td');
-        availableFundsCell.textContent = item.available_funds;
+        cardNumberCell.textContent = item.available_funds;
         
         row.appendChild(cardNumberCell);
         row.appendChild(availableFundsCell);
