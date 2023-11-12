@@ -391,6 +391,10 @@
       }
       let apiUrl = "/getCardholderDetails";
 
+      data = {
+        'email': email,
+        'merchantSelected': merchantSelected
+      };
       let globalResponse;
 
       try {
