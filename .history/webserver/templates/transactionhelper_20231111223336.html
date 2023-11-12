@@ -64,30 +64,29 @@
           </tr>
         </thead>
         <tbody id="tbody">
-
+  
         </tbody>
       </table>
     </div>
     <div>
-      <table border="1">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Card Number</th>
-            <th>Amount</th>
-            <th>Merchant</th>
-            <th>Authentication Type</th>
-            <th>Currency</th>
-            <th>Transaction Status</th>
-            <th>Fraud</th>
-            <th>Decline Reason</th>
-          </tr>
-        </thead>
-        <tbody id="tbody2">
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Card Number</th>
+          <th>Amount</th>
+          <th>Merchant</th>
+          <th>Authentication Type</th>
+          <th>Currency</th>
+          <th>Transaction Status</th>
+          <th>Fraud</th>
+          <th>Decline Reason</th>
+        </tr>
+      </thead>
+      <tbody id="tbody2">
 
-        </tbody>
-      </table>
-    </div>
+      </tbody>
+    </table>
     <div id="search-again-2">
       Search by another email:
       <input type="search-email" id="search-again-email-2" name="search-email" required><br>
@@ -129,9 +128,9 @@
 
       // Send a request to the server to check if the user is an admin
       const data = {
-        'email': email,
-        'password': password
-      };
+                'email': email,
+                'password': password
+            };
 
       const apiUrl = "/baselogin";
 
@@ -151,7 +150,7 @@
       } else {
         alert('Invalid email or password. Please try again.');
       }
-    });
+});
 
     goToSearchPage.addEventListener('click', async () => {
       email = document.getElementById('email').value;
@@ -256,7 +255,7 @@
         cardNumberCell.textContent = item.card_number;
         const availableFundsCell = document.createElement('td');
         availableFundsCell.textContent = item.available_funds;
-
+        
         row.appendChild(cardNumberCell);
         row.appendChild(availableFundsCell);
 
@@ -339,7 +338,7 @@
         const currencyCell = document.createElement('td');
         currencyCell.textContent = item.transaction_currency;
         const transactionStatus = document.createElement('td');
-        if (item.transaction_status === true)
+        if(item.transaction_status===true)
           transactionStatus.textContent = 'Approved';
         else
           transactionStatus.textContent = 'Not Approved ';
@@ -410,7 +409,7 @@
         cardNumberCell.textContent = item.card_number;
         const availableFundsCell = document.createElement('td');
         availableFundsCell.textContent = item.available_funds;
-
+        
         row.appendChild(cardNumberCell);
         row.appendChild(availableFundsCell);
 
@@ -453,7 +452,7 @@
         const currencyCell = document.createElement('td');
         currencyCell.textContent = item.transaction_currency;
         const transactionStatus = document.createElement('td');
-        if (item.transaction_status === true)
+        if(item.transaction_status===true)
           transactionStatus.textContent = 'Approved';
         else
           transactionStatus.textContent = 'Not Approved ';
