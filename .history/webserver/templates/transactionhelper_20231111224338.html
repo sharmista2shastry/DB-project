@@ -302,7 +302,6 @@
 
       searchPage.style.display = 'none';
       transactionsPage.style.display = 'block';
-      table2.style.display = 'block';
 
       apiUrl = "/gettransactions";
 
@@ -376,7 +375,6 @@
         'transactionStatus': transactionStatusSelected
       };
       transactionsPage.style.display = 'none';
-      table2.style.display = 'none';
       if (tbody) {
         // Remove all child nodes (contents) of the tbody
         while (tbody.firstChild) {
@@ -479,7 +477,6 @@
         tbody2.appendChild(row);
       });
       transactionsPage.style.display = 'block';
-      table2.style.display = 'block';
     });
 
   </script>

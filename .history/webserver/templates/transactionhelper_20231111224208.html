@@ -108,7 +108,7 @@
     const merchantDropdown = document.getElementById('merchant-dropdown');
     const cardNumberDropdown = document.getElementById('card-number-dropdown');
     const transactionStatusDropdown = document.getElementById('transaction-status-dropdown');
-    const table2 = document.getElementById('transactions-actual');
+    onst table = document.getElementById('transactions-table');
 
     let email = '';
     let merchants = '';
@@ -212,7 +212,6 @@
     searchButton.addEventListener('click', async () => {
       email = document.getElementById('search-email').value;
       transactionsPage.style.display = 'none';
-      table2.style.display = 'none';
 
       if (tbody) {
         // Remove all child nodes (contents) of the tbody
@@ -302,7 +301,6 @@
 
       searchPage.style.display = 'none';
       transactionsPage.style.display = 'block';
-      table2.style.display = 'block';
 
       apiUrl = "/gettransactions";
 
@@ -376,7 +374,6 @@
         'transactionStatus': transactionStatusSelected
       };
       transactionsPage.style.display = 'none';
-      table2.style.display = 'none';
       if (tbody) {
         // Remove all child nodes (contents) of the tbody
         while (tbody.firstChild) {
@@ -479,7 +476,6 @@
         tbody2.appendChild(row);
       });
       transactionsPage.style.display = 'block';
-      table2.style.display = 'block';
     });
 
   </script>
