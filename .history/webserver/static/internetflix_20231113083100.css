@@ -174,7 +174,6 @@ html, body {
   }
   
   #pay-by-card, #save-and-pay-button {
-    margin-top: 1%;
     background-color: red;
     color: #fff;
     padding: 10px 20px;

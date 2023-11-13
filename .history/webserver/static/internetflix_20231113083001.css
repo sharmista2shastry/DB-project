@@ -137,7 +137,6 @@ html, body {
   #card-pay, #save-and-pay {
     display: none;
     margin-left: 1.5%;
-    margin-top: 2%;
   }
   
   #card-email, #save-and-pay-email {
@@ -174,7 +173,6 @@ html, body {
   }
   
   #pay-by-card, #save-and-pay-button {
-    margin-top: 1%;
     background-color: red;
     color: #fff;
     padding: 10px 20px;
