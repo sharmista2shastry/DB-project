@@ -31,7 +31,7 @@ html, body {
   }
   
   #login-button {
-    background-color: red;
+    background-color: black;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -41,7 +41,7 @@ html, body {
   }
 
   #sign-up-button{
-    background-color: red;
+    background-color: black;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -73,7 +73,7 @@ html, body {
   }
   
   #submit {
-    background-color: red;
+    background-color: black;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -118,7 +118,7 @@ html, body {
   }
   
   #process-payment-button {
-    background-color: red;
+    background-color: black;
     color: #fff;
     padding: 10px 20px;
     border: none;
