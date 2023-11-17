@@ -379,6 +379,16 @@
       });
     });
 
+    document.getElementById('analytics-button').addEventListener('click', async () => {
+    // Fetch chart data
+    const response = await fetch('/chart-data?type=fraud_percentage');  // You can change the type as needed
+    const chartData = await response.json();
+
+    // Redirect to charttest.html with chart data as a query parameter
+    const queryString = `type=${encodeURIComponent("fraud_percentage")}&data=${encodeURIComponent(JSON.stringify(chartData))}`;
+    window.location.href = `/chart?${queryString}`;
+  });
+
     searchAgainButton.addEventListener('click', async () => {
       if (document.getElementById('search-again-email').value != "")
         email = document.getElementById('search-again-email').value;

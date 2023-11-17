@@ -620,7 +620,10 @@ def chart_data():
 
 @app.route('/chart', methods=['GET'])
 def chart():
-   return render_template("charttest.html")
+    chart_type = request.args.get('type', 'fraud_percentage')
+    chart_data = request.args.get('data', '{"fraud_percentage": []}')  # Default to an empty array if no data is provided
+    return render_template("charttest.html", chart_type=chart_type, chart_data=chart_data)
+
 
 if __name__ == "__main__":
   import click

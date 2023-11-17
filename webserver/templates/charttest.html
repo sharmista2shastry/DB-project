@@ -28,48 +28,67 @@
     </div>
 
     <script>
-        function fetchAndRender() {
-            const chartType = document.getElementById("chartType").value;
-            fetch(`/chart-data?type=${chartType}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    renderChart(data[chartType], chartType);
-                    hideDropdownAndButton();
-                })
-                .catch((error) => console.error("Error fetching data: ", error));
-        }
+        let chart;  // Reference to the chart
+let chartData = {
+    "fraud_percentage": [],
+    "success_percentage": [],
+    "average_transactions": []
+};
 
-        function hideDropdownAndButton() {
-            document.getElementById("chartTypeGroup").style.display = "none";
-            document.getElementById("fetchData").style.display = "none";
-        }
+document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const chartType = params.get('type') || 'fraud_percentage';
+    const initialChartData = JSON.parse(params.get('data') || '{"fraud_percentage": []}');
+    chartData[chartType] = initialChartData; // Store initial data
 
-        function renderChart(chartData, chartType) {
-            const merchantNames = chartData.map((item) => item.name);
-    
-            const ctx = document.getElementById('myChart').getContext('2d');
-    
-            const chart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: merchantNames,
-                    datasets: [
-                        {
-                            label: 'Chart Data',
-                            data: chartData.map((item) => chartType === 'average_transactions' ? item.average : item.percentage),
-                            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                        },
-                    ],
+    // Render the chart with the fetched data
+    renderChart(chartData[chartType], chartType);
+});
+
+function fetchAndRender() {
+    const selectedType = document.getElementById('chartType').value;
+    fetch(`/chart-data?type=${selectedType}`)
+        .then(response => response.json())
+        .then(data => {
+            chartData[selectedType] = data[selectedType]; // Store fetched data
+            renderChart(chartData[selectedType], selectedType);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+}
+
+function renderChart(chartData, chartType) {
+    if (chart) {
+        // If the chart already exists, destroy it before rendering a new one
+        chart.destroy();
+    }
+
+    const merchantNames = chartData.map((item) => item.name);
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: merchantNames,
+            datasets: [
+                {
+                    label: 'Chart Data',
+                    data: chartData.map((item) => chartType === 'average_transactions' ? item.average : item.percentage),
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
                 },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                        },
-                    },
+            ],
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
                 },
-            });
-        }
+            },
+        },
+    });
+}
     </script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
