@@ -38,7 +38,6 @@
   </div>
 
   <div id="transactions-table" style="display: none;">
-    <button type="button" id="analytics-button">Client Analytics</button>
     <div id="search-again">
       Search by another email:
       <input type="search-email" id="search-again-email" name="search-email" required><br>
@@ -62,43 +61,43 @@
       <h3 id="cardholder-name">
     </div>
     <h2>Cardholder's Cards</h3>
-      <table border="1">
-        <thead>
-          <tr>
-            <th>Card Number</th>
-            <th>Available Funds</th>
-          </tr>
-        </thead>
-        <tbody id="tbody">
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Card Number</th>
+          <th>Available Funds</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
 
-        </tbody>
-      </table>
+      </tbody>
+    </table>
   </div>
   <div id="transactions-actual" style="display: none;">
     <h2 style="margin-left: 1%;">Transactions</h3>
-      <table border="1">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Card Number</th>
-            <th>Amount</th>
-            <th>Merchant</th>
-            <th>Authentication Type</th>
-            <th>Currency</th>
-            <th>Transaction Status</th>
-            <th>Fraud</th>
-            <th>Decline Reason</th>
-          </tr>
-        </thead>
-        <tbody id="tbody2">
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Card Number</th>
+          <th>Amount</th>
+          <th>Merchant</th>
+          <th>Authentication Type</th>
+          <th>Currency</th>
+          <th>Transaction Status</th>
+          <th>Fraud</th>
+          <th>Decline Reason</th>
+        </tr>
+      </thead>
+      <tbody id="tbody2">
 
-        </tbody>
-      </table>
-      <div id="search-again-2">
-        Search by another email:
-        <input type="search-email" id="search-again-email-2" name="search-email" required><br>
-        <button type="button" id="search-again-button-2">Search Transactions</button>
-      </div>
+      </tbody>
+    </table>
+    <div id="search-again-2">
+      Search by another email:
+      <input type="search-email" id="search-again-email-2" name="search-email" required><br>
+      <button type="button" id="search-again-button-2">Search Transactions</button>
+    </div>
   </div>
   <script>
     const loginButton = document.getElementById('login-button');
@@ -381,14 +380,14 @@
     });
 
     document.getElementById('analytics-button').addEventListener('click', async () => {
-      // Fetch chart data
-      const response = await fetch('/chart-data?type=fraud_percentage');  // You can change the type as needed
-      const chartData = await response.json();
+    // Fetch chart data
+    const response = await fetch('/chart-data?type=fraud_percentage');  // You can change the type as needed
+    const chartData = await response.json();
 
-      // Redirect to charttest.html with chart data as a query parameter
-      const queryString = `type=${encodeURIComponent("fraud_percentage")}&data=${encodeURIComponent(JSON.stringify(chartData))}`;
-      window.location.href = `/chart?${queryString}`;
-    });
+    // Redirect to charttest.html with chart data as a query parameter
+    const queryString = `type=${encodeURIComponent("fraud_percentage")}&data=${encodeURIComponent(JSON.stringify(chartData))}`;
+    window.location.href = `/chart?${queryString}`;
+  });
 
     searchAgainButton.addEventListener('click', async () => {
       if (document.getElementById('search-again-email').value != "")
@@ -440,7 +439,7 @@
       } catch (error) {
         console.error('API call failed:', error);
       }
-      document.getElementById('cardholder-name').innerHTML = 'Cardholder Name: ' + globalResponse.result.name;
+      document.getElementById('cardholder-name').innerHTML = 'Cardholder Name:' + globalResponse.result.name;
       globalResponse.result.card_list.forEach(item => {
         const row = document.createElement('tr');
         const cardNumberCell = document.createElement('td');
