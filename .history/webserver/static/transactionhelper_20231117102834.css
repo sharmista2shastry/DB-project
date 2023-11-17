@@ -70,7 +70,7 @@ body {
     background-color: red;
   }
 
-  #analytics-button-back {
+  #analytics-button {
     padding: 10px 20px;
     margin: 10px;
     background-color: black;
@@ -80,7 +80,7 @@ body {
     cursor: pointer;
   }
   
-  #analytics-button-back:hover {
+  #go-search-button:hover, #analytics-button:hover {
     background-color: red;
   }
   

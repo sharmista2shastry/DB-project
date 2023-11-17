@@ -38,7 +38,7 @@
   </div>
 
   <div id="transactions-table" style="display: none;">
-    <button type="button" id="analytics-button-back">Go to Client Analytics</button>
+    <button type="button" id="analytics-button">Go to Client Analytics</button>
     <div id="search-again">
       Search by another email:
       <input type="search-email" id="search-again-email" name="search-email" required><br>
@@ -116,7 +116,6 @@
     const cardNumberDropdown = document.getElementById('card-number-dropdown');
     const transactionStatusDropdown = document.getElementById('transaction-status-dropdown');
     const table2 = document.getElementById('transactions-actual');
-    const analyticsBack = document.getElementById('analytics-button-back');
 
     let email = '';
     let merchants = '';
@@ -389,10 +388,6 @@
       // Redirect to charttest.html with chart data as a query parameter
       const queryString = `type=${encodeURIComponent("fraud_percentage")}&data=${encodeURIComponent(JSON.stringify(chartData))}`;
       window.location.href = `/chart?${queryString}`;
-    });
-
-    document.getElementById('analytics-button-back').addEventListener('click', async () => {
-      document.getElementById('analytics-button').click();
     });
 
     searchAgainButton.addEventListener('click', async () => {

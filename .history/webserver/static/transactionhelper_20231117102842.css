@@ -80,7 +80,7 @@ body {
     cursor: pointer;
   }
   
-  #analytics-button-back:hover {
+  #analytics-button:hover {
     background-color: red;
   }
   

@@ -391,10 +391,6 @@
       window.location.href = `/chart?${queryString}`;
     });
 
-    document.getElementById('analytics-button-back').addEventListener('click', async () => {
-      document.getElementById('analytics-button').click();
-    });
-
     searchAgainButton.addEventListener('click', async () => {
       if (document.getElementById('search-again-email').value != "")
         email = document.getElementById('search-again-email').value;
