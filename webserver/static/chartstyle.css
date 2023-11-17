@@ -6,14 +6,27 @@ body {
     text-align: center;
 }
 
+#goToTransactionHelper {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #050505;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+        }
+
 .card {
-    max-width: 400px;
-    margin: 0 auto;
-    border-radius: 4px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
-    background-color: #111; 
-    color: #fff;
-}
+        max-width: 90%; /* Increase this value to adjust the width of the card */
+        margin: 0 auto;
+        border-radius: 4px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+        background-color: #111; 
+        color: #fff;
+    }
 
 .card-title {
     color: #fff;
@@ -21,7 +34,7 @@ body {
 
 .form-group,
 .btn {
-    margin-top: 10px;
+    margin-top: -10px;
 }
 
 .form-control {
@@ -32,26 +45,19 @@ body {
 .btn.btn-success {
     background-color: #050505 !important;
     border-color: #333 !important;
+    transition: background-color, border-color;
 }
 
 .btn.btn-success:hover {
-    background-color: #0a0a0a !important;
-    border-color: #1a1a1a !important;
+    background-color: red !important; 
+    border-color: red !important; 
 }
 
-#header-img {
-    width: 100%;
-    height: 50px;
-    background-color: #333; 
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 9999;
-}
+#header-img{
+    background: black;
+    text-align: center;
+  }
 
-#img-id {
-    display: block;
-    margin: 0 auto;
-    max-width: 100%;
-    height: auto;
-}
+  #img-id{
+    width: 20%;
+  }
