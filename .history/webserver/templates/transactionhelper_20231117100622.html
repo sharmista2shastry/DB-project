@@ -275,8 +275,8 @@
         tbody.appendChild(row);
       });
 
-      while (cardNumberDropdown.options.length > 0) {
-        cardNumberDropdown.remove(0);
+      while (dropdown.options.length > 0) {
+        dropdown.remove(0);
       }
 
       apiUrl = "/getcards";
@@ -406,10 +406,6 @@
         }
       }
       let apiUrl = "/getCardholderDetails";
-
-      while (cardNumberDropdown.options.length > 0) {
-        cardNumberDropdown.remove(0);
-      }
 
       let globalResponse;
 
