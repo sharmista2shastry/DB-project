@@ -25,6 +25,8 @@
                         <option value="fraud_percentage">Fraud Percentage</option>
                         <option value="success_percentage">Success Percentage</option>
                         <option value="average_transactions">Average Transactions</option>
+                        <option value="peak_transaction_times">Peak Transaction Times</option>
+                        <option value="cross_border_transactions">Cross Border Transactions</option>
                     </select>
                 </div>
                 <button id="fetchData" class="btn btn-success btn-block" onclick="fetchAndRender()">Fetch Data</button>
@@ -38,7 +40,8 @@
 let chartData = {
     "fraud_percentage": [],
     "success_percentage": [],
-    "average_transactions": []
+    "average_transactions": [],
+    "peak_transaction_times": []
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -70,13 +73,60 @@ function fetchAndRender() {
 
 function renderChart(chartData, chartType) {
     if (chart) {
-        // If the chart already exists, destroy it before rendering a new one
         chart.destroy();
     }
 
-    const merchantNames = chartData.map((item) => item.name);
-
     const ctx = document.getElementById('myChart').getContext('2d');
+
+    if (chartType === 'peak_transaction_times') {
+            const uniqueHours = chartData.map(item => item.hour);
+            const transactionCounts = chartData.map(item => item.transaction_count);
+
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: uniqueHours,
+                    datasets: [{
+                        label: 'Transaction Count',
+                        data: transactionCounts,
+                        backgroundColor: 'rgba(169, 169, 169, 0.5)',
+                    }],
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                        },
+                    },
+                },
+            });
+    } else if (chartType === 'cross_border_transactions') {
+    const merchantNames = chartData.map((item) => item.merchant_name);
+    const crossBorderCounts = chartData.map((item) => item.cross_border_count);
+
+    chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: merchantNames,
+            datasets: [
+                {
+                    label: 'Cross-Border Transactions',
+                    data: crossBorderCounts,
+                    backgroundColor: 'rgba(169, 169, 169, 0.5)',
+                },
+            ],
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
+            },
+        },
+    });
+} else {
+    // Existing logic for other chart types remains unchanged
+    const merchantNames = chartData.map((item) => item.name);
 
     chart = new Chart(ctx, {
         type: 'bar',
@@ -98,6 +148,8 @@ function renderChart(chartData, chartType) {
             },
         },
     });
+}
+
 }
     </script>
 

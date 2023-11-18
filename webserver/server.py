@@ -600,20 +600,47 @@ def chart_data():
     GROUP BY M.MERCHANT_NAME;
     """)
 
+    peak_transaction_times_query = text("""
+    SELECT
+    EXTRACT(HOUR FROM TRANSACTION_TIMESTAMP) AS transaction_hour,
+    COUNT(*) AS transaction_count
+    FROM
+        TRANSACTIONS
+    GROUP BY
+        transaction_hour
+    ORDER BY
+        transaction_count DESC;
+    """)
+
+    cross_border_transactions_query = text("""
+    SELECT M.MERCHANT_NAME, COUNT(*) AS cross_border_count
+    FROM TRANSACTIONS T
+    JOIN MERCHANTS M ON T.MERCHANT_ID = M.MERCHANT_ID
+    JOIN CARDS C ON T.CARD_NUMBER = C.CARD_NUMBER 
+    JOIN ISSUERS I ON C.ISSUER_ID = I.ISSUER_ID 
+    WHERE M.COUNTRY_ID <> I.COUNTRY_ID
+    GROUP BY M.MERCHANT_NAME;
+    """)
+
     # Execute the SQL queries
     fraud_data = g.conn.execute(fraud_query).fetchall()
     success_data = g.conn.execute(success_query).fetchall()
     avg_transactions_data = g.conn.execute(avg_transactions_query).fetchall()
+    peak_transaction_times_data = g.conn.execute(peak_transaction_times_query).fetchall()
+    cross_border_transactions_data = g.conn.execute(cross_border_transactions_query).fetchall()
 
     # Close the database connection
     g.conn.close()
 
     # Organize the data
     chart_data = {
-        "fraud_percentage": [{'name': row[0], 'percentage': row[1]} for row in fraud_data],
-        "success_percentage": [{'name': row[0], 'percentage': row[1]} for row in success_data],
-        "average_transactions": [{'name': row[0], 'average': row[1]} for row in avg_transactions_data]
+    "fraud_percentage": [{'name': row[0], 'percentage': row[1]} for row in fraud_data],
+    "success_percentage": [{'name': row[0], 'percentage': row[1]} for row in success_data],
+    "average_transactions": [{'name': row[0], 'average': row[1]} for row in avg_transactions_data],
+    "peak_transaction_times": [{'hour': row[0], 'transaction_count': row[1]} for row in peak_transaction_times_data],
+    "cross_border_transactions": [{'merchant_name': row[0], 'cross_border_count': row[1]} for row in cross_border_transactions_data]
     }
+
 
     return jsonify(chart_data)
 
