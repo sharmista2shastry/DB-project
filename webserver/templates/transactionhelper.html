@@ -190,6 +190,15 @@
       }
     });
 
+    analyticsBack.addEventListener('click', async () => {
+      document.getElementById('transactions-table').style.display = 'none';
+      document.getElementById('find-form').style.display = 'none';
+      document.getElementById('transactions-actual').style.display = 'none';
+      document.getElementById('search-again-2').style.display = 'none';
+
+      document.getElementById('analytics-form').style.display = 'block';
+    });
+
     goToSearchPage.addEventListener('click', async () => {
       email = document.getElementById('email').value;
       mainPage.style.display = 'none';
@@ -577,9 +586,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
     const chartType = params.get('type') || 'fraud_percentage';
     const initialChartData = JSON.parse(params.get('data') || '{"fraud_percentage": []}');
-    chartData[chartType] = initialChartData; // Store initial data
+    chartData[chartType] = initialChartData; 
 
-    // Render the chart with the fetched data
     renderChart(chartData[chartType], chartType);
 });
 
@@ -601,7 +609,7 @@ function fetchAndRender() {
     fetch(`/chart-data?type=${selectedType}`)
         .then(response => response.json())
         .then(data => {
-            chartData[selectedType] = data[selectedType]; // Store fetched data
+            chartData[selectedType] = data[selectedType]; 
             renderChart(chartData[selectedType], selectedType);
         })
         .catch(error => {
@@ -663,7 +671,6 @@ function renderChart(chartData, chartType) {
         },
     });
 } else {
-    // Existing logic for other chart types remains unchanged
     const merchantNames = chartData.map((item) => item.name);
 
     chart = new Chart(ctx, {
