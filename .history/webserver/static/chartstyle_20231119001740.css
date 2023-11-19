@@ -19,10 +19,6 @@
             transition: background-color 0.3s, border-color 0.3s, color 0.3s;
         }
 
-        #goToTransactionHelper:hover {
-            background-color: red;
-          }
-
 .card {
         max-width: 90%; /* Increase this value to adjust the width of the card */
         margin: 0 auto;
@@ -42,7 +38,7 @@
 }
 
 #chartType {
-    /* background-color: #222;  */
+    background-color: #222; 
     color: #fff;
 }
 

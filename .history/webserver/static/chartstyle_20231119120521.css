@@ -19,7 +19,7 @@
             transition: background-color 0.3s, border-color 0.3s, color 0.3s;
         }
 
-        #goToTransactionHelper:hover {
+        #go-search-button:hover, #analytics-button:hover {
             background-color: red;
           }
 
@@ -42,7 +42,7 @@
 }
 
 #chartType {
-    /* background-color: #222;  */
+    background-color: #222; 
     color: #fff;
 }
 
