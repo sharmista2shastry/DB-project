@@ -421,7 +421,7 @@
         'cardNumber': cardNumber,
         'transactionStatus': transactionStatusSelected
       };
-      // cardNumber = '';
+      cardNumber = '';
       transactionsPage.style.display = 'none';
       table2.style.display = 'none';
       if (tbody) {
@@ -439,9 +439,9 @@
       }
       let apiUrl = "/getCardholderDetails";
 
-      // while (cardNumberDropdown.options.length > 0) {
-      //   cardNumberDropdown.remove(0);
-      // }
+      while (cardNumberDropdown.options.length > 0) {
+        cardNumberDropdown.remove(0);
+      }
 
       let globalResponse;
 
