@@ -405,7 +405,6 @@
                         console.error('API call failed:', error);
                     }
                     if (globalResponse.result.isSuccess) {
-                        saveAndPaySection.style.display = 'none';
                         paymentOptions.style.display = 'none';
                         paymentSection.style.display = 'none';
                         paymentConfirmationPage.style.display = 'block';
@@ -460,7 +459,6 @@
                         console.error('API call failed:', error);
                     }
                     if (globalResponse.result.isSuccess) {
-                        payByCardSection.style.display = 'none';
                         paymentOptions.style.display = 'none';
                         paymentSection.style.display = 'none';
                         paymentConfirmationPage.style.display = 'block';
