@@ -260,8 +260,6 @@
 
     searchButton.addEventListener('click', async () => {
       email = document.getElementById('search-email').value;
-      document.getElementById('search-again-email').value = email;
-      document.getElementById('search-again-email-2').value = email;
       transactionsPage.style.display = 'none';
       table2.style.display = 'none';
 
@@ -623,7 +621,7 @@
           cardNumberDropdown.remove(0);
         }
 
-        merchantDropdown.selectedIndex = -1;
+        merc
 
       document.getElementById('analytics-form').style.display = 'none';
       document.getElementById('transactions-table').style.display = 'none';
