@@ -194,7 +194,7 @@
         'merchantSelected': merchantSelected
       };
 
-      apiUrl = "/getmerchants";
+      let apiUrl = "/getmerchants";
 
       try {
         const response = await fetch(apiUrl, {
@@ -223,12 +223,12 @@
         merchantDropdown.appendChild(option);
       });
     });
+    });
 
     goToSearchPage.addEventListener('click', async () => {
       email = document.getElementById('email').value;
       mainPage.style.display = 'none';
       searchPage.style.display = 'block';
-    });
 
     merchantDropdown.addEventListener('change', function () {
       // Get the selected option

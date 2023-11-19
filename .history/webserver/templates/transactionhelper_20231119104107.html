@@ -188,47 +188,12 @@
       } else {
         alert('Invalid email or password. Please try again.');
       }
-
-      data = {
-        'email': email,
-        'merchantSelected': merchantSelected
-      };
-
-      apiUrl = "/getmerchants";
-
-      try {
-        const response = await fetch(apiUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        });
-        if (response.ok) {
-          globalResponse = await response.json(); // Store the response in the global variable
-        } else {
-          console.error('API call failed with status:', response.status);
-        }
-      } catch (error) {
-        console.error('API call failed:', error);
-      }
-      const option = document.createElement('option');
-      option.value = 'All Merchants';
-      option.textContent = 'All Merchants';
-      merchantDropdown.appendChild(option);
-      globalResponse.result.merchant_list.forEach(item => {
-        const option = document.createElement('option');
-        option.value = item;
-        option.textContent = item;
-        merchantDropdown.appendChild(option);
-      });
     });
 
     goToSearchPage.addEventListener('click', async () => {
       email = document.getElementById('email').value;
       mainPage.style.display = 'none';
       searchPage.style.display = 'block';
-    });
 
     merchantDropdown.addEventListener('change', function () {
       // Get the selected option
