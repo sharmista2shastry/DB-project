@@ -163,7 +163,11 @@ body {
    }
 
    #search-again-2:hover, #search-again:hover{
-    background-color: red;
+    display: flex;
+    margin-left: 33%;
+    text-align: center;
+    align-items: center;
+    margin-top: 1.5%;
   }
 
  

@@ -162,8 +162,12 @@ body {
     margin-left: 1.5%;
    }
 
-   #search-again-2:hover, #search-again:hover{
-    background-color: red;
+   #search-again-2: hover, {
+    display: flex;
+    margin-left: 33%;
+    text-align: center;
+    align-items: center;
+    margin-top: 1.5%;
   }
 
  

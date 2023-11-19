@@ -519,11 +519,11 @@
         });
 
         data = {
-          'email': email,
-          'merchantSelected': merchantSelected,
-          'cardNumber': '',
-          'transactionStatus': transactionStatusSelected
-        };
+        'email': email,
+        'merchantSelected': merchantSelected,
+        'cardNumber': '',
+        'transactionStatus': transactionStatusSelected
+      };
       }
 
       apiUrl = "/gettransactions";
@@ -596,14 +596,14 @@
       "peak_transaction_times": []
     };
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const params = new URLSearchParams(window.location.search);
-      const chartType = params.get('type') || 'fraud_percentage';
-      const initialChartData = JSON.parse(params.get('data') || '{"fraud_percentage": []}');
-      chartData[chartType] = initialChartData;
+document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const chartType = params.get('type') || 'fraud_percentage';
+    const initialChartData = JSON.parse(params.get('data') || '{"fraud_percentage": []}');
+    chartData[chartType] = initialChartData; 
 
-      renderChart(chartData[chartType], chartType);
-    });
+    renderChart(chartData[chartType], chartType);
+});
 
     analyticsButton.addEventListener('click', () => {
       mainPage.style.display = 'none';
@@ -611,11 +611,11 @@
     });
 
     document.getElementById('goToTransactionHelper').addEventListener('click', function () {
-      email = '';
-      merchantSelected = '';
-      cardNumber = '';
-      transactionStatusSelected = '';
-      prevEmail = '';
+    email = '';
+    merchantSelected = '';
+    let cardNumber = '';
+    let transactionStatusSelected = '';
+    let prevEmail = '';
       document.getElementById('analytics-form').style.display = 'none';
       document.getElementById('transactions-table').style.display = 'none';
 
@@ -627,8 +627,8 @@
       fetch(`/chart-data?type=${selectedType}`)
         .then(response => response.json())
         .then(data => {
-          chartData[selectedType] = data[selectedType];
-          renderChart(chartData[selectedType], selectedType);
+            chartData[selectedType] = data[selectedType]; 
+            renderChart(chartData[selectedType], selectedType);
         })
         .catch(error => {
           console.error('Error fetching data:', error);
