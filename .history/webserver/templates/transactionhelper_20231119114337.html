@@ -189,24 +189,6 @@
       } else {
         alert('Invalid email or password. Please try again.');
       }
-<<<<<<< HEAD
-    });
-
-    analyticsBack.addEventListener('click', async () => {
-      document.getElementById('transactions-table').style.display = 'none';
-      document.getElementById('find-form').style.display = 'none';
-      document.getElementById('transactions-actual').style.display = 'none';
-      document.getElementById('search-again-2').style.display = 'none';
-
-      document.getElementById('analytics-form').style.display = 'block';
-    });
-
-    goToSearchPage.addEventListener('click', async () => {
-      email = document.getElementById('email').value;
-      mainPage.style.display = 'none';
-      searchPage.style.display = 'block';
-=======
->>>>>>> fdd80647b9b306a78375059057a8b8bbd477bcff
 
       data = {
         'email': email,
@@ -464,7 +446,6 @@
         while (cardNumberDropdown.options.length > 0) {
           cardNumberDropdown.remove(0);
         }
-
         prevEmail = email;
 
         let apiUrl = "/getCardholderDetails";
@@ -529,13 +510,6 @@
           option.textContent = item;
           cardNumberDropdown.appendChild(option);
         });
-
-        data = {
-        'email': email,
-        'merchantSelected': merchantSelected,
-        'cardNumber': '',
-        'transactionStatus': transactionStatusSelected
-      };
       }
 
       apiUrl = "/gettransactions";
@@ -608,16 +582,6 @@
       "peak_transaction_times": []
     };
 
-<<<<<<< HEAD
-document.addEventListener('DOMContentLoaded', () => {
-    const params = new URLSearchParams(window.location.search);
-    const chartType = params.get('type') || 'fraud_percentage';
-    const initialChartData = JSON.parse(params.get('data') || '{"fraud_percentage": []}');
-    chartData[chartType] = initialChartData; 
-
-    renderChart(chartData[chartType], chartType);
-});
-=======
     document.addEventListener('DOMContentLoaded', () => {
       const params = new URLSearchParams(window.location.search);
       const chartType = params.get('type') || 'fraud_percentage';
@@ -627,7 +591,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // Render the chart with the fetched data
       renderChart(chartData[chartType], chartType);
     });
->>>>>>> fdd80647b9b306a78375059057a8b8bbd477bcff
 
     analyticsButton.addEventListener('click', () => {
       mainPage.style.display = 'none';
@@ -647,13 +610,8 @@ document.addEventListener('DOMContentLoaded', () => {
       fetch(`/chart-data?type=${selectedType}`)
         .then(response => response.json())
         .then(data => {
-<<<<<<< HEAD
-            chartData[selectedType] = data[selectedType]; 
-            renderChart(chartData[selectedType], selectedType);
-=======
           chartData[selectedType] = data[selectedType]; // Store fetched data
           renderChart(chartData[selectedType], selectedType);
->>>>>>> fdd80647b9b306a78375059057a8b8bbd477bcff
         })
         .catch(error => {
           console.error('Error fetching data:', error);
@@ -711,18 +669,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 beginAtZero: true,
               },
             },
-<<<<<<< HEAD
-        },
-    });
-} else {
-    const merchantNames = chartData.map((item) => item.name);
-=======
           },
         });
       } else {
         // Existing logic for other chart types remains unchanged
         const merchantNames = chartData.map((item) => item.name);
->>>>>>> fdd80647b9b306a78375059057a8b8bbd477bcff
 
         chart = new Chart(ctx, {
           type: 'bar',

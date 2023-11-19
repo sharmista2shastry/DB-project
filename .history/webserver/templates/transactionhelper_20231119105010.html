@@ -152,7 +152,6 @@
     let merchantSelected = '';
     let cardNumber = '';
     let transactionStatusSelected = '';
-    let prevEmail = '';
 
     let data = {
       'email': email,
@@ -166,7 +165,7 @@
       const password = document.getElementById('password').value;
 
       // Send a request to the server to check if the user is an admin
-      let data = {
+      const data = {
         'email': email,
         'password': password
       };
@@ -189,24 +188,6 @@
       } else {
         alert('Invalid email or password. Please try again.');
       }
-<<<<<<< HEAD
-    });
-
-    analyticsBack.addEventListener('click', async () => {
-      document.getElementById('transactions-table').style.display = 'none';
-      document.getElementById('find-form').style.display = 'none';
-      document.getElementById('transactions-actual').style.display = 'none';
-      document.getElementById('search-again-2').style.display = 'none';
-
-      document.getElementById('analytics-form').style.display = 'block';
-    });
-
-    goToSearchPage.addEventListener('click', async () => {
-      email = document.getElementById('email').value;
-      mainPage.style.display = 'none';
-      searchPage.style.display = 'block';
-=======
->>>>>>> fdd80647b9b306a78375059057a8b8bbd477bcff
 
       data = {
         'email': email,
@@ -275,8 +256,6 @@
       transactionsPage.style.display = 'none';
       table2.style.display = 'none';
 
-      prevEmail = email;
-
       if (tbody) {
         // Remove all child nodes (contents) of the tbody
         while (tbody.firstChild) {
@@ -327,9 +306,9 @@
         tbody.appendChild(row);
       });
 
-      // while (cardNumberDropdown.options.length > 0) {
-      //   cardNumberDropdown.remove(0);
-      // }
+      while (cardNumberDropdown.options.length > 0) {
+        cardNumberDropdown.remove(0);
+      }
 
       apiUrl = "/getcards";
 
@@ -442,7 +421,6 @@
         'cardNumber': cardNumber,
         'transactionStatus': transactionStatusSelected
       };
-      // cardNumber = '';
       transactionsPage.style.display = 'none';
       table2.style.display = 'none';
       if (tbody) {
@@ -458,85 +436,72 @@
           tbody2.removeChild(tbody2.firstChild);
         }
       }
+      let apiUrl = "/getCardholderDetails";
 
-      if (prevEmail != email) {
-
-        while (cardNumberDropdown.options.length > 0) {
-          cardNumberDropdown.remove(0);
-        }
-
-        prevEmail = email;
-
-        let apiUrl = "/getCardholderDetails";
-
-        let globalResponse;
-
-        try {
-          const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-          });
-          if (response.ok) {
-            globalResponse = await response.json(); // Store the response in the global variable
-          } else {
-            console.error('API call failed with status:', response.status);
-          }
-        } catch (error) {
-          console.error('API call failed:', error);
-        }
-        document.getElementById('cardholder-name').innerHTML = 'Cardholder Name: ' + globalResponse.result.name;
-        globalResponse.result.card_list.forEach(item => {
-          const row = document.createElement('tr');
-          const cardNumberCell = document.createElement('td');
-          cardNumberCell.textContent = item.card_number;
-          const availableFundsCell = document.createElement('td');
-          availableFundsCell.textContent = item.available_funds;
-
-          row.appendChild(cardNumberCell);
-          row.appendChild(availableFundsCell);
-
-          tbody.appendChild(row);
-        });
-
-        apiUrl = "/getcards";
-
-        try {
-          const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-          });
-          if (response.ok) {
-            globalResponse = await response.json(); // Store the response in the global variable
-          } else {
-            console.error('API call failed with status:', response.status);
-          }
-        } catch (error) {
-          console.error('API call failed:', error);
-        }
-        const option = document.createElement('option');
-        option.value = 'All Cards';
-        option.textContent = 'All Cards';
-        cardNumberDropdown.appendChild(option);
-        globalResponse.result.cards.forEach(item => {
-          const option = document.createElement('option');
-          option.value = item;
-          option.textContent = item;
-          cardNumberDropdown.appendChild(option);
-        });
-
-        data = {
-        'email': email,
-        'merchantSelected': merchantSelected,
-        'cardNumber': '',
-        'transactionStatus': transactionStatusSelected
-      };
+      while (cardNumberDropdown.options.length > 0) {
+        cardNumberDropdown.remove(0);
       }
+
+      let globalResponse;
+
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+        if (response.ok) {
+          globalResponse = await response.json(); // Store the response in the global variable
+        } else {
+          console.error('API call failed with status:', response.status);
+        }
+      } catch (error) {
+        console.error('API call failed:', error);
+      }
+      document.getElementById('cardholder-name').innerHTML = 'Cardholder Name: ' + globalResponse.result.name;
+      globalResponse.result.card_list.forEach(item => {
+        const row = document.createElement('tr');
+        const cardNumberCell = document.createElement('td');
+        cardNumberCell.textContent = item.card_number;
+        const availableFundsCell = document.createElement('td');
+        availableFundsCell.textContent = item.available_funds;
+
+        row.appendChild(cardNumberCell);
+        row.appendChild(availableFundsCell);
+
+        tbody.appendChild(row);
+      });
+
+      apiUrl = "/getcards";
+
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+        if (response.ok) {
+          globalResponse = await response.json(); // Store the response in the global variable
+        } else {
+          console.error('API call failed with status:', response.status);
+        }
+      } catch (error) {
+        console.error('API call failed:', error);
+      }
+      const option = document.createElement('option');
+      option.value = 'All Cards';
+      option.textContent = 'All Cards';
+      cardNumberDropdown.appendChild(option);
+      globalResponse.result.cards.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item;
+        option.textContent = item;
+        cardNumberDropdown.appendChild(option);
+      });
 
       apiUrl = "/gettransactions";
       try {
@@ -608,16 +573,6 @@
       "peak_transaction_times": []
     };
 
-<<<<<<< HEAD
-document.addEventListener('DOMContentLoaded', () => {
-    const params = new URLSearchParams(window.location.search);
-    const chartType = params.get('type') || 'fraud_percentage';
-    const initialChartData = JSON.parse(params.get('data') || '{"fraud_percentage": []}');
-    chartData[chartType] = initialChartData; 
-
-    renderChart(chartData[chartType], chartType);
-});
-=======
     document.addEventListener('DOMContentLoaded', () => {
       const params = new URLSearchParams(window.location.search);
       const chartType = params.get('type') || 'fraud_percentage';
@@ -627,7 +582,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // Render the chart with the fetched data
       renderChart(chartData[chartType], chartType);
     });
->>>>>>> fdd80647b9b306a78375059057a8b8bbd477bcff
 
     analyticsButton.addEventListener('click', () => {
       mainPage.style.display = 'none';
@@ -647,13 +601,8 @@ document.addEventListener('DOMContentLoaded', () => {
       fetch(`/chart-data?type=${selectedType}`)
         .then(response => response.json())
         .then(data => {
-<<<<<<< HEAD
-            chartData[selectedType] = data[selectedType]; 
-            renderChart(chartData[selectedType], selectedType);
-=======
           chartData[selectedType] = data[selectedType]; // Store fetched data
           renderChart(chartData[selectedType], selectedType);
->>>>>>> fdd80647b9b306a78375059057a8b8bbd477bcff
         })
         .catch(error => {
           console.error('Error fetching data:', error);
@@ -711,18 +660,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 beginAtZero: true,
               },
             },
-<<<<<<< HEAD
-        },
-    });
-} else {
-    const merchantNames = chartData.map((item) => item.name);
-=======
           },
         });
       } else {
         // Existing logic for other chart types remains unchanged
         const merchantNames = chartData.map((item) => item.name);
->>>>>>> fdd80647b9b306a78375059057a8b8bbd477bcff
 
         chart = new Chart(ctx, {
           type: 'bar',

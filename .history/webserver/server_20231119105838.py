@@ -360,6 +360,7 @@ def getCardholderDetails():
     g.conn.commit()
 
     for result in cursor:
+      print(result)
       cards.append({
         "card_number": result[0],
         "available_funds": result[1]
