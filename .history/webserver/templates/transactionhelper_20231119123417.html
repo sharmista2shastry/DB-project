@@ -426,14 +426,13 @@
         email = document.getElementById('search-again-email').value;
       document.getElementById('search-again-email').value = email;
       document.getElementById('search-again-email-2').value = email;
-
+      
       let data = {
         'email': email,
         'merchantSelected': merchantSelected,
         'cardNumber': cardNumber,
         'transactionStatus': transactionStatusSelected
       };
-
       transactionsPage.style.display = 'none';
       table2.style.display = 'none';
 
@@ -443,7 +442,10 @@
           tbody2.removeChild(tbody2.firstChild);
         }
       }
-      
+
+      console.log(prevEmail);
+      console.log(email);
+
       if (prevEmail != email) {
 
         if (tbody) {
