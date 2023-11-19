@@ -226,9 +226,9 @@
     });
 
     analyticsBack.addEventListener('click', async () => {
+      email = document.getElementById('email').value;
       transactionsPage.style.display = 'none';
-      document.getElementById('transactions-actual').style.display = 'none';
-      analyticsForm.style.display = 'block';
+      searchPage.style.display = 'block';
     });
 
     goToSearchPage.addEventListener('click', async () => {

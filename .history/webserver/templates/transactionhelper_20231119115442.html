@@ -225,11 +225,12 @@
       });
     });
 
-    analyticsBack.addEventListener('click', async () => {
-      transactionsPage.style.display = 'none';
-      document.getElementById('transactions-actual').style.display = 'none';
-      analyticsForm.style.display = 'block';
+    goToSearchPage.addEventListener('click', async () => {
+      email = document.getElementById('email').value;
+      mainPage.style.display = 'none';
+      searchPage.style.display = 'block';
     });
+
 
     goToSearchPage.addEventListener('click', async () => {
       email = document.getElementById('email').value;
