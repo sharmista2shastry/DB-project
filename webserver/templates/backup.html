@@ -4,9 +4,6 @@
 <head>
   <title>Transaction Helper</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='transactionhelper.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='chartstyle.css') }}">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -38,30 +35,6 @@
     <input type="search-email" id="search-email" name="search-email" required><br>
 
     <button type="button" id="search-button">Search Transactions</button>
-  </div>
-
-  <div id="analytics-form" style="display: none;">
-    <button id="goToTransactionHelper">Go to Transaction Helper</button>
-
-    <div class="container mt-5">
-        <div class="card shadow">
-            <div class="card-body">
-                <h5 class="card-title mb-4">Bar Chart Example</h5>
-                <div class="form-group" id="chartTypeGroup">
-                    <label for="chartType">Select Chart Type:</label>
-                    <select id="chartType" class="form-control">
-                        <option value="fraud_percentage">Fraud Percentage</option>
-                        <option value="success_percentage">Success Percentage</option>
-                        <option value="average_transactions">Average Transactions</option>
-                        <option value="peak_transaction_times">Peak Transaction Times</option>
-                        <option value="cross_border_transactions">Cross Border Transactions</option>
-                    </select>
-                </div>
-                <button id="fetchData" class="btn btn-success btn-block" onclick="fetchAndRender()">Fetch Data</button>
-                <canvas id="myChart" width="400" height="200" class="mt-4"></canvas>
-            </div>
-        </div>
-    </div>
   </div>
 
   <div id="transactions-table" style="display: none;">
@@ -144,8 +117,6 @@
     const transactionStatusDropdown = document.getElementById('transaction-status-dropdown');
     const table2 = document.getElementById('transactions-actual');
     const analyticsBack = document.getElementById('analytics-button-back');
-    const analyticsButton = document.getElementById('analytics-button');
-    const analyticsForm = document.getElementById('analytics-form');
 
     let email = '';
     let merchants = '';
@@ -189,6 +160,13 @@
         alert('Invalid email or password. Please try again.');
       }
     });
+
+    window.onload = function() {
+    if (window.location.hash === '#find-form') {
+        loginPage.style.display = 'none';
+        document.getElementById('find-form').style.display = 'block';
+    }
+};
 
     goToSearchPage.addEventListener('click', async () => {
       email = document.getElementById('email').value;
@@ -410,6 +388,20 @@
       });
     });
 
+    document.getElementById('analytics-button').addEventListener('click', async () => {
+      // Fetch chart data
+      const response = await fetch('/chart-data?type=fraud_percentage');  // You can change the type as needed
+      const chartData = await response.json();
+
+      // Redirect to charttest.html with chart data as a query parameter
+      const queryString = `type=${encodeURIComponent("fraud_percentage")}&data=${encodeURIComponent(JSON.stringify(chartData))}`;
+      window.location.href = `/chart?${queryString}`;
+    });
+
+    document.getElementById('analytics-button-back').addEventListener('click', async () => {
+      document.getElementById('analytics-button').click();
+    });
+
     searchAgainButton.addEventListener('click', async () => {
       if (document.getElementById('search-again-email').value != "")
         email = document.getElementById('search-again-email').value;
@@ -565,137 +557,7 @@
       table2.style.display = 'block';
     });
 
-let chart; 
-let chartData = {
-    "fraud_percentage": [],
-    "success_percentage": [],
-    "average_transactions": [],
-    "peak_transaction_times": []
-};
-
-document.addEventListener('DOMContentLoaded', () => {
-    const params = new URLSearchParams(window.location.search);
-    const chartType = params.get('type') || 'fraud_percentage';
-    const initialChartData = JSON.parse(params.get('data') || '{"fraud_percentage": []}');
-    chartData[chartType] = initialChartData; // Store initial data
-
-    // Render the chart with the fetched data
-    renderChart(chartData[chartType], chartType);
-});
-
-analyticsButton.addEventListener('click', () => {
-  mainPage.style.display = 'none';
-  analyticsForm.style.display = 'block';
-});
-
-document.getElementById('goToTransactionHelper').addEventListener('click', function() {
-
-    document.getElementById('analytics-form').style.display = 'none';
-    document.getElementById('transactions-table').style.display = 'none';
-
-    document.getElementById('find-form').style.display = 'block';
-});
-
-function fetchAndRender() {
-    const selectedType = document.getElementById('chartType').value;
-    fetch(`/chart-data?type=${selectedType}`)
-        .then(response => response.json())
-        .then(data => {
-            chartData[selectedType] = data[selectedType]; // Store fetched data
-            renderChart(chartData[selectedType], selectedType);
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
-}
-
-function renderChart(chartData, chartType) {
-    if (chart) {
-        chart.destroy();
-    }
-
-    const ctx = document.getElementById('myChart').getContext('2d');
-
-    if (chartType === 'peak_transaction_times') {
-            const uniqueHours = chartData.map(item => item.hour);
-            const transactionCounts = chartData.map(item => item.transaction_count);
-
-            chart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: uniqueHours,
-                    datasets: [{
-                        label: 'Transaction Count',
-                        data: transactionCounts,
-                        backgroundColor: 'rgba(169, 169, 169, 0.5)',
-                    }],
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                        },
-                    },
-                },
-            });
-    } else if (chartType === 'cross_border_transactions') {
-    const merchantNames = chartData.map((item) => item.merchant_name);
-    const crossBorderCounts = chartData.map((item) => item.cross_border_count);
-
-    chart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: merchantNames,
-            datasets: [
-                {
-                    label: 'Cross-Border Transactions',
-                    data: crossBorderCounts,
-                    backgroundColor: 'rgba(169, 169, 169, 0.5)',
-                },
-            ],
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                },
-            },
-        },
-    });
-} else {
-    // Existing logic for other chart types remains unchanged
-    const merchantNames = chartData.map((item) => item.name);
-
-    chart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: merchantNames,
-            datasets: [
-                {
-                    label: 'Chart Data',
-                    data: chartData.map((item) => chartType === 'average_transactions' ? item.average : item.percentage),
-                    backgroundColor: 'rgba(169, 169, 169, 0.5)',
-                },
-            ],
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                },
-            },
-        },
-    });
-}
-
-}
-
   </script>
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
 </body>
 
 </html>

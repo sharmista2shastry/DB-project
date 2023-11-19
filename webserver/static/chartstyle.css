@@ -1,10 +1,10 @@
-body {
+/* body {
     font-family: Arial, sans-serif;
     background-color: #000;
     color: #fff;
     margin: 20px;
     text-align: center;
-}
+} */
 
 #goToTransactionHelper {
             position: absolute;
@@ -32,25 +32,25 @@ body {
     color: #fff;
 }
 
-.form-group,
-.btn {
+#chartTypeGroup,
+#fetchData {
     margin-top: -10px;
 }
 
-.form-control {
+#chartType {
     background-color: #222; 
     color: #fff;
 }
 
-.btn.btn-success {
-    background-color: #050505 !important;
-    border-color: #333 !important;
+#fetchData {
+    background-color: #050505;
+    border-color: #333;
     transition: background-color, border-color;
 }
 
-.btn.btn-success:hover {
-    background-color: red !important; 
-    border-color: red !important; 
+#fetchData:hover {
+    background-color: red; 
+    border-color: red; 
 }
 
 #header-img{

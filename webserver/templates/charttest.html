@@ -44,6 +44,23 @@ let chartData = {
     "peak_transaction_times": []
 };
 
+window.addEventListener('message', (event) => {
+    if (event.origin !== window.location.origin) return;
+
+    if (event.data.type === 'fetchChartData') {
+
+        fetch('/chart-data?type=fraud_percentage')
+            .then(response => response.json())
+            .then(chartData => {
+                
+                window.opener.postMessage({ type: 'chartData', data: chartData }, window.location.origin);
+            })
+            .catch(error => {
+                console.error('Error fetching chart data:', error);
+            });
+    }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
     const chartType = params.get('type') || 'fraud_percentage';
