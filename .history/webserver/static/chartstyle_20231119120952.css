@@ -38,11 +38,11 @@
 
 #chartTypeGroup,
 #fetchData {
-    margin-top: 10px;
+    margin-top: -10px;
 }
 
-#chartTypeGroup
-{
+#chartTypeGroup,
+#fetchData {
     margin-top: -10px;
 }
 
