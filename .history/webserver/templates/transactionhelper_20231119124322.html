@@ -450,8 +450,16 @@
           tbody2.removeChild(tbody2.firstChild);
         }
       }
-      
-      let apiUrl = "/getCardholderDetails";
+
+      if (prevEmail != email) {
+
+        while (cardNumberDropdown.options.length > 0) {
+          cardNumberDropdown.remove(0);
+        }
+
+        prevEmail = email;
+
+        let apiUrl = "/getCardholderDetails";
 
         let globalResponse;
 
@@ -484,14 +492,6 @@
 
           tbody.appendChild(row);
         });
-
-      if (prevEmail != email) {
-
-        while (cardNumberDropdown.options.length > 0) {
-          cardNumberDropdown.remove(0);
-        }
-
-        prevEmail = email;
 
         apiUrl = "/getcards";
 

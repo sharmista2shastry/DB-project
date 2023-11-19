@@ -442,7 +442,6 @@
         while (tbody.firstChild) {
           tbody.removeChild(tbody.firstChild);
         }
-      }
 
       if (tbody2) {
         // Remove all child nodes (contents) of the tbody
@@ -450,8 +449,19 @@
           tbody2.removeChild(tbody2.firstChild);
         }
       }
-      
-      let apiUrl = "/getCardholderDetails";
+
+      if (prevEmail != email) {
+
+       
+      }
+
+        while (cardNumberDropdown.options.length > 0) {
+          cardNumberDropdown.remove(0);
+        }
+
+        prevEmail = email;
+
+        let apiUrl = "/getCardholderDetails";
 
         let globalResponse;
 
@@ -484,14 +494,6 @@
 
           tbody.appendChild(row);
         });
-
-      if (prevEmail != email) {
-
-        while (cardNumberDropdown.options.length > 0) {
-          cardNumberDropdown.remove(0);
-        }
-
-        prevEmail = email;
 
         apiUrl = "/getcards";
 
