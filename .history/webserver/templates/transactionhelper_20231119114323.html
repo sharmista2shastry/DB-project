@@ -442,11 +442,6 @@
       }
 
       if (prevEmail != email) {
-        
-        while (cardNumberDropdown.options.length > 0) {
-          cardNumberDropdown.remove(0);
-        }
-
         prevEmail = email;
 
         let apiUrl = "/getCardholderDetails";
