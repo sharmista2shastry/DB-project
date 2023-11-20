@@ -1,6 +1,13 @@
 # cs-w4111-project
 
-Database Project replicating a Transaction Processing Company
+Database Project replicating a Transaction Processing Company. 
+
+* Interactions 
+
+The projects has two access points: 
+
+1. Url with just / - Back-end access for employees of the transaction processing company (Y)
+2. Url with /internetflix - Access to customers 
 
 * The PostgreSQL account name is hb2779.
 
@@ -22,13 +29,13 @@ Purpose: This page facilitates the search for transaction details associated wit
 
 - User Input: The email entered is used to retrieve cardholder information from the database.
 
-- Database Query: The application performs queries based on the entered email to fetch cardholder details and associated transactions from the database.
+- Database Query: The application performs queries based on the entered email to fetch cardholder details and associated transactions from the database. Enter a cardholder’s email and get all the cards associated with the user, their balances and their lifetime transactions. 
 
-- Display of Transactions: Transaction data is dynamically populated in a table based on the fetched data, involving operations to retrieve and display transaction records.
+- Display of Transactions: Transaction data is dynamically populated in a table based on the fetched data, involving operations to retrieve and display transaction records. Can use dropdowns to filter by merchant, card, or approved/not approved.
 
 2. Client Analytics: 
 
-Purpose: This page generates analytical charts based on transaction data for client insights.
+Purpose: This page generates analytical charts based on transaction data for client insights. Can see transactions based on 5 KPIs and can help banks/merchants increase their revenue.
 
 - Chart Selection: User selection of chart types initiates queries to the database for specific transaction data (fraud percentage, success percentage, average transactions, peak transaction times, cross-border transactions).
 
