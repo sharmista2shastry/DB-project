@@ -1,4 +1,4 @@
-# cs-w4111-project
+# Project Y
 
 Database Project replicating a Transaction Processing Company. 
 
