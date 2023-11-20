@@ -7,7 +7,7 @@ Database Project replicating a Transaction Processing Company.
 The projects has two access points: 
 
 1. Url with just / - Back-end access for employees of the transaction processing company (Y)
-2. Url with /internetflix - Access to customers 
+2. Url with /internetflix - Access to customers. Internetlfix offers a streamlined payment system with three payment options for users. Upon login/signup, users select their country and preferred plan for payment.
 
 * The PostgreSQL account name is hb2779.
 
