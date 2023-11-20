@@ -15,9 +15,9 @@ The projects has two access points:
 
 * Alignment with Objectives Proposed in Part 1 of the Project:
 
-- Implemented features directly align with the project's objective of creating a simplified payment processing database system.
-- Successfully developed and integrated all planned components as outlined in the initial proposal.
-- These components offer insights into card transactions, shedding light on the intricate processes behind digital fund flow.
+  - Implemented features directly aligned with the project's objective of creating a simplified payment processing database system.
+  - Successfully developed and integrated all planned components as outlined in the initial proposal.
+  - These components offer insights into card transactions, shedding light on the intricate processes behind digital fund flow.
 
 All proposed elements were successfully implemented, providing a comprehensive understanding of modern finance mechanisms and technology.
 
