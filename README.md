@@ -37,6 +37,7 @@ Purpose: This page shows how users/cardholders can make online payments.
   3. Check if the card exists for that email, card number, CVV, and Expiry Date
   4. Check if the amount <= available funds
   5. Is the transaction happening in the same country as the card was issued?
+ 
  Once all the checks have passed, the transaction is approved, else, the reason for failure can be seen in the below webpage
 
 2. Search Transactions for a Cardholder
