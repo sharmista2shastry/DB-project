@@ -29,8 +29,8 @@ Purpose: This page shows how users/cardholders can make online payments.
 
 - User Input: The user logs in/ signs up to the web application (where they are authenticated using the database records) and proceeds to make a payment
 
-- Payment types: The user has the option to select which country they want to make the payment for and has three subscription options to choose from - Weekly, Monthly, and Annual. There are three payment modes - Pay by existing card token, create a new token and pay, and pay by card.
-
+- Payment types: The user has the option to select which country they want to make the payment for and has three subscription options to choose from - Weekly, Monthly, and Annual. There are three payment modes - Pay by existing card token, create a new token and pay, and pay by card. The best part? Eligible cardholders get discount and we maintain the record of eligible cardholders and process transactions with discounts automatically
+  
 - Database Query: The payment process is quite complex and uses multiple functions and stored procedures that we wrote. Every transaction goes through five rounds of checks before a transaction is approved -
   1. Has the card expired?
   2. Is CVV correct?
