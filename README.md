@@ -44,3 +44,7 @@ Purpose: This page generates analytical charts based on transaction data for cli
 - Chart Rendering: The retrieved data is processed and rendered using Chart.js to display meaningful analytics, requiring operations to aggregate and format transaction information.
 
 These pages showcase intriguing database interactions, involving data retrieval, query executions, and dynamic rendering based on user inputs, enabling users to explore transaction details and derive insights through analytics.
+
+* Use of AI Tools in the Project
+
+We have used ChatGPT for refining and optimizing our CSS code, elevating the visual appeal and user experience of our webpages.
