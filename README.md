@@ -11,7 +11,7 @@ The projects has two access points:
 
 * The PostgreSQL account name is hb2779.
 
-* URL: 
+* URL: http://104.196.54.42:8111
 
 * Alignment with Objectives Proposed in Part 1 of the Project:
 
