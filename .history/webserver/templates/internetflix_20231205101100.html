@@ -30,20 +30,8 @@
         <label for="email">Email:</label>
         <input type="email" id="signup-email" name="email" required><br>
 
-        <label for="street-address">Street Address:</label>
-        <input type="text" id="signup-street-address" name="street-address" required><br>
-
-        <label for="city">City:</label>
-        <input type="text" id="signup-city" name="city" required><br>
-
-        <label for="state">State:</label>
-        <input type="text" id="signup-state" name="state" required><br>
-
-        <label for="country">Country:</label>
-        <input type="text" id="signup-country" name="country" required><br>
-
-        <label for="postal-code">Postal Code:</label>
-        <input type="text" id="signup-postal-code" name="postal-code" required><br>
+        <label for="address">Address:</label>
+        <input type="address" id="signup-address" name="address" required><br>
 
         <label for="password">Password:</label>
         <input type="password" id="signup-password" name="password" required><br>
@@ -211,33 +199,21 @@
             }
         });
 
-        // signupButton.addEventListener('click', async () => {
-        //     loginForm.style.display = 'none'; // Hide the login form
-        //     signupSection.style.display = 'block'; // Show the country and payment options
-        // });
+        signupButton.addEventListener('click', async () => {
+            loginForm.style.display = 'none'; // Hide the login form
+            signupSection.style.display = 'block'; // Show the country and payment options
+        });
 
         submit.addEventListener('click', async () => {
             const signupName = document.getElementById('signup-name').value;
             email = document.getElementById('signup-email').value;
+            const signupAddress = document.getElementById('signup-address').value;
             const signupPassword = document.getElementById('signup-password').value;
-            const signupStreetAddress = document.getElementById('signup-street-address').value;
-            const signupCity = document.getElementById('signup-city').value;
-            const signupState = document.getElementById('signup-state').value;
-            const signupCountry = document.getElementById('signup-country').value;
-            const signupPostalCode = document.getElementById('signup-postal-code').value;
-
-            const addressDetails = {
-                street_address: signupStreetAddress,
-                city: signupCity,
-                state: signupState,
-                country: signupCountry,
-                postal_code: signupPostalCode
-            };
 
             let data = {
                 'email': email,
                 'password': signupPassword,
-                'address': addressDetails,
+                'address': signupAddress,
                 'name': signupName
             };
 
@@ -296,6 +272,7 @@
         });
 
         goToPaymentSection.addEventListener('click', async () => {
+        console.log('Pressed');
             countrySelected = document.getElementById('country').value;
 
             const apiUrl = "/checkexistingtoken";
