@@ -375,26 +375,48 @@ def getCardholderDetails():
     response = {str(key): value for key, value in response.items()}
     return jsonify(result=response)
 
-@app.route('/signup', methods=['GET','POST'])
+import json  # Ensure you have the json library imported
+
+from psycopg2.extras import Json
+
+@app.route('/signup', methods=['POST'])
 def signup():
-    email = request.json['email']
-    name = request.json['name']
-    address = request.json['address']
-    password = request.json['password']
-    params_dict = {"email":email, "password":password, "name":name, "address":address}
-    isValid = False
     try:
-      cursor = g.conn.execute(text("INSERT INTO INTERNETFLIX_CUSTOMER_DATA(CUSTOMER_NAME, CUSTOMER_ADDRESS, CUSTOMER_EMAIL, PASS_WORD) VALUES (:name, :address, :email, :password);"), params_dict)
+        email = request.json['email']
+        name = request.json['name']
+        address_details = request.json['address']
+        password = request.json['password']
 
-   # Check if the insert was successful
-      isValid = cursor.rowcount > 0
+        isValid = False
 
-      g.conn.commit()
+        # Inserting customer details into INTERNETFLIX_CUSTOMER_DATA
+        cursor = g.conn.execute(
+            text("INSERT INTO INTERNETFLIX_CUSTOMER_DATA(CUSTOMER_NAME, CUSTOMER_EMAIL, PASS_WORD) VALUES (:name, :email, :password) RETURNING CUSTOMER_ID;"),
+            {"name": name, "email": email, "password": password}
+        )
+        customer_id = cursor.fetchone()[0]  # Get the ID of the newly inserted customer
 
-    # Close the cursor
-      cursor.close()
-    except:
-       isValid = False
+        # Inserting address details into CARDHOLDER_ADDRESSES
+        address_query = text(
+            "INSERT INTO CARDHOLDER_ADDRESSES(CUSTOMER_ID, ADDRESS_DETAILS) VALUES (:customer_id, :address_details);"
+        )
+        
+        g.conn.execute(
+            address_query,
+            {"customer_id": customer_id, "address_details": Json(address_details)}
+        )
+
+        # Commit the transaction
+        g.conn.commit()
+
+        # Close the cursor
+        cursor.close()
+
+        isValid = True
+    except Exception as e:
+        print(e)
+        isValid = False
+
     response = {
         "output": isValid
     }
